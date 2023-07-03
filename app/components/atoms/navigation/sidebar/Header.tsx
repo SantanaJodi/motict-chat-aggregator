@@ -1,0 +1,25 @@
+import { ChevronLeft, ChevronRight } from "@/public/icons/outline";
+import clsx from "clsx";
+import React from "react";
+import Logo from "../../Logo";
+
+interface HeaderProps {
+  collapsed: boolean;
+  toggle: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ collapsed, toggle }) => {
+  return (
+    <div className={clsx("relative py-6 w-full px-6", "px-4" && !collapsed)}>
+      <Logo collapsed={collapsed} />
+      <div
+        onClick={toggle}
+        className="absolute top-6 -right-3 border border-[#EEF5FF] rounded-full bg-white hover:bg-[#EEF5FF] cursor-pointer"
+      >
+        {collapsed ? <ChevronRight /> : <ChevronLeft />}
+      </div>
+    </div>
+  );
+};
+
+export default Header;
