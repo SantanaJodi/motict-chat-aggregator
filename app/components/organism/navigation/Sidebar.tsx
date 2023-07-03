@@ -73,8 +73,8 @@ export const Sidebar: React.FC<SidebarProps> = () => {
       className={clsx(
         "h-full transition-transform bg-white border-r border-[#EEF5FF]",
         {
-          "max-w-[72px]": collapsed,
-          "max-w-[200px]": !collapsed,
+          "w-[72px]": collapsed,
+          "w-[200px]": !collapsed,
         }
       )}
     >
