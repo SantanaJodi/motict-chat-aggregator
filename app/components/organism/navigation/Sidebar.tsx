@@ -5,16 +5,14 @@ import {
   ChartIcon,
   ChatIcon,
   HelpIcon,
+  NotificationIcon,
   PeoplesIcon,
+  ProfileIcon,
   SettingsIcon,
 } from "@/public/icons/outline";
 import { clsx } from "clsx";
 import React, { useState } from "react";
-import {
-  Header,
-  MenuItem,
-  MenuItemProps,
-} from "../../atoms/navigation/sidebar";
+import { Header, Menu, MenuItemProps } from "../../moleculs/navigation/sidebar";
 
 interface SidebarProps {
   isExpand?: boolean;
@@ -51,7 +49,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
     },
   ];
 
-  const footer: MenuItemProps[] = [
+  const secondary: MenuItemProps[] = [
     {
       path: "/help",
       label: "Help",
@@ -85,18 +83,8 @@ export const Sidebar: React.FC<SidebarProps> = () => {
           collapsed={collapsed}
           toggle={() => setCollapsed((value) => !value)}
         />
-        <div
-          className={`bg-[#323944] rounded-r-2xl w-full p-2 flex flex-col gap-6`}
-        >
-          {main.map((item) => (
-            <MenuItem key={item.path} collapsed={collapsed} isMain {...item} />
-          ))}
-        </div>
-        <div className={`w-full p-4 flex flex-col gap-[16px]`}>
-          {footer.map((item) => (
-            <MenuItem key={item.path} collapsed={collapsed} {...item} />
-          ))}
-        </div>
+        <Menu items={main} collapsed={collapsed} isMain />
+        <Menu items={secondary} collapsed={collapsed} />
       </div>
     </div>
   );

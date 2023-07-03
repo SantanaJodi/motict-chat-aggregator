@@ -1,7 +1,7 @@
+import { Logo } from "@/app/components/atoms";
 import { ChevronLeft, ChevronRight } from "@/public/icons/outline";
 import clsx from "clsx";
 import React from "react";
-import Logo from "../../Logo";
 
 interface HeaderProps {
   collapsed: boolean;
