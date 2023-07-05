@@ -1,7 +1,7 @@
 "use client";
 
 import React, { PropsWithChildren } from "react";
-import { Sidebar } from "../organism/navigation";
+import { Sidebar } from "../organism";
 
 interface ContainerProps extends PropsWithChildren {}
 
