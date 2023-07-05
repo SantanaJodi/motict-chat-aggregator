@@ -3,12 +3,12 @@ import { ChevronLeft, ChevronRight } from "@/public/icons/outline";
 import clsx from "clsx";
 import React from "react";
 
-interface HeaderProps {
+interface SidebarHeaderProps {
   collapsed: boolean;
   toggle: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ collapsed, toggle }) => {
+const SidebarHeader: React.FC<SidebarHeaderProps> = ({ collapsed, toggle }) => {
   return (
     <div className={clsx("relative py-6 w-full px-6", "px-4" && !collapsed)}>
       <Logo collapsed={collapsed} />
@@ -22,4 +22,4 @@ const Header: React.FC<HeaderProps> = ({ collapsed, toggle }) => {
   );
 };
 
-export default Header;
+export default SidebarHeader;

@@ -1,6 +1,6 @@
-import Header from "./Header";
 import Menu from "./Menu";
 import MenuItem from "./MenuItem";
+import SidebarHeader from "./SidebarHeader";
 
 export * from "./MenuItem";
-export { MenuItem, Header, Menu };
+export { MenuItem, SidebarHeader, Menu };

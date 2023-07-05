@@ -5,14 +5,16 @@ import {
   ChartIcon,
   ChatIcon,
   HelpIcon,
-  NotificationIcon,
   PeoplesIcon,
-  ProfileIcon,
   SettingsIcon,
 } from "@/public/icons/outline";
 import { clsx } from "clsx";
 import React, { useState } from "react";
-import { Header, Menu, MenuItemProps } from "../../moleculs/navigation/sidebar";
+import {
+  Menu,
+  MenuItemProps,
+  SidebarHeader,
+} from "../../moleculs/navigation/sidebar";
 
 interface SidebarProps {
   isExpand?: boolean;
@@ -79,7 +81,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
       )}
     >
       <div className="flex h-full w-full flex-col items-start justify-between">
-        <Header
+        <SidebarHeader
           collapsed={collapsed}
           toggle={() => setCollapsed((value) => !value)}
         />
