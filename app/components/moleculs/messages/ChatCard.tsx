@@ -52,10 +52,11 @@ const ChatCard: React.FC<ChatCardProps> = ({
     >
       {/* AVATAR */}
       <div className="relative flex-shrink-0">
+        {/* <Avatar url="" /> */}
         <Avatar url="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg" />
         <div className="p-1 rounded-full bg-white flex flex-shrink-0 absolute -bottom-3 left-3">
           <Image
-            src="/images/WhatsApp.png"
+            src="/images/svg/channel-wa.svg"
             alt="whatsapp"
             width={16}
             height={16}

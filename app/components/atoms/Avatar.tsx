@@ -9,7 +9,7 @@ const Avatar: React.FC<AvatarProps> = ({ url }) => {
   return (
     <Image
       alt="avatar"
-      src={url || "/images/ava.png"}
+      src={url || "/images/svg/avatar-placeholder.svg"}
       width={48}
       height={48}
       className="object-cover rounded-full w-12 h-12"
