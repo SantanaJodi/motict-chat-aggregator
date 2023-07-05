@@ -1,7 +1,6 @@
 "use client";
 
-import brandLogoGraph from "@/public/images/svg/brand-logo-graph.svg";
-import brandLogoType from "@/public/images/svg/brand-logo-type.svg";
+import clsx from "clsx";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -12,13 +11,15 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ collapsed }) => {
   const router = useRouter();
-  const image = collapsed ? brandLogoGraph : brandLogoType;
+  const image = `/images/svg/brand-logo-${collapsed ? "graph" : "type"}.svg`;
   return (
     <Image
       src={image}
       alt="brand-logo"
-      className="self-center"
+      width={collapsed ? 24 : 84}
+      height={24}
       onClick={() => router.push("/")}
+      className={clsx("self-center", collapsed ? "w-6" : "w-[84px]", "h-6")}
     />
   );
 };
