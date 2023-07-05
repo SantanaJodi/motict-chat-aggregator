@@ -1,4 +1,4 @@
-import { Logo } from "@/app/components/atoms";
+import { Logo } from "@/src/components/atoms";
 import { ChevronLeftIcon, ChevronRightIcon } from "@/public/icons/outline";
 import clsx from "clsx";
 import React from "react";

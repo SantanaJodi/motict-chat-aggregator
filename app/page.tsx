@@ -1,4 +1,4 @@
-import { Messages } from "./components/organism";
+import { Messages } from "../src/components/organism";
 
 export default function Home() {
   return (
