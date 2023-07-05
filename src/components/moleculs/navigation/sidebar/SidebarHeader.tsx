@@ -1,5 +1,5 @@
-import { Logo } from "@/app/components/atoms";
-import { ChevronLeft, ChevronRight } from "@/public/icons/outline";
+import { Logo } from "@/src/components/atoms";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/public/icons/outline";
 import clsx from "clsx";
 import React from "react";
 
@@ -14,9 +14,9 @@ const SidebarHeader: React.FC<SidebarHeaderProps> = ({ collapsed, toggle }) => {
       <Logo collapsed={collapsed} />
       <div
         onClick={toggle}
-        className="absolute top-6 -right-3 border border-[#EEF5FF] rounded-full bg-white hover:bg-[#EEF5FF] cursor-pointer"
+        className="absolute top-6 -right-3 border border-[#EEF5FF] rounded-full bg-white hover:bg-[#EEF5FF] cursor-pointer z-10"
       >
-        {collapsed ? <ChevronRight /> : <ChevronLeft />}
+        {collapsed ? <ChevronRightIcon /> : <ChevronLeftIcon />}
       </div>
     </div>
   );

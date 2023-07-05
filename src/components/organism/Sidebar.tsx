@@ -14,14 +14,14 @@ import {
   Menu,
   MenuItemProps,
   SidebarHeader,
-} from "../../moleculs/navigation/sidebar";
+} from "../moleculs/navigation/sidebar";
 
 interface SidebarProps {
   isExpand?: boolean;
 }
 
-export const Sidebar: React.FC<SidebarProps> = () => {
-  const [collapsed, setCollapsed] = useState(false);
+const Sidebar: React.FC<SidebarProps> = () => {
+  const [collapsed, setCollapsed] = useState(true);
 
   const main: MenuItemProps[] = [
     {
@@ -91,3 +91,5 @@ export const Sidebar: React.FC<SidebarProps> = () => {
     </div>
   );
 };
+
+export default Sidebar;

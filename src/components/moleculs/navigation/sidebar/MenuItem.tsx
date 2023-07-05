@@ -47,7 +47,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
         </p>
       )}
       {pathname == path && (
-        <div className="w-4 h-4  flex-shrink-0 bg-[#323944] rounded-full border-4 border-white border-solid absolute -right-4" />
+        <div className="w-4 h-4  flex-shrink-0 bg-[#323944] rounded-full border-4 border-white border-solid absolute -right-4 z-10" />
       )}
     </Link>
   );
