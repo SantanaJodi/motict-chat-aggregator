@@ -1,5 +1,5 @@
 import * as React from "react";
-const ChevronLeft = (props: React.SVGProps<SVGSVGElement>) => (
+const ChevronLeftIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width={24}
     height={24}
@@ -16,4 +16,4 @@ const ChevronLeft = (props: React.SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-export default ChevronLeft;
+export default ChevronLeftIcon;
