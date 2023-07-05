@@ -1,7 +1,7 @@
 "use client";
 
-import brandLogoGraph from "@/public/images/brand-logo-graph.png";
-import brandLogoType from "@/public/images/brand-logo-type.png";
+import brandLogoGraph from "@/public/images/svg/brand-logo-graph.svg";
+import brandLogoType from "@/public/images/svg/brand-logo-type.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
