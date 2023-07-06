@@ -1,5 +1,5 @@
 import { MessageAssignmentEnum } from "../../atoms/tag";
-import { SessionEnum } from "../../molecules/card/ChatCard";
+import { SessionEnum } from "../../molecules/card/MessageCard";
 
 export const DUMMY_CHAT = [
   {
