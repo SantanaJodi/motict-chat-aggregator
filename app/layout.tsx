@@ -1,6 +1,6 @@
+import { Sidebar, Toaster } from "@/src";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
-import { Container } from "../src/components/atoms";
 
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
@@ -17,7 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={dmSans.className}>
-        <Container>{children}</Container>
+        <div className="h-full w-full p-0 m-0  flex flex-row">
+          <Sidebar />
+          <Toaster />
+          <div className="w-full">{children}</div>
+        </div>
       </body>
     </html>
   );
