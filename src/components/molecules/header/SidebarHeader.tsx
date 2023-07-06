@@ -1,7 +1,7 @@
-import { Logo } from "@/src/components/atoms";
 import { ChevronLeftIcon, ChevronRightIcon } from "@/public/icons/outline";
 import clsx from "clsx";
 import React from "react";
+import { Logo } from "../../atoms";
 
 interface SidebarHeaderProps {
   collapsed: boolean;

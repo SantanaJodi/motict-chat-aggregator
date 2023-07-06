@@ -1,14 +1,18 @@
 import clsx from "clsx";
 import React from "react";
-import MenuItem, { MenuItemProps } from "./MenuItem";
+import SidebarMenuItem, { ISidebarMenuItem } from "./SidebarMenuItem";
 
-interface MenuProps {
-  items: MenuItemProps[];
+interface SidebarMenuProps {
+  items: ISidebarMenuItem[];
   collapsed: boolean;
   isMain?: boolean;
 }
 
-const Menu: React.FC<MenuProps> = ({ items, collapsed, isMain }) => {
+const SidebarMenu: React.FC<SidebarMenuProps> = ({
+  items,
+  collapsed,
+  isMain,
+}) => {
   return (
     <div
       className={clsx("w-full flex flex-col", {
@@ -17,7 +21,7 @@ const Menu: React.FC<MenuProps> = ({ items, collapsed, isMain }) => {
       })}
     >
       {items.map((item) => (
-        <MenuItem
+        <SidebarMenuItem
           key={item.path}
           isMain={isMain}
           collapsed={collapsed}
@@ -28,4 +32,4 @@ const Menu: React.FC<MenuProps> = ({ items, collapsed, isMain }) => {
   );
 };
 
-export default Menu;
+export default SidebarMenu;

@@ -10,11 +10,7 @@ import {
 } from "@/public/icons/outline";
 import { clsx } from "clsx";
 import React, { useState } from "react";
-import {
-  Menu,
-  MenuItemProps,
-  SidebarHeader,
-} from "../moleculs/navigation/sidebar";
+import { ISidebarMenuItem, SidebarHeader, SidebarMenu } from "../../molecules";
 
 interface SidebarProps {
   isExpand?: boolean;
@@ -23,7 +19,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = () => {
   const [collapsed, setCollapsed] = useState(true);
 
-  const main: MenuItemProps[] = [
+  const main: ISidebarMenuItem[] = [
     {
       path: "/",
       label: "Chatroom",
@@ -51,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
     },
   ];
 
-  const secondary: MenuItemProps[] = [
+  const secondary: ISidebarMenuItem[] = [
     {
       path: "/help",
       label: "Help",
@@ -74,10 +70,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
     <div
       className={clsx(
         "h-full transition-transform bg-white border-r border-[#EEF5FF]",
-        {
-          "w-[72px]": collapsed,
-          "w-[200px]": !collapsed,
-        }
+        collapsed ? "w-[72px]" : "w-[200px]"
       )}
     >
       <div className="flex h-full w-full flex-col items-start justify-between">
@@ -85,8 +78,8 @@ const Sidebar: React.FC<SidebarProps> = () => {
           collapsed={collapsed}
           toggle={() => setCollapsed((value) => !value)}
         />
-        <Menu items={main} collapsed={collapsed} isMain />
-        <Menu items={secondary} collapsed={collapsed} />
+        <SidebarMenu items={main} collapsed={collapsed} isMain />
+        <SidebarMenu items={secondary} collapsed={collapsed} />
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { clsx } from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export interface MenuItemProps {
+export interface ISidebarMenuItem {
   path: string;
   label: string;
   Icon: React.ElementType;
@@ -12,7 +12,7 @@ export interface MenuItemProps {
   isMain?: boolean;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({
+const SidebarMenuItem: React.FC<ISidebarMenuItem> = ({
   Icon,
   label,
   path,
@@ -53,4 +53,4 @@ const MenuItem: React.FC<MenuItemProps> = ({
   );
 };
 
-export default MenuItem;
+export default SidebarMenuItem;
