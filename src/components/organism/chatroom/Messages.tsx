@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ChatCard, ChatHeader } from "../../molecules";
+import { ChatHeader, MessageCard } from "../../molecules";
 import StatesContainer from "../StatesContainer";
 import { DUMMY_CHAT } from "./dummy";
 
@@ -44,7 +44,7 @@ const Messages: React.FC<MessagesProps> = ({
       />
       <div className=" h-full flex flex-col items-start justify-start mt-4 overflow-y-auto pb-[150px] relative">
         {chatroom.map((c: any) => (
-          <ChatCard
+          <MessageCard
             key={c.id}
             data={c}
             onSelectChat={onSelectChat}
