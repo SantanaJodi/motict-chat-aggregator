@@ -1,10 +1,5 @@
-import { Messages } from "../src/components/organism";
+import ChatroomClient from "./ChatroomClient";
 
 export default function Home() {
-  return (
-    <div className="w-full h-full flex flex-row">
-      <Messages />
-      <Chatroom />
-    </div>
-  );
+  return <ChatroomClient />;
 }
