@@ -17,10 +17,16 @@ import ReplyIcon from "./ReplyIcon";
 import ResolveIcon from "./ResolveIcon";
 import SearchIcon from "./SearchIcon";
 import SettingsIcon from "./SettingsIcon";
+import SnackbarErrorIcon from "./SnackbarErrorIcon";
+import SnackbarSuccessIcon from "./SnackbarSuccessIcon";
+import SnackbarWarningIcon from "./SnackbarWarningIcon";
 import TagIcon from "./TagIcon";
 import XIcon from "./XIcon";
 
 export {
+  SnackbarSuccessIcon,
+  SnackbarWarningIcon,
+  SnackbarErrorIcon,
   ExpanderIcon,
   XIcon,
   HeadsetIcon,
