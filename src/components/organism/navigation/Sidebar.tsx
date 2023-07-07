@@ -25,11 +25,12 @@ const Sidebar: React.FC<SidebarProps> = () => {
       label: "Chatroom",
       Icon: ChatIcon,
     },
-    {
-      path: "/broadcast",
-      label: "Broadcast",
-      Icon: BroadcastIcon,
-    },
+    // EXCLUDED IN MVP
+    // {
+    //   path: "/broadcast",
+    //   label: "Broadcast",
+    //   Icon: BroadcastIcon,
+    // },
     {
       path: "/contact",
       label: "Contact",
