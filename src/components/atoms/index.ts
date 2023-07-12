@@ -8,6 +8,7 @@ import Toaster from "./Toaster";
 import IconButton from "./buttons/IconButton";
 
 export * from "./buttons";
+export * from "./divider";
 export {
   Toaster,
   Avatar,
