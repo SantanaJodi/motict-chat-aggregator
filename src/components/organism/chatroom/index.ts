@@ -1,4 +1,5 @@
 import Chatroom from "./Chatroom";
+import ChatroomDetail from "./ChatroomDetail";
 import Messages from "./Messages";
 
-export { Messages, Chatroom };
+export { Messages, Chatroom, ChatroomDetail };
