@@ -1,4 +1,4 @@
-import FileIcon from "@/public/icons/duotone/FileIcon";
+import { FileIcon } from "@/public/icons/duotone";
 import { DownloadIcon } from "@/public/icons/outline";
 import { IconButton } from "@/src/components/atoms";
 import React from "react";
