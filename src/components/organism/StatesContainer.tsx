@@ -28,21 +28,23 @@ const StatesContainer: React.FC<StatesContainerProps> = ({
   return (
     <div
       className={clsx(
-        "absolute w-full h-[80%] flex items-center justify-center bg-white px-6 overflow-auto",
+        "absolute w-full h-full flex items-center justify-center bg-white px-6 z-10",
         !isEmpty && !isError && !isLoading && "hidden"
       )}
     >
-      {isLoading ? (
-        <Loading />
-      ) : isError ? (
-        <FailedToLoad onReload={() => alert("Reloading...")} />
-      ) : isEmpty ? (
-        <EmptyState Icon={ChatIcon} title={emptyMsg || ""} />
-      ) : noResult ? (
-        <EmptyState Icon={SearchIcon} title="No result" />
-      ) : (
-        ""
-      )}
+      <div className="mb-20">
+        {isLoading ? (
+          <Loading />
+        ) : isError ? (
+          <FailedToLoad onReload={() => alert("Reloading...")} />
+        ) : isEmpty ? (
+          <EmptyState Icon={ChatIcon} title={emptyMsg || ""} />
+        ) : noResult ? (
+          <EmptyState Icon={SearchIcon} title="No result" />
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };
