@@ -16,7 +16,7 @@ const Messages: React.FC<MessagesProps> = ({
 }) => {
   const [search, setSearch] = useState("");
   const [chatroom, setChatroom] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [msgStatus, setMsgStatus] = useState("All");
   const [noResult, setNoResult] = useState(false);
@@ -30,6 +30,7 @@ const Messages: React.FC<MessagesProps> = ({
   };
 
   useEffect(() => {
+    setIsLoading(false);
     setChatroom(DUMMY_CHAT);
   }, []);
 
@@ -38,19 +39,21 @@ const Messages: React.FC<MessagesProps> = ({
       <ChatHeader
         search={search}
         onSearch={(val) => setSearch(val)}
-        hideInput={isLoading || error}
+        hideInput={error}
         status={msgStatus}
         onChangeStatus={handleChangeStatus}
       />
-      <div className=" h-full flex flex-col items-start justify-start mt-4 overflow-y-auto pb-[150px] relative">
-        {chatroom.map((c: any) => (
-          <MessageCard
-            key={c.id}
-            data={c}
-            onSelectChat={onSelectChat}
-            isSelectedChat={c.id === selectedChatId}
-          />
-        ))}
+      <div className=" h-full flex flex-col items-start justify-start mt-4  pb-[150px] relative">
+        <div className="h-full overflow-y-auto">
+          {chatroom.map((c: any) => (
+            <MessageCard
+              key={c.id}
+              data={c}
+              onSelectChat={onSelectChat}
+              isSelectedChat={c.id === selectedChatId}
+            />
+          ))}
+        </div>
 
         {/* STATE */}
         <StatesContainer
