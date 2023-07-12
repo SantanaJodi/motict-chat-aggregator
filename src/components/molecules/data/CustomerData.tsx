@@ -28,7 +28,7 @@ const CustomerData: React.FC<CustomerDataProps> = ({ agent }) => {
           />
           {agent ? (
             <div className="flex flex-row items-center gap-1 w-full">
-              <p className="text-[#67768B] text-sm leading-normal mr-1">
+              <p className="text-[#67768B] text-[14px] leading-[18.23px] mr-1">
                 {/* TODO ALVIN: show "and {number} more" if agent > 2 */}
                 {/* ex: Darmadi Setyo, and 2 more */}
                 {Array.isArray(agent) ? agent.join(", ") : agent}
