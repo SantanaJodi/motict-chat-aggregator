@@ -28,7 +28,7 @@ const StatesContainer: React.FC<StatesContainerProps> = ({
   return (
     <div
       className={clsx(
-        "absolute w-full h-full flex items-center justify-center bg-white px-6 z-10",
+        "absolute w-full h-full flex items-center justify-center bg-white px-6",
         !isEmpty && !isError && !isLoading && "hidden"
       )}
     >
