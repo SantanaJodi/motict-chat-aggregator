@@ -10,9 +10,11 @@ import DownloadIcon from "./DownloadIcon";
 import EmojiIcon from "./EmojiIcon";
 import ExpanderIcon from "./ExpanderIcon.";
 import FailedIcon from "./FailedIcon";
+import FileIcon from "./FileIcon";
 import FilterIcon from "./FilterIcon";
 import HeadsetIcon from "./HeadsetIcon";
 import HelpIcon from "./HelpIcon";
+import ImageIcon from "./ImageIcon";
 import NotificationIcon from "./NotificationIcon";
 import PaperPlaneIcon from "./PaperPlaneIcon";
 import PeoplesIcon from "./PeoplesIcon";
@@ -30,6 +32,8 @@ import TagIcon from "./TagIcon";
 import XIcon from "./XIcon";
 
 export {
+  ImageIcon,
+  FileIcon,
   PlayIcon,
   PaperPlaneIcon,
   EmojiIcon,
