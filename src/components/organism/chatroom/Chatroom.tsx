@@ -1,11 +1,12 @@
 "use client";
 
-import clsx from "clsx";
 import React, { useMemo, useState } from "react";
-import { ChatroomHeader } from "../../molecules";
-import StatesContainer from "../StatesContainer";
-import { DUMMY_CHAT } from "./dummy";
+import { ChatTime } from "../../atoms/divider";
 import { MessageAssignmentEnum } from "../../atoms/tag";
+import { ChatCard, ChatroomHeader } from "../../molecules";
+import StatesContainer from "../StatesContainer";
+import ChatroomDetail from "./ChatroomDetail";
+import { CHATS, DUMMY_CHAT } from "./dummy";
 
 interface ChatroomProps {
   chatId: number | undefined;
@@ -37,8 +38,35 @@ const Chatroom: React.FC<ChatroomProps> = ({ chatId }) => {
           isChatExpanded={isExpanded}
           onChatExpanded={() => setIsExpanded((prev) => !prev)}
         />
-        <div className="h-full overflow-y-auto flex items-center justify-center relative">
-          <p>{chat?.lastChat}</p>
+        <div className="h-full w-full flex flex-col justify-between relative">
+          {/* CHATS */}
+          <div className="p-6 pr-14 flex flex-col gap-6 w-full overflow-y-auto  mb-40">
+            {/*TODO APIN: Groups chat by time and divide using ChatTime component */}
+            <ChatTime time="Yesterday" />
+            <div className="flex flex-col gap-2">
+              {CHATS.slice(0, 5).map((c) => (
+                <ChatCard
+                  key={c.id}
+                  status={c.status}
+                  isSelf={c.isSelf}
+                  chat={c.chat}
+                  hideUsername={c.isSelf}
+                />
+              ))}
+            </div>
+            <ChatTime time="Today" />
+            <div className="flex flex-col gap-2">
+              {CHATS.slice(6).map((c) => (
+                <ChatCard
+                  key={c.id}
+                  status={c.status}
+                  isSelf={c.isSelf}
+                  chat={c.chat}
+                  hideUsername={c.isSelf}
+                />
+              ))}
+            </div>
+          </div>
 
           {/* STATES */}
           <StatesContainer
@@ -50,14 +78,8 @@ const Chatroom: React.FC<ChatroomProps> = ({ chatId }) => {
           />
         </div>
       </div>
-      <div
-        className={clsx(
-          "h-full bg-white border-l border-[#EEF5FF] transition-all",
-          isExpanded ? "w-[375px]" : "hidden w-0"
-        )}
-      >
-        DETAIL CUSTOMER
-      </div>
+
+      <ChatroomDetail isExpanded={isExpanded} />
     </div>
   );
 };
