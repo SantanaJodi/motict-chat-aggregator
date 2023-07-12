@@ -7,6 +7,7 @@ import { ChatCard, ChatroomHeader } from "../../molecules";
 import StatesContainer from "../StatesContainer";
 import ChatroomDetail from "./ChatroomDetail";
 import { CHATS, DUMMY_CHAT } from "./dummy";
+import { ChatProperties } from "../../molecules/footer";
 
 interface ChatroomProps {
   chatId: number | undefined;
@@ -31,7 +32,7 @@ const Chatroom: React.FC<ChatroomProps> = ({ chatId }) => {
   }, [chatId]);
 
   return (
-    <div className="w-full h-full overflow-hidden flex flex-row">
+    <div className="w-full h-full overflow-hidden flex flex-row relative">
       <div className="w-full">
         <ChatroomHeader
           isResolved={chat?.status === MessageAssignmentEnum.resolved}
@@ -67,6 +68,8 @@ const Chatroom: React.FC<ChatroomProps> = ({ chatId }) => {
               ))}
             </div>
           </div>
+
+          <ChatProperties onSend={() => alert("send...")} />
 
           {/* STATES */}
           <StatesContainer
