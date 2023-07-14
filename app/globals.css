@@ -34,6 +34,94 @@ body,
     margin: 0 !important;
 }
 
+
+aside.EmojiPickerReact.epr-main {
+    border: 1px solid #EEF5FF !important;
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.16);
+}
+
+.EmojiPickerReact {
+    --epr-emoji-size: 24px;
+    --epr-search-input-bg-color: #EEF5FF;
+}
+
+.EmojiPickerReact .epr-search-container {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.EmojiPickerReact .epr-search-container input.epr-search {
+    background-color: #EEF5FF !important;
+    border: none !important;
+    padding-left: 38px !important;
+    color: #0D0F12 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400 !important;
+    line-height: 20.83px;
+}
+
+.EmojiPickerReact .epr-search-container input.epr-search::placeholder {
+    color: #AABDD7 !important
+}
+
+.EmojiPickerReact .epr-search-container input.epr-search:hover {
+    background-color: #D7E4F5 !important;
+}
+
+.EmojiPickerReact .epr-search-container .epr-icn-search {
+    background-image: url("data:image/svg+xml,%3Csvg width='19' height='19' viewBox='0 0 19 19' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.5001 1.64961C4.71695 1.64961 1.6501 4.71646 1.6501 8.49961C1.6501 12.2828 4.71695 15.3496 8.5001 15.3496C12.2832 15.3496 15.3501 12.2828 15.3501 8.49961C15.3501 4.71646 12.2832 1.64961 8.5001 1.64961ZM0.350098 8.49961C0.350098 3.99849 3.99898 0.349609 8.5001 0.349609C13.0012 0.349609 16.6501 3.99849 16.6501 8.49961C16.6501 10.5162 15.9177 12.3617 14.7044 13.7847L18.4597 17.54C18.7136 17.7938 18.7136 18.2054 18.4597 18.4592C18.2059 18.7131 17.7943 18.7131 17.5405 18.4592L13.7851 14.7039C12.3622 15.9172 10.5167 16.6496 8.5001 16.6496C3.99898 16.6496 0.350098 13.0007 0.350098 8.49961Z' fill='%23AABDD7'/%3E%3C/svg%3E%0A") !important;
+}
+
+.EmojiPickerReact .epr-search-container button.epr-btn-clear-search .epr-icn-clear-search,
+.EmojiPickerReact .epr-search-container button.epr-btn-clear-search:focus,
+.EmojiPickerReact .epr-search-container button.epr-btn-clear-search:hover {
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7.46968 7.46967C7.76257 7.17678 8.23745 7.17678 8.53034 7.46967L12 10.9393L15.4697 7.46967C15.7626 7.17678 16.2374 7.17678 16.5303 7.46967C16.8232 7.76256 16.8232 8.23744 16.5303 8.53033L13.0607 12L16.5303 15.4697C16.8232 15.7626 16.8232 16.2374 16.5303 16.5303C16.2374 16.8232 15.7626 16.8232 15.4697 16.5303L12 13.0607L8.53033 16.5303C8.23744 16.8232 7.76256 16.8232 7.46967 16.5303C7.17678 16.2374 7.17678 15.7626 7.46967 15.4697L10.9393 12L7.46968 8.53033C7.17678 8.23744 7.17678 7.76256 7.46968 7.46967Z' fill='%23AABDD7'/%3E%3C/svg%3E%0A") !important;
+    right: 3px !important;
+    top: 57% !important;
+
+}
+
+.epr-header-overlay {
+    padding: 16px 16px 0px 16px !important;
+}
+
+.epr-category-nav {
+    padding: 10px !important;
+}
+
+.epr-emoji-category {
+    margin-bottom: 10px;
+}
+
+.epr-emoji-category-label {
+    padding: 10px 16px !important;
+    height: 1px !important;
+}
+
+.epr-emoji-category-label {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400 !important;
+    line-height: normal;
+    color: #0D0F12 !important;
+}
+
+.epr-skin-tones {
+    display: none !important;
+}
+
+
+button.epr-emoji .epr-emoji-img {
+    padding: 0 !important;
+    width: 24px;
+    height: 24px;
+}
+
 @layer utilities {
     @variants responsive {
 
