@@ -1,4 +1,4 @@
-import { Messages } from "../src/components/organism";
+import ChatroomClient from "./ChatroomClient";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -12,9 +12,5 @@ async function checkToken() {
 
 export default async function Home() {
   await checkToken();
-  return (
-    <div className="w-full h-full flex flex-row">
-      <Messages />
-    </div>
-  );
+  return <ChatroomClient />;
 }

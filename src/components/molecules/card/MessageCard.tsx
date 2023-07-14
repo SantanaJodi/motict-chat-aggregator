@@ -1,6 +1,5 @@
 import { ReplyIcon, TagIcon } from "@/public/icons/outline";
 import clsx from "clsx";
-import Image from "next/image";
 import React from "react";
 import { Avatar } from "../../atoms";
 import {
@@ -15,7 +14,7 @@ export enum SessionEnum {
   expired = 2,
 }
 
-interface IChat {
+interface IMessage {
   id: number;
   name: string;
   date: string;
@@ -27,8 +26,8 @@ interface IChat {
   isReplied?: boolean;
 }
 
-interface ChatCardProps {
-  data: IChat;
+interface MessageCardProps {
+  data: IMessage;
   isSelectedChat?: boolean;
   onSelectChat: (id: number) => void;
 }
@@ -38,7 +37,7 @@ const flexBetween = clsx(flexRow, "justify-between w-full");
 const textColor = "text-[#67768B]";
 const textMsg = "leading-[18px] text-[14px] truncate";
 
-const ChatCard: React.FC<ChatCardProps> = ({
+const MessageCard: React.FC<MessageCardProps> = ({
   data,
   onSelectChat,
   isSelectedChat,
@@ -51,18 +50,10 @@ const ChatCard: React.FC<ChatCardProps> = ({
       onClick={() => onSelectChat(data.id)}
     >
       {/* AVATAR */}
-      <div className="relative flex-shrink-0">
-        {/* <Avatar url="" /> */}
-        <Avatar url="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg" />
-        <div className="p-1 rounded-full bg-white flex flex-shrink-0 absolute -bottom-3 left-3">
-          <Image
-            src="/images/svg/channel-wa.svg"
-            alt="whatsapp"
-            width={16}
-            height={16}
-          />
-        </div>
-      </div>
+      <Avatar
+        withChannel
+        url="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg"
+      />
 
       {/* CONTENT */}
       <div className="flex flex-col items-start gap-1  w-full">
@@ -146,4 +137,4 @@ const ChatCard: React.FC<ChatCardProps> = ({
   );
 };
 
-export default ChatCard;
+export default MessageCard;

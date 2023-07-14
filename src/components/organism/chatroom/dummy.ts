@@ -1,5 +1,4 @@
-import { MessageAssignmentEnum } from "../atoms/tag";
-import { SessionEnum } from "../moleculs/messages/ChatCard";
+import { MessageAssignmentEnum } from "../../atoms/tag";
 
 export const DUMMY_CHAT = [
   {
@@ -10,7 +9,7 @@ export const DUMMY_CHAT = [
     unreadChatCount: 1,
     tag: "order, gundam, mainan anak",
     status: MessageAssignmentEnum.waiting,
-    session: SessionEnum.open,
+    session: 0,
     isReplied: false,
   },
   {
@@ -21,7 +20,7 @@ export const DUMMY_CHAT = [
     unreadChatCount: 0,
     tag: "order, gundam, mainan anak,order, gundam, mainan anak",
     status: MessageAssignmentEnum.resolved,
-    session: SessionEnum.open,
+    session: 0,
     isReplied: true,
   },
   {
@@ -32,7 +31,7 @@ export const DUMMY_CHAT = [
     unreadChatCount: 2,
     tag: "order, gundam, mainan anak",
     status: MessageAssignmentEnum.assigned,
-    session: SessionEnum.expiring,
+    session: 1,
     isReplied: false,
   },
   {
@@ -43,7 +42,7 @@ export const DUMMY_CHAT = [
     unreadChatCount: 0,
     tag: null,
     status: MessageAssignmentEnum.campaign,
-    session: SessionEnum.expired,
+    session: 2,
     isReplied: true,
   },
   {
@@ -54,7 +53,7 @@ export const DUMMY_CHAT = [
     unreadChatCount: 0,
     tag: "order, gundam, mainan anak",
     status: MessageAssignmentEnum.assigned_to_me,
-    session: SessionEnum.open,
+    session: 0,
     isReplied: true,
   },
   {
@@ -65,7 +64,7 @@ export const DUMMY_CHAT = [
     unreadChatCount: 1,
     tag: "order, gundam, mainan anak",
     status: MessageAssignmentEnum.waiting,
-    session: SessionEnum.open,
+    session: 0,
     isReplied: false,
   },
   {
@@ -76,7 +75,7 @@ export const DUMMY_CHAT = [
     unreadChatCount: 0,
     tag: "order, gundam, mainan anak,order, gundam, mainan anak",
     status: MessageAssignmentEnum.resolved,
-    session: SessionEnum.open,
+    session: 0,
     isReplied: true,
   },
   {
@@ -87,7 +86,7 @@ export const DUMMY_CHAT = [
     unreadChatCount: 2,
     tag: "order, gundam, mainan anak",
     status: MessageAssignmentEnum.assigned,
-    session: SessionEnum.expiring,
+    session: 1,
     isReplied: false,
   },
   {
@@ -98,7 +97,7 @@ export const DUMMY_CHAT = [
     unreadChatCount: 0,
     tag: null,
     status: MessageAssignmentEnum.campaign,
-    session: SessionEnum.expired,
+    session: 2,
     isReplied: true,
   },
   {
@@ -109,7 +108,7 @@ export const DUMMY_CHAT = [
     unreadChatCount: 0,
     tag: "order, gundam, mainan anak",
     status: MessageAssignmentEnum.assigned_to_me,
-    session: SessionEnum.open,
+    session: 0,
     isReplied: true,
   },
 ];

@@ -8,7 +8,7 @@ interface FailedToLoadProps {
 
 const FailedToLoad: React.FC<FailedToLoadProps> = ({ onReload }) => {
   return (
-    <div className="flex flex-col gap-2 items-center w-64">
+    <div className="flex flex-col gap-2 items-center w-full">
       <FailedIcon width={80} height={80} />
       <p className="text-[#8B9EB7]">Failed To Load Data</p>
       <Button

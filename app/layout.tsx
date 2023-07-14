@@ -1,8 +1,6 @@
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
-import { Container } from "../src/components/atoms";
 import { GlobalContext } from "@/src/hooks/global-context";
-import { cookies } from "next/headers";
 
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
