@@ -1,9 +1,9 @@
 "use client";
 
-import { FilterIcon, ResolveIcon, SearchIcon } from "@/public/icons/outline";
+import { SearchIcon } from "@/public/icons/outline";
 import React from "react";
-import { IconButton, Input } from "../../atoms";
-import { Filter, NotificationCount } from "../../atoms/tag";
+import { TextInput } from "../../atoms";
+import { Filter } from "../../atoms/tag";
 
 interface ChatHeaderProps {
   search: string;
@@ -36,7 +36,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
           </div> */}
         </div>
         {!hideInput && (
-          <Input
+          <TextInput
             Icon={SearchIcon}
             value={search}
             onChange={onSearch}
