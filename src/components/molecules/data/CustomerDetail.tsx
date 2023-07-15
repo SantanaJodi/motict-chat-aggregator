@@ -20,7 +20,7 @@ const CustomerDetail: React.FC<CustomerDetailProps> = () => {
                 +6281234567890
               </p>
               <Button
-                type="link"
+                variant="link"
                 label="• 2 more contact(s)"
                 onClick={() => alert("change")}
                 color="#67768B"

@@ -2,13 +2,13 @@
 
 import { DoubleCheckIcon, RefreshIcon } from "@/public/icons/outline";
 import CheckIcon from "@/public/icons/outline/CheckIcon";
+import { Button } from "@/src/components/atoms";
 import clsx from "clsx";
 import React, { useMemo } from "react";
 import { ClipLoader } from "react-spinners";
+import FileAttachment from "./FileAttachment";
 import ImagesAttachment from "./ImagesAttachment";
 import VideoAttachment from "./VideoAttachment";
-import FileAttachment from "./FileAttachment";
-import { Button } from "@/src/components/atoms";
 
 export enum ChatStatusEnum {
   sent = 11,
@@ -112,7 +112,7 @@ const ChatCard: React.FC<ChatCardProps> = ({
           {RenderStatusIndicator}
           {status === ChatStatusEnum.failed ? (
             <Button
-              type="link"
+              variant="link"
               label="Retry"
               Icon={RefreshIcon}
               onClick={() => alert("retry..")}

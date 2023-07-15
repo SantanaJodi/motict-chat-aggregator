@@ -12,7 +12,7 @@ const FailedToLoad: React.FC<FailedToLoadProps> = ({ onReload }) => {
       <FailedIcon width={80} height={80} />
       <p className="text-[#8B9EB7]">Failed To Load Data</p>
       <Button
-        type="subtle"
+        variant="subtle"
         label="Reload"
         Icon={RefreshIcon}
         onClick={onReload}

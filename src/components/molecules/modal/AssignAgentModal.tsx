@@ -66,7 +66,7 @@ const AssignAgentModal: React.FC<AssignAgentModalProps> = ({
         <Button
           label="Assign"
           disabled={!value}
-          type="primary"
+          variant="primary"
           color="#323944"
           onClick={() => {
             onAssign(value);

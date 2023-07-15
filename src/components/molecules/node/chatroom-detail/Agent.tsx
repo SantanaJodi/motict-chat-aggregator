@@ -23,7 +23,7 @@ const Agent: React.FC<AgentProps> = ({ agent, onAssign }) => {
   if (!agent) {
     bodyContent = (
       <Button
-        type="link"
+        variant="link"
         label="+ Assign Agent"
         color="#C02716"
         onClick={() => setModal(true)}
@@ -39,7 +39,7 @@ const Agent: React.FC<AgentProps> = ({ agent, onAssign }) => {
           <p className="text-[#67768B] text-[14px]">{agent}</p>
         </div>
         <Button
-          type="link"
+          variant="link"
           label="Change"
           color="#8B9EB7"
           onClick={() => setModal(true)}

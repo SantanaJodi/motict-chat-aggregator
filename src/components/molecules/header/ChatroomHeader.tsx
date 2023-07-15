@@ -30,7 +30,7 @@ const ChatroomHeader: React.FC<ChatroomHeaderProps> = ({
 
       <div className={flex}>
         <Button
-          type={isResolved ? "primary" : "ghost"}
+          variant={isResolved ? "primary" : "ghost"}
           label={isResolved ? "Resolved" : "Resolve"}
           color={isResolved ? "#4ABF71" : "#0D0F12"}
           onClick={() => alert("resolved")}

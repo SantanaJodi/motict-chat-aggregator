@@ -3,11 +3,11 @@
 import clsx from "clsx";
 import React from "react";
 
-interface ButtonProps {
-  type: "primary" | "subtle" | "ghost" | "link";
+interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, "size"> {
+  variant: "primary" | "subtle" | "ghost" | "link";
   Icon?: React.ElementType;
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   isLoading?: boolean;
   disabled?: boolean;
   color?: string;
@@ -18,7 +18,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   label,
   onClick,
-  type = "primary",
+  variant = "primary",
   Icon,
   disabled,
   isLoading,
@@ -26,22 +26,22 @@ const Button: React.FC<ButtonProps> = ({
   size = "medium",
   className,
 }) => {
-  const iconSize = size === "medium" && type !== "link" ? 24 : 16;
+  const iconSize = size === "medium" && variant !== "link" ? 24 : 16;
   return (
     <button
       onClick={onClick}
       disabled={isLoading || disabled}
       className={clsx(
         "rounded-lg gap-1 w-max flex flex-row items-center justify-center",
-        type === "primary" && `bg-[${color}]`,
-        type === "subtle" && "border border-[#D7E4F5] hover:bg-[#EEF5FF]",
-        type === "ghost" && "hover:bg-[#EEF5FF]",
-        type === "link" ? `w-max p-0` : "p-2",
+        variant === "primary" && `bg-[${color}]`,
+        variant === "subtle" && "border border-[#D7E4F5] hover:bg-[#EEF5FF]",
+        variant === "ghost" && "hover:bg-[#EEF5FF]",
+        variant === "link" ? `w-max p-0` : "p-2",
         disabled && {
-          "bg-[#AABDD7]": type === "primary",
-          "bg-[#D7E4F5] border-[#AABDD7]": type === "subtle",
-          "bg-[#D7E4F5]": type === "ghost",
-          "opacity-50": type === "link",
+          "bg-[#AABDD7]": variant === "primary",
+          "bg-[#D7E4F5] border-[#AABDD7]": variant === "subtle",
+          "bg-[#D7E4F5]": variant === "ghost",
+          "opacity-50": variant === "link",
         },
         className
       )}
@@ -53,10 +53,10 @@ const Button: React.FC<ButtonProps> = ({
           fill={clsx(
             disabled
               ? {
-                  "#67768B": type === "primary",
-                  "#8B9EB7": type === "subtle" || type === "ghost",
+                  "#67768B": variant === "primary",
+                  "#8B9EB7": variant === "subtle" || variant === "ghost",
                 }
-              : type === "primary"
+              : variant === "primary"
               ? "#fff"
               : color
           )}
@@ -65,17 +65,17 @@ const Button: React.FC<ButtonProps> = ({
       <p
         className={clsx(
           "font-medium",
-          type === "primary" && "text-white",
+          variant === "primary" && "text-white",
           disabled && {
-            "!text-[#67768B]": type === "primary",
-            "!text-[#8B9EB7]": type === "subtle",
+            "!text-[#67768B]": variant === "primary",
+            "!text-[#8B9EB7]": variant === "subtle",
           },
-          type === "link" &&
+          variant === "link" &&
             `text-[${color}] underline text-[14px] leading-[18.23px] !font-normal`,
-          size === "medium" && type !== "link" && "text-[16px]",
+          size === "medium" && variant !== "link" && "text-[16px]",
           size === "small" && "text-[14px] leading-[18.23px]"
         )}
-        style={type === "link" ? { color } : {}}
+        style={variant === "link" ? { color } : {}}
       >
         {label}
       </p>

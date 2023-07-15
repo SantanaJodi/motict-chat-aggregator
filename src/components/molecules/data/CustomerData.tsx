@@ -34,7 +34,7 @@ const CustomerData: React.FC<CustomerDataProps> = ({ agent }) => {
                 {Array.isArray(agent) ? agent.join(", ") : agent}
               </p>
               <Button
-                type="link"
+                variant="link"
                 label="• Change"
                 onClick={() => alert("change")}
                 color="#67768B"
@@ -42,7 +42,7 @@ const CustomerData: React.FC<CustomerDataProps> = ({ agent }) => {
             </div>
           ) : (
             <Button
-              type="link"
+              variant="link"
               label="+ Assign Agent"
               onClick={() => alert("add")}
               color="#C02716"

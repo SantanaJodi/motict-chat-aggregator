@@ -18,7 +18,7 @@ const Tags: React.FC<TagsProps> = ({ tags, onSave }) => {
   if (!tags?.length && !isEdit) {
     bodyContent = (
       <Button
-        type="link"
+        variant="link"
         label="Add tag"
         color="#8B9EB7"
         onClick={() => setIsEdit(true)}
@@ -53,14 +53,14 @@ const Tags: React.FC<TagsProps> = ({ tags, onSave }) => {
         />
         <div className="flex flex-row items-center justify-between gap-2 w-full">
           <Button
-            type="ghost"
+            variant="ghost"
             label="Cancel"
             size="small"
             onClick={() => setIsEdit(false)}
             className="flex-1"
           />
           <Button
-            type="primary"
+            variant="primary"
             label="Save"
             Icon={SaveIcon}
             size="small"
