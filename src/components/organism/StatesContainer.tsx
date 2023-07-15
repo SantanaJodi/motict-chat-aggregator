@@ -1,4 +1,4 @@
-import { ChatIcon, SearchIcon } from "@/public/icons/outline";
+import { SearchIcon } from "@/public/icons/outline";
 import clsx from "clsx";
 import React, { useEffect } from "react";
 import { toast } from "react-hot-toast";
@@ -12,6 +12,9 @@ interface StatesContainerProps {
   noResult?: boolean;
   emptyMsg?: string;
   onReload: () => void;
+  noResultMsg?: string;
+  EmptyIcon: any;
+  disableErrorToast?: boolean;
 }
 
 const StatesContainer: React.FC<StatesContainerProps> = ({
@@ -20,10 +23,16 @@ const StatesContainer: React.FC<StatesContainerProps> = ({
   isLoading,
   emptyMsg,
   noResult,
+  noResultMsg,
+  onReload,
+  EmptyIcon,
+  disableErrorToast,
 }) => {
   useEffect(() => {
+    if (!disableErrorToast) return;
+
     if (isError) toast.error("Something is wrong, please try again.");
-  }, [isError]);
+  }, [isError, disableErrorToast]);
 
   return (
     <div
@@ -32,15 +41,15 @@ const StatesContainer: React.FC<StatesContainerProps> = ({
         !isEmpty && !isError && !isLoading && "hidden"
       )}
     >
-      <div className="mb-20">
+      <div className="mb-20 w-full">
         {isLoading ? (
           <Loading />
         ) : isError ? (
-          <FailedToLoad onReload={() => alert("Reloading...")} />
-        ) : isEmpty ? (
-          <EmptyState Icon={ChatIcon} title={emptyMsg || ""} />
+          <FailedToLoad onReload={onReload} />
         ) : noResult ? (
-          <EmptyState Icon={SearchIcon} title="No result" />
+          <EmptyState Icon={SearchIcon} title={noResultMsg || "No result"} />
+        ) : isEmpty ? (
+          <EmptyState Icon={EmptyIcon} title={emptyMsg || ""} />
         ) : (
           ""
         )}

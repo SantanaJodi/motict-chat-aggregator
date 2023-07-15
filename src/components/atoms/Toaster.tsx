@@ -18,7 +18,7 @@ const Toaster: React.FC<ToasterProps> = () => {
           flexDirection: "row",
           alignItems: "center",
           gap: 8,
-          width: "max-content",
+          width: 360,
           maxWidth: "none",
           color: "#fff",
           margin: 0,

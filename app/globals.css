@@ -8,6 +8,7 @@ body,
     height: 100%;
     padding: 0;
     margin: 0;
+    --rt-opacity: 1
 }
 
 ::-webkit-scrollbar {
@@ -30,20 +31,22 @@ body,
     background: #555;
 }
 
+
+/* TOASTER TEXT CSS */
 .go3958317564 {
     margin: 0 !important;
+    flex: unset !important;
 }
 
 
+
+/* EMOJI PICKER CUSTOM */
 aside.EmojiPickerReact.epr-main {
     border: 1px solid #EEF5FF !important;
     box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.16);
 }
 
-.EmojiPickerReact {
-    --epr-emoji-size: 24px;
-    --epr-search-input-bg-color: #EEF5FF;
-}
+
 
 .EmojiPickerReact .epr-search-container {
     display: flex !important;
@@ -120,6 +123,96 @@ button.epr-emoji .epr-emoji-img {
     padding: 0 !important;
     width: 24px;
     height: 24px;
+}
+
+/* CUSTOM RADIO BUTTON STYLE */
+input[type="radio"] {
+    appearance: none;
+    font: inherit;
+    color: #D7E4F5;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #D7E4F5;
+    border-radius: 50%;
+    background: white;
+}
+
+
+input[type="radio"]:checked,
+input[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="radio"]:checked+label,
+input[type="radio"]:not(:checked)+label {
+    position: relative;
+    cursor: pointer;
+    line-height: 20px;
+    display: flex;
+    color: #0D0F12;
+    font-size: 16px;
+    line-height: 20.83px;
+    font-weight: 700;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+input[type="radio"]:checked+label:before,
+input[type="radio"]:not(:checked)+label:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -2px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #D7E4F5;
+    border-radius: 100%;
+    background: #fff;
+}
+
+input[type="radio"]:checked+label:hover:before,
+input[type="radio"]:not(:checked)+label:hover:before {
+    background: #EEF5FF;
+}
+
+input[type="radio"]:checked+label:after,
+input[type="radio"]:not(:checked)+label:after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: #323944;
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+input[type="radio"]:not(:checked)+label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+input[type="radio"]:checked+label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
+/* TOOLTIP */
+.tooltip-pointer::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-width: 10px;
+    border-style: solid;
 }
 
 @layer utilities {

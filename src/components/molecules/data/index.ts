@@ -1,3 +1,4 @@
 import CustomerData from "./CustomerData";
+import CustomerDetail from "./CustomerDetail";
 
-export { CustomerData };
+export { CustomerDetail, CustomerData };
