@@ -1,5 +1,6 @@
 "use client";
 
+import { ChatIcon } from "@/public/icons/outline";
 import React, { useEffect, useState } from "react";
 import { ChatHeader, MessageCard } from "../../molecules";
 import StatesContainer from "../StatesContainer";
@@ -63,6 +64,7 @@ const Messages: React.FC<MessagesProps> = ({
           noResult={noResult}
           emptyMsg="You have no chatroom"
           onReload={() => alert("reload")}
+          EmptyIcon={ChatIcon}
         />
       </div>
     </div>
