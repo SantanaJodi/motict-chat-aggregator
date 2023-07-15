@@ -1,4 +1,4 @@
-import { LoginView } from "@/src/modules/login/view/login-view";
+import { LoginView } from "@/src/modules/login/view/LoginView";
 
 import { redirect } from "next/navigation";
 
