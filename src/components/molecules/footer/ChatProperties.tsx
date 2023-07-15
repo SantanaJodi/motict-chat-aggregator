@@ -23,7 +23,7 @@ const ChatProperties: React.FC<ChatPropertiesProps> = () => {
       <IconButton
         Icon={AttachmentIcon}
         onClick={() => setAttachFile((value) => !value)}
-        color={emoji ? "#C02716" : "#0D0F12"}
+        color={attachFile ? "#C02716" : "#0D0F12"}
       />
       <IconButton
         Icon={emoji ? EmojiIconDuotone : EmojiIconOutline}
