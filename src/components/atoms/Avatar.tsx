@@ -1,3 +1,4 @@
+import { ChannelWa } from "@/public/icons/logo";
 import Image from "next/image";
 import React from "react";
 
@@ -22,13 +23,8 @@ const Avatar: React.FC<AvatarProps> = ({ url, withChannel }) => {
   return (
     <div className="relative flex-shrink-0">
       {image}
-      <div className="p-1 rounded-full bg-white flex flex-shrink-0 absolute -bottom-2 left-[14px]">
-        <Image
-          src="/images/svg/channel-wa.svg"
-          alt="whatsapp"
-          width={13.333}
-          height={13.333}
-        />
+      <div className="p-1 rounded-full bg-white flex flex-shrink-0 absolute -bottom-3 left-[12px]">
+        <ChannelWa width={16} height={16} />
       </div>
     </div>
   );
