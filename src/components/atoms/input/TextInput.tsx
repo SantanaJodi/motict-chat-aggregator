@@ -2,12 +2,15 @@ import { XIcon } from "@/public/icons/outline";
 import clsx from "clsx";
 import React from "react";
 
-interface TextInputProps {
+export interface TextInputProps
+  extends Omit<React.HTMLProps<HTMLInputElement>, "value" | "onChange"> {
   placeholder: string;
   value: string;
   onChange: (value: string) => void;
   Icon?: React.ElementType;
+  rightElement?: React.ReactNode;
   className?: string;
+  disableClear?: boolean;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -16,6 +19,9 @@ const TextInput: React.FC<TextInputProps> = ({
   value,
   Icon,
   className,
+  disableClear,
+  rightElement,
+  ...props
 }) => {
   return (
     <div
@@ -30,8 +36,14 @@ const TextInput: React.FC<TextInputProps> = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
+        {...props}
       />
-      {value && <XIcon fill="#AABDD7" onClick={() => onChange("")} />}
+      {rightElement
+        ? rightElement
+        : value &&
+          !disableClear && (
+            <XIcon fill="#AABDD7" onClick={() => onChange("")} />
+          )}
     </div>
   );
 };
