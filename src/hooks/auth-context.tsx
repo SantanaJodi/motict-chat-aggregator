@@ -1,10 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-import React, { PropsWithChildren, useEffect, useMemo, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 
 import Cookies from "js-cookie";
-import { Container } from "../components";
 
 const AuthContext = React.createContext<AuthContextProps>({} as any);
 
@@ -38,17 +37,9 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
     }
   }, [router, setState]);
 
-  const renderChild = useMemo(() => {
-    if (token) {
-      return <Container>{children}</Container>;
-    } else {
-      return children;
-    }
-  }, [children, token]);
-
   return (
     <AuthContext.Provider value={{ token, handleRevokeToken, handleSetToken }}>
-      {renderChild}
+      {children}
     </AuthContext.Provider>
   );
 };
