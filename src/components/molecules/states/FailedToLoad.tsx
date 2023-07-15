@@ -16,6 +16,7 @@ const FailedToLoad: React.FC<FailedToLoadProps> = ({ onReload }) => {
         label="Reload"
         Icon={RefreshIcon}
         onClick={onReload}
+        className="!w-full"
       />
     </div>
   );
