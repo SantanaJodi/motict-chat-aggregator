@@ -1,6 +1,6 @@
-import { Sidebar, Toaster } from "@/src";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import { GlobalContext } from "@/src/hooks/global-context";
 
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
@@ -17,11 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={dmSans.className}>
-        <div className="h-full w-full p-0 m-0  flex flex-row">
-          <Sidebar />
-          <Toaster />
-          <div className="w-full">{children}</div>
-        </div>
+        <GlobalContext>{children}</GlobalContext>
       </body>
     </html>
   );
