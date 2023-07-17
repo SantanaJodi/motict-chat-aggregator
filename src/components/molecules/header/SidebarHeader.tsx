@@ -10,7 +10,7 @@ interface SidebarHeaderProps {
 
 const SidebarHeader: React.FC<SidebarHeaderProps> = ({ collapsed, toggle }) => {
   return (
-    <div className={clsx("relative py-6 w-full px-6", "px-4" && !collapsed)}>
+    <div className={clsx("relative w-full", collapsed ? "p-4" : " px-4 py-6")}>
       <Logo collapsed={collapsed} />
       <div
         onClick={toggle}
