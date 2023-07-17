@@ -12,20 +12,22 @@ interface ChatroomViewProps {}
 
 const ChatroomView: React.FC<ChatroomViewProps> = () => {
   const [selectedChat, setSelectedChat] = useState<number>();
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <Container>
-      <Messages
-        selectedChatId={selectedChat}
-        onSelectChat={(id) => setSelectedChat(id)}
-      />
-      <Chatroom
-        chatId={selectedChat}
-        isChatExpanded={isExpanded}
-        onChatExpanded={() => setIsExpanded((prev) => !prev)}
-      />
-      <ChatroomDetail isExpanded={isExpanded} />
+      <div className="w-full h-full flex flex-row gap-[1px]">
+        <Messages
+          selectedChatId={selectedChat}
+          onSelectChat={(id) => setSelectedChat(id)}
+        />
+        <Chatroom
+          chatId={selectedChat}
+          isChatExpanded={isExpanded}
+          onChatExpanded={() => setIsExpanded((prev) => !prev)}
+        />
+        <ChatroomDetail isExpanded={isExpanded} />
+      </div>
     </Container>
   );
 };
