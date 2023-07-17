@@ -29,7 +29,7 @@ const StatesContainer: React.FC<StatesContainerProps> = ({
   disableErrorToast,
 }) => {
   useEffect(() => {
-    if (!disableErrorToast) return;
+    if (disableErrorToast) return;
 
     if (isError) toast.error("Something is wrong, please try again.");
   }, [isError, disableErrorToast]);
