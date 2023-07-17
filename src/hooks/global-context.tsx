@@ -3,13 +3,17 @@ import { FunctionComponent, PropsWithChildren } from "react";
 
 import { QueryClientProviderContext } from "./query-client-provider-context";
 import { AuthContextProvider } from "./auth-context";
+import { Toaster } from "../components";
 
 export const GlobalContext: FunctionComponent<GlobalContextProps> = ({
   children,
 }) => {
   return (
     <QueryClientProviderContext>
-      <AuthContextProvider>{children}</AuthContextProvider>
+      <AuthContextProvider>
+        <Toaster />
+        {children}
+      </AuthContextProvider>
     </QueryClientProviderContext>
   );
 };

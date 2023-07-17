@@ -1,16 +1,21 @@
 "use client";
 
-import { Chatroom, ChatroomDetail, Messages } from "@/src";
+import {
+  Chatroom,
+  ChatroomDetail,
+  Container,
+  Messages,
+} from "@/src/components";
 import React, { useState } from "react";
 
-interface ChatroomClientProps {}
+interface ChatroomViewProps {}
 
-const ChatroomClient: React.FC<ChatroomClientProps> = () => {
+const ChatroomView: React.FC<ChatroomViewProps> = () => {
   const [selectedChat, setSelectedChat] = useState<number>();
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
-    <div className="w-full h-full flex flex-row gap-[1px]">
+    <Container>
       <Messages
         selectedChatId={selectedChat}
         onSelectChat={(id) => setSelectedChat(id)}
@@ -21,8 +26,8 @@ const ChatroomClient: React.FC<ChatroomClientProps> = () => {
         onChatExpanded={() => setIsExpanded((prev) => !prev)}
       />
       <ChatroomDetail isExpanded={isExpanded} />
-    </div>
+    </Container>
   );
 };
 
-export default ChatroomClient;
+export default ChatroomView;

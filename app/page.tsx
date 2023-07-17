@@ -1,4 +1,4 @@
-import ChatroomClient from "./ChatroomClient";
+import ChatroomView from "@/src/modules/chatroom/view/ChatroomView";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -12,5 +12,5 @@ async function checkToken() {
 
 export default async function Home() {
   await checkToken();
-  return <ChatroomClient />;
+  return <ChatroomView />;
 }
