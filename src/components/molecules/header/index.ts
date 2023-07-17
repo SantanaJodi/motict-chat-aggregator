@@ -1,6 +1,13 @@
 import ChatHeader from "./ChatHeader";
 import ChatroomHeader from "./ChatroomHeader";
+import ContactHeader from "./ContactHeader";
 import ModalHeader from "./ModalHeader";
 import SidebarHeader from "./SidebarHeader";
 
-export { ModalHeader, SidebarHeader, ChatroomHeader, ChatHeader };
+export {
+  ContactHeader,
+  ModalHeader,
+  SidebarHeader,
+  ChatroomHeader,
+  ChatHeader,
+};

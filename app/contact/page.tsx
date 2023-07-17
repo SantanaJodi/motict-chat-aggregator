@@ -1,5 +1,7 @@
+import ContactView from "@/src/modules/contact/view/ContactView";
+
 const ContactPage = () => {
-  return <h1>Contact Page</h1>;
+  return <ContactView />;
 };
 
 export default ContactPage;

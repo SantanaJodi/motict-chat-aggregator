@@ -9,7 +9,7 @@ interface FailedToLoadProps {
 const FailedToLoad: React.FC<FailedToLoadProps> = ({ onReload }) => {
   return (
     <div className="flex flex-col gap-2 items-center w-full">
-      <FailedIcon width={80} height={80} />
+      <FailedIcon width={80} height={80} fill="#8B9EB7" />
       <p className="text-[#8B9EB7]">Failed To Load Data</p>
       <Button
         variant="subtle"
