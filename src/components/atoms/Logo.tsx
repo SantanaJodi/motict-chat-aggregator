@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { BrandLogoGraph, BrandLogoType } from "@/public/icons/logo";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -10,15 +10,14 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ collapsed }) => {
   const router = useRouter();
+  const onClick = () => router.push("/");
+
+  if (!collapsed) return <BrandLogoType onClick={onClick} />;
+
   return (
-    <Image
-      src={`/images/svg/brand-logo-${collapsed ? "graph" : "type"}.svg`}
-      alt="brand-logo"
-      className="self-center"
-      onClick={() => router.push("/")}
-      width={collapsed ? 24 : 84}
-      height={24}
-    />
+    <div onClick={onClick} className="p-2 rounded-lg hover:bg-[#EEF5FF]">
+      <BrandLogoGraph />
+    </div>
   );
 };
 
