@@ -10,6 +10,7 @@ export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
         staleTime: 5 * 1000,
         // @ts-ignore
         onError: (err: AxiosError<IResponDataFetch>) => {
+          console.log(err, "<<< iki error coba");
           if (err.response?.data) {
             console.log(err, "<< error");
           }

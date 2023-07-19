@@ -1,10 +1,17 @@
 import axios from "axios";
-import { GetServerSidePropsContext } from "next";
 
-export const baseAxios = (ctx: GetServerSidePropsContext | null = null) => {
+import Cookies from "js-cookie";
+
+export const baseAxios = (nonAuth?: boolean) => {
+  let Authorization;
+  if (!nonAuth) {
+    const cookieToken = Cookies.get("token");
+    Authorization = "Bearer " + cookieToken;
+  }
   const baseApi = axios.create({
     timeout: 30000,
     timeoutErrorMessage: "Time out!",
+    headers: { Authorization },
   });
 
   baseApi.interceptors.response.use(

@@ -6,9 +6,9 @@ import { TextInput } from "../../atoms";
 import { Filter } from "../../atoms/tag";
 
 interface ChatHeaderProps {
-  search: string;
+  search?: string;
   onSearch: (value: string) => void;
-  status: string;
+  status?: string;
   onChangeStatus: (value: string) => void;
   hideInput?: boolean;
 }
@@ -38,20 +38,14 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
         {!hideInput && (
           <TextInput
             Icon={SearchIcon}
-            value={search}
+            value={search || ""}
             onChange={onSearch}
             placeholder="Search chatroom or conversation"
           />
         )}
       </div>
       <div className="flex flex-row items-center gap-2 overflow-x-auto  ml-4 no-scrollbar">
-        {[
-          "All",
-          "Waiting • 32",
-          "Assigned to Me • 12",
-          "Assigned",
-          "Resolved",
-        ].map((item) => (
+        {["All", "waiting", "assigned", "resolved", "expired"].map((item) => (
           <Filter
             key={item}
             label={item}

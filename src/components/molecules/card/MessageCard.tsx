@@ -7,11 +7,12 @@ import {
   MessageAssignmentEnum,
   NotificationCount,
 } from "../../atoms/tag";
+import { MessagesDTO } from "../../organism/chatroom/messages/types/MessagesTypes";
 
 export enum SessionEnum {
-  open = 0,
-  expiring = 1,
-  expired = 2,
+  open = "open",
+  expiring = "expiring",
+  expired = "expired",
 }
 
 interface IMessage {
@@ -27,7 +28,7 @@ interface IMessage {
 }
 
 interface MessageCardProps {
-  data: IMessage;
+  data: MessagesDTO;
   isSelectedChat?: boolean;
   onSelectChat: (id: number) => void;
 }
@@ -47,25 +48,24 @@ const MessageCard: React.FC<MessageCardProps> = ({
       className={
         "flex flex-row items-start gap-2 bg-white px-4 py-6 w-full relative hover:bg-[#EEF5FF] cursor-pointer"
       }
-      onClick={() => onSelectChat(data.id)}
+      onClick={() => onSelectChat(data.conversation_id)}
     >
       {/* AVATAR */}
-      <Avatar
-        withChannel
-        url="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg"
-      />
+      <Avatar withChannel url={data.from_user_photo || (null as any)} />
 
       {/* CONTENT */}
       <div className="flex flex-col items-start gap-1  w-full">
         <div className={flexBetween} style={{ alignItems: "flex-start" }}>
           <p className="font-bold text-[#0D0F12] leading-[20.83px] truncate max-w-[150px]">
-            {data.name}
+            {data.from_user_name}
           </p>
-          <p className={clsx(textColor, "text-[12px]")}>{data.date}</p>
+          <p className={clsx(textColor, "text-[12px]")}>
+            {data.last_message?.time as any}
+          </p>
         </div>
 
         <div className={flexBetween}>
-          {data.isReplied ? (
+          {data.unread_counter > 0 ? (
             <div className={clsx(flexRow, "gap-1 w-full")}>
               <ReplyIcon
                 width={16}
@@ -80,25 +80,27 @@ const MessageCard: React.FC<MessageCardProps> = ({
                   "font-normal max-w-[268px]"
                 )}
               >
-                {data.lastChat}
+                {data.last_message?.text}
               </p>
             </div>
           ) : (
             <p className={clsx(textColor, textMsg, "font-bold max-w-[265px]")}>
-              {data.lastChat}
+              {data.last_message?.text}
             </p>
           )}
 
-          {!data.isReplied && <NotificationCount count={1} />}
+          {data.unread_counter > 0 && (
+            <NotificationCount count={data.unread_counter} />
+          )}
         </div>
 
-        {data.tag && (
+        {data.tags?.length > 0 && (
           <div className={clsx(flexRow, "gap-1")}>
             <TagIcon width={16} height={16} fill="#8B9EB7" />
             <p
               className={clsx(textColor, "text-[12px] truncate max-w-[268px]")}
             >
-              {data.tag}
+              {data.tags[1]}
             </p>
           </div>
         )}
@@ -107,25 +109,25 @@ const MessageCard: React.FC<MessageCardProps> = ({
           className={clsx(
             "w-full",
             "flex flex-row",
-            data.session === SessionEnum.open
+            data.status === SessionEnum.open
               ? "justify-end"
               : "items-end justify-between"
           )}
         >
           {/* CHANGE BY MESSAGE TIME */}
-          {data.session !== SessionEnum.open && (
+          {data.status !== SessionEnum.open && (
             <p
               className={clsx("text-[12px] leading-[15.62px]", {
-                "text-[#F0A22E]": data.session === SessionEnum.expiring,
-                "text-[#CB5237]": data.session === SessionEnum.expired,
+                "text-[#F0A22E]": data.status === SessionEnum.expiring,
+                "text-[#CB5237]": data.status === SessionEnum.expired,
               })}
             >
-              {data.session === SessionEnum.expiring
+              {data.status === SessionEnum.expiring
                 ? "Expired in 59 minute(s)"
                 : "Expired"}
             </p>
           )}
-          <MessageAssignment type={data.status} />
+          <MessageAssignment type={data.assigned_agent_id} />
         </div>
       </div>
 
