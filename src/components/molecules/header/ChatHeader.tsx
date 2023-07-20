@@ -4,12 +4,13 @@ import { SearchIcon } from "@/public/icons/outline";
 import React from "react";
 import { TextInput } from "../../atoms";
 import { Filter } from "../../atoms/tag";
+import { StatusEnum } from "../../organism/chatroom/messages/types/MessagesTypes";
 
 interface ChatHeaderProps {
   search?: string;
   onSearch: (value: string) => void;
   status?: string;
-  onChangeStatus: (value: string) => void;
+  onChangeStatus: (value: StatusEnum) => void;
   hideInput?: boolean;
 }
 
@@ -45,7 +46,13 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
         )}
       </div>
       <div className="flex flex-row items-center gap-2 overflow-x-auto  ml-4 no-scrollbar">
-        {["All", "waiting", "assigned", "resolved", "expired"].map((item) => (
+        {[
+          StatusEnum.ALL,
+          StatusEnum.WAITING,
+          StatusEnum.ASSIGNED,
+          StatusEnum.RESOLVED,
+          StatusEnum.EXPIRED,
+        ].map((item) => (
           <Filter
             key={item}
             label={item}

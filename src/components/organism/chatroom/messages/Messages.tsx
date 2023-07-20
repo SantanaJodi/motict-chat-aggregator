@@ -25,14 +25,12 @@ const Messages: React.FC<MessagesProps> = ({
     chatroom,
     data,
     error,
-    handleChangeStatus,
     isLoading,
     msgStatus,
     noResult,
     search,
     setChatroom,
     setError,
-    setIsLoading,
     setMsgStatus,
     setNoResult,
     setSearch,
@@ -40,22 +38,26 @@ const Messages: React.FC<MessagesProps> = ({
     fetchNextPage,
     hasNextPage,
   } = MessagesViewModel();
+
   return (
     <div className="w-[375px] h-screen bg-white py-6  border-r border-[#EEF5FF]  overflow-hidden flex-shrink-0">
       <ChatHeader
         search={search}
         onSearch={(val) => setSearch(val)}
         hideInput={error}
-        status={"All"}
-        onChangeStatus={handleChangeStatus}
+        status={msgStatus}
+        onChangeStatus={setMsgStatus}
       />
       <div className=" h-full flex flex-col items-start justify-start mt-4  pb-[150px] relative">
         <div className="h-full overflow-y-auto">
           <InfiniteScroll
-            dataLength={messages.length}
+            dataLength={
+              data?.pages.reduce((acc, page) => acc + page.count, 0) || 0
+            }
             next={fetchNextPage}
             loader={<Loading />}
-            hasMore={!!hasNextPage}
+            hasMore={hasNextPage || false}
+            scrollableTarget="scrollableDiv"
           >
             {messages.map((c: MessagesDTO) => (
               <MessageCard

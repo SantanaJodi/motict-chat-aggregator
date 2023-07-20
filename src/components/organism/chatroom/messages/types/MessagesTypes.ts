@@ -22,6 +22,14 @@ export interface LastMessageDTO {
 
 export interface IPaginateMessageReq extends PaginateRequestDTO {
   search: string;
-  status?: number;
-  assignee?: number;
+  status?: StatusEnum;
+  assignee?: string;
+}
+
+export enum StatusEnum {
+  ALL = "all",
+  WAITING = "waiting",
+  ASSIGNED = "assigned",
+  RESOLVED = "resolved",
+  EXPIRED = "expired",
 }
