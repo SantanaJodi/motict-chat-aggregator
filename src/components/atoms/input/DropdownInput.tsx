@@ -3,7 +3,7 @@
 import { ChevronDownIcon, XIcon } from "@/public/icons/outline";
 import Select, { MultiValueRemoveProps, components } from "react-select";
 
-interface DropdownInputProps<T> {
+export interface DropdownInputProps<T> {
   placeholder?: string;
   options: T[];
   onChange: (value: any) => void;
