@@ -1,4 +1,5 @@
 import MessageCard from "./MessageCard";
+import UploadedFileCard from "./UploadedFileCard";
 
 export * from "./chat";
-export { MessageCard };
+export { UploadedFileCard as UploadedFile, MessageCard };
