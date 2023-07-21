@@ -9,6 +9,7 @@ import IconButton from "./buttons/IconButton";
 
 export * from "./buttons";
 export * from "./divider";
+export * from "./fields";
 export * from "./input";
 export {
   Modal,
