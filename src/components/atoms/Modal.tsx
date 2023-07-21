@@ -5,6 +5,8 @@ import { ModalHeader } from "../molecules";
 
 interface ModalProps extends ModalType, PropsWithChildren {
   footer?: React.ReactNode;
+  width: number;
+  height: number;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -13,6 +15,8 @@ const Modal: React.FC<ModalProps> = ({
   visible,
   children,
   footer,
+  height,
+  width,
 }) => {
   return (
     <div
@@ -21,7 +25,13 @@ const Modal: React.FC<ModalProps> = ({
         visible ? "block" : "hidden"
       )}
     >
-      <div className="bg-white w-[480px] h-[560px] rounded-2xl relative overflow-hidden flex flex-col">
+      <div
+        className={clsx(
+          "bg-white rounded-2xl relative overflow-hidden flex flex-col",
+          `w-[${width}px]`,
+          `h-[${height}px]`
+        )}
+      >
         <ModalHeader title={title} onClose={onClose} />
         <div className="flex flex-col justify-between h-[calc(100%_-_65px)]">
           <div className="px-6 pt-6 h-[calc(100%_-_72px)]">{children}</div>

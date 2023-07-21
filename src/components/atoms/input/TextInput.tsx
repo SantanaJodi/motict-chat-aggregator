@@ -4,7 +4,7 @@ import React from "react";
 
 export interface TextInputProps
   extends Omit<React.HTMLProps<HTMLInputElement>, "value" | "onChange"> {
-  placeholder: string;
+  placeholder?: string;
   value: string;
   onChange: (value: string) => void;
   Icon?: React.ElementType;
@@ -32,11 +32,13 @@ const TextInput: React.FC<TextInputProps> = ({
     >
       {Icon && <Icon />}
       <input
-        className="w-full bg-transparent border-none focus:outline-none text-base placeholder:text-[#AABDD7]"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         {...props}
+        className={clsx(
+          "w-full bg-transparent border-none focus:outline-none text-base placeholder:text-[#AABDD7]"
+        )}
       />
       {rightElement
         ? rightElement
