@@ -239,6 +239,20 @@ input[type="checkbox"]:focus {
     border-style: solid;
 }
 
+
+/* DISABLE INPUT NUMBER ARROWS */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 @layer utilities {
     @variants responsive {
 
