@@ -18,9 +18,9 @@ const AddNewContactView: React.FC<AddNewContactViewProps> = () => {
   return (
     <Container>
       <div className="w-full h-full flex flex-row gap-[1px]">
-        <div className="w-full h-full">
+        <div className="w-full h-full overflow-hidden">
           <NewContactHeader type={state.type} onChangeType={handleChangeType} />
-          <div className="p-6">
+          <div className="p-6 h-full overflow-auto">
             <FormProvider {...formModule}>
               <form onSubmit={formModule.handleSubmit(handleSaveContact)}>
                 <div className="flex flex-col gap-12">
