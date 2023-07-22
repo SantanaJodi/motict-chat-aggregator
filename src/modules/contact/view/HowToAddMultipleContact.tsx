@@ -5,7 +5,7 @@ interface HowToAddMultipleContactProps {}
 
 const HowToAddMultipleContact: React.FC<HowToAddMultipleContactProps> = () => {
   return (
-    <div className="w-[375px] p-4 flex flex-col gap-8 flex-shrink-0 bg-white border-l border-[#EEF5FF]">
+    <div className="w-[375px] p-4 flex flex-col gap-8 flex-shrink-0 bg-white border-l border-[#EEF5FF] overflow-auto">
       <div className="flex flex-col gap-4">
         <h2 className="m-0 text-xl text-[#0D0F12] font-bold">
           Upload Multiple Contact
