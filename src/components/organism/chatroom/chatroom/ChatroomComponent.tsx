@@ -45,10 +45,12 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
             {chatroomDetails[t].map((c) => (
               <ChatCard
                 key={c.id}
-                status={c.status}
+                // TODO: fix this
+                status={c.status as any}
                 isSelf={c.is_agent}
                 chat={{
-                  timestamp: c.send_time,
+                  // TODO: fix this
+                  timestamp: c.send_time as any,
                   username: c.from_user_name,
                   message: c.text,
                 }}
