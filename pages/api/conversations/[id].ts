@@ -7,10 +7,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
+    const conversation_id = req.query["id"];
     const token = req.headers.cookie?.substring(6);
-
     return await axios
-      .get(`${BASEURL}/conversations`, {
+      .get(`${BASEURL}/conversations/${conversation_id}`, {
         params: req.query,
         headers: {
           Authorization: "Bearer " + token,
@@ -23,6 +23,7 @@ export default async function handler(
       })
       .catch((err) => {
         const { status, data } = err.response;
+        console.log(status);
         throw res.status(status).json(data);
       });
   } else {
