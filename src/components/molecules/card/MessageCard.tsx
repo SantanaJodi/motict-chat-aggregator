@@ -51,7 +51,10 @@ const MessageCard: React.FC<MessageCardProps> = ({
       onClick={() => onSelectChat(data)}
     >
       {/* AVATAR */}
-      <Avatar withChannel url={data.from_user_photo || (null as any)} />
+      <Avatar
+        channel={data.platform}
+        url={data.from_user_photo || (null as any)}
+      />
 
       {/* CONTENT */}
       <div className="flex flex-col items-start gap-1  w-full">

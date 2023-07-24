@@ -1,11 +1,9 @@
 "use client";
 
 import { HeadsetIcon } from "@/public/icons/outline";
+import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 import React from "react";
 import { Avatar, Button } from "../../atoms";
-import { IHeaderMessages } from "../../organism/chatroom/chatroom/types/ChatroomTypes";
-import { IChatroomDetail } from "../../organism/chatroom/messages/types/MessagesTypes";
-import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 
 interface CustomerDataProps {
   header?: IConversationDetail;
@@ -26,7 +24,10 @@ const CustomerData: React.FC<CustomerDataProps> = ({ header }) => {
   };
   return (
     <div className="flex flex-row items-center gap-2 w-full">
-      <Avatar withChannel url={header?.sender?.from_user_photo || undefined} />
+      <Avatar
+        channel="Whatsapp"
+        url={header?.sender?.from_user_photo || undefined}
+      />
       <div className="flex flex-col items-start gap-1 w-full">
         <p className="text-[#0D0F12] font-bold leading[20.83px]">
           {header?.sender?.from_user_name}
