@@ -15,9 +15,8 @@ interface MessagesProps {}
 
 const Messages: React.FC<MessagesProps> = ({}) => {
   const {
-    isExpanded,
     selectedChat,
-    setIsExpanded,
+
     setSelectedChat,
     conversationDetail,
   } = useChatroomContext();

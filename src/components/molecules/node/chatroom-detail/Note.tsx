@@ -10,7 +10,7 @@ interface NoteProps {
 }
 
 const Note: React.FC<NoteProps> = ({ notes, onSave }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(notes || "");
   const [isEdit, setIsEdit] = useState(false);
 
   let bodyContent;
@@ -26,7 +26,19 @@ const Note: React.FC<NoteProps> = ({ notes, onSave }) => {
   }
 
   if (notes) {
-    bodyContent = <p className="text-[#67768B]">{notes}</p>;
+    bodyContent = (
+      <>
+        {" "}
+        <p className="text-[#67768B]">{notes}</p>
+        <Button
+          variant="link"
+          label="Edit Note"
+          color="#8B9EB7"
+          onClick={() => setIsEdit(true)}
+        />
+        <br />
+      </>
+    );
   }
 
   if (isEdit) {

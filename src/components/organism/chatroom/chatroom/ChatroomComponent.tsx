@@ -4,12 +4,13 @@ import { ChatIcon } from "@/public/icons/outline";
 import { ChatTime } from "@/src/components/atoms";
 import { ChatroomHeader, ChatCard } from "@/src/components/molecules";
 import { ChatProperties } from "@/src/components/molecules/footer";
-import React from "react";
+import React, { useMemo } from "react";
 import StatesContainer from "../../StatesContainer";
 import { CHATS } from "../dummy";
 import { ChatroomViewModel } from "./viewModel/ChatRoomViewModel";
 import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 import { IChatroomDetail } from "../messages/types/MessagesTypes";
+import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
 
 interface ChatroomComponentProps {
   chatroomDetail?: IConversationDetail;
@@ -32,42 +33,52 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
     messageHeader,
   } = ChatroomViewModel({ selectedChat: selectedChat });
 
+  const { conversationDetail } = useChatroomContext();
+
+  const messageChats = useMemo(() => {
+    const component = [] as any;
+    Object.keys(chatroomDetails).forEach((t, y) => {
+      component.push(
+        <>
+          <ChatTime time={t} />
+          <div className="flex flex-col gap-2">
+            {chatroomDetails[t].map((c) => (
+              <ChatCard
+                key={c.id}
+                status={c.status}
+                isSelf={c.is_agent}
+                chat={{
+                  timestamp: c.send_time,
+                  username: c.from_user_name,
+                  message: c.text,
+                }}
+                hideUsername={c.is_agent}
+              />
+            ))}
+          </div>
+        </>
+      );
+    });
+
+    return component;
+  }, [chatroomDetails]);
+
   return (
     <div className="w-full h-full overflow-hidden relative">
-      <ChatroomHeader
-        isResolved={messageHeader?.conversation_status === "resolved"}
-        isChatExpanded={isChatExpanded}
-        onChatExpanded={onChatExpanded}
-        header={chatroomDetail}
-      />
+      {conversationDetail && (
+        <ChatroomHeader
+          isResolved={messageHeader?.conversation_status === "resolved"}
+          isChatExpanded={isChatExpanded}
+          onChatExpanded={onChatExpanded}
+          header={chatroomDetail}
+        />
+      )}
+
       <div className="h-full w-full flex flex-col justify-between relative">
-        {/* CHATS */}
         <div className="p-6 pr-14 flex flex-col gap-6 w-full overflow-y-auto  mb-40">
           {/*TODO APIN: Groups chat by time and divide using ChatTime component */}
-          <ChatTime time="Yesterday" />
-          <div className="flex flex-col gap-2">
-            {CHATS.slice(0, 5).map((c) => (
-              <ChatCard
-                key={c.id}
-                status={c.status}
-                isSelf={c.isSelf}
-                chat={c.chat}
-                hideUsername={c.isSelf}
-              />
-            ))}
-          </div>
-          <ChatTime time="Today" />
-          <div className="flex flex-col gap-2">
-            {CHATS.slice(6).map((c) => (
-              <ChatCard
-                key={c.id}
-                status={c.status}
-                isSelf={c.isSelf}
-                chat={c.chat}
-                hideUsername={c.isSelf}
-              />
-            ))}
-          </div>
+
+          {messageChats}
         </div>
 
         <ChatProperties onSend={() => alert("send...")} />
