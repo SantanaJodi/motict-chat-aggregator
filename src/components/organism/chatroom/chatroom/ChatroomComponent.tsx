@@ -1,16 +1,16 @@
 "use client";
 
 import { ChatIcon } from "@/public/icons/outline";
-import { ChatTime } from "@/src/components/atoms";
+import { ChatTime, Loading } from "@/src/components/atoms";
 import { ChatroomHeader, ChatCard } from "@/src/components/molecules";
 import { ChatProperties } from "@/src/components/molecules/footer";
 import React, { useMemo } from "react";
 import StatesContainer from "../../StatesContainer";
-import { CHATS } from "../dummy";
 import { ChatroomViewModel } from "./viewModel/ChatRoomViewModel";
 import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 import { IChatroomDetail } from "../messages/types/MessagesTypes";
 import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 interface ChatroomComponentProps {
   chatroomDetail?: IConversationDetail;
@@ -79,8 +79,15 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
       <div className="h-full w-full flex flex-col justify-between relative">
         <div className="p-6 pr-14 flex flex-col gap-6 w-full overflow-y-auto  mb-40">
           {/*TODO APIN: Groups chat by time and divide using ChatTime component */}
-
-          {messageChats}
+          <InfiniteScroll
+            dataLength={Object.keys(chatroomDetails).length}
+            next={fetchNextPage}
+            loader={<Loading />}
+            hasMore={hasNextPage || false}
+            inverse={true}
+          >
+            {messageChats}
+          </InfiniteScroll>
         </div>
 
         <ChatProperties onSend={() => alert("send...")} />

@@ -50,9 +50,7 @@ const Messages: React.FC<MessagesProps> = ({}) => {
       <div className=" h-full w-full flex flex-col items-start justify-start mt-4  pb-[150px] relative">
         <div className="h-full w-full overflow-y-auto">
           <InfiniteScroll
-            dataLength={
-              data?.pages.reduce((acc, page) => acc + page.count, 0) || 0
-            }
+            dataLength={messages.length}
             next={fetchNextPage}
             loader={<Loading />}
             hasMore={hasNextPage || false}
