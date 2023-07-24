@@ -1,12 +1,15 @@
 "use client";
 
-import { Container, NewContactHeader } from "@/src/components";
+import {
+  Container,
+  HowToAddMultipleContact,
+  NewContactHeader,
+} from "@/src/components";
 import React from "react";
 import { FormProvider } from "react-hook-form";
 import AddMultipleContactForm from "../form/AddMultipleContactForm";
 import AddSingleContactForm from "../form/AddSingleContactForm";
 import AddContactViewModel from "../view-model/AddContactViewModel";
-import HowToAddMultipleContact from "./HowToAddMultipleContact";
 
 interface AddNewContactViewProps {}
 
