@@ -15,8 +15,6 @@ export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
           if (err.response?.data) {
             const res = err.response.status === 403;
 
-            console.log(res, "<<<<<<<");
-
             if (res) {
               handleRevokeToken();
             }

@@ -9,16 +9,18 @@ import { IChatroomDetail } from "./types/MessagesTypes";
 import { MessagesViewModel } from "./viewModel/MessagesViewModel";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "@/src/components/atoms";
+import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
 
-interface MessagesProps {
-  selectedChatroom: IChatroomDetail | undefined;
-  onSelectChat: (chatroomDetail: IChatroomDetail) => void;
-}
+interface MessagesProps {}
 
-const Messages: React.FC<MessagesProps> = ({
-  onSelectChat,
-  selectedChatroom,
-}) => {
+const Messages: React.FC<MessagesProps> = ({}) => {
+  const {
+    isExpanded,
+    selectedChat,
+    setIsExpanded,
+    setSelectedChat,
+    conversationDetail,
+  } = useChatroomContext();
   const {
     chatroom,
     data,
@@ -61,9 +63,9 @@ const Messages: React.FC<MessagesProps> = ({
               <MessageCard
                 key={c.conversation_id}
                 data={c}
-                onSelectChat={onSelectChat}
+                onSelectChat={setSelectedChat}
                 isSelectedChat={
-                  c.conversation_id === selectedChatroom?.conversation_id
+                  c.conversation_id === selectedChat?.conversation_id
                 }
               />
             ))}

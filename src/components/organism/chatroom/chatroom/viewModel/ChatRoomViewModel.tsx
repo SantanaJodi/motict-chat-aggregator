@@ -1,10 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { IChatroomDetail } from "../../messages/types/MessagesTypes";
-import { DUMMY_CHAT } from "../../dummy";
 import { useInfiniteQuery } from "react-query";
 import { ChatroomApi } from "../api/ChatroomApi";
-import { flatten } from "lodash";
-import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 
 export interface IChatroomViewModel {
   selectedChat?: IChatroomDetail;
