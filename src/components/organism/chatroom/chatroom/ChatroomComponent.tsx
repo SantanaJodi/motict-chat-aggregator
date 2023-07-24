@@ -45,7 +45,7 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
             {chatroomDetails[t].map((c) => (
               <ChatCard
                 key={c.id}
-                // TODO: fix this
+                // TODO: fix this a
                 status={c.status as any}
                 isSelf={c.is_agent}
                 chat={{
