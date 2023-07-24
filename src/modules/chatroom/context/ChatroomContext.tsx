@@ -65,6 +65,21 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
     }
   );
 
+  const { mutateAsync: setResolve } = useMutation(
+    ["setNotesFn", selectedChat?.conversation_id],
+
+    {
+      onSuccess: () => {
+        toast.success("Data successfully resolved.");
+        refetch();
+      },
+      mutationFn: () => {
+        // @ts-ignore
+        return ChatroomApi().SetResolve(selectedChat?.conversation_id);
+      },
+    }
+  );
+
   return (
     <ChatroomContext.Provider
       value={{
@@ -75,6 +90,7 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
         isFetchingConversationDetail,
         conversationDetail,
         setNotes,
+        setResolve,
       }}
     >
       {children}
@@ -95,6 +111,12 @@ export interface ChatroomContextProps {
     IConversationDetail,
     unknown,
     string,
+    unknown
+  >;
+  setResolve: UseMutateAsyncFunction<
+    IConversationDetail,
+    unknown,
+    void,
     unknown
   >;
 }

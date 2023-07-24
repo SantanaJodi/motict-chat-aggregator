@@ -6,6 +6,7 @@ import React from "react";
 import { Button } from "../../atoms";
 import CustomerData from "../data/CustomerData";
 import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
+import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
 
 interface ChatroomHeaderProps {
   isResolved?: boolean;
@@ -22,6 +23,7 @@ const ChatroomHeader: React.FC<ChatroomHeaderProps> = ({
   onChatExpanded,
   header,
 }) => {
+  const { setResolve } = useChatroomContext();
   return (
     <div
       className={clsx(
@@ -36,7 +38,7 @@ const ChatroomHeader: React.FC<ChatroomHeaderProps> = ({
           variant={isResolved ? "primary" : "ghost"}
           label={isResolved ? "Resolved" : "Resolve"}
           color={isResolved ? "#4ABF71" : "#0D0F12"}
-          onClick={() => alert("resolved")}
+          onClick={async () => await setResolve()}
         />
         <div
           onClick={onChatExpanded}

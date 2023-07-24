@@ -18,7 +18,7 @@ const ChatroomInfo: React.FC<ChatroomInfoProps> = ({ conversationDetail }) => {
       />
       <ListData
         label="Created"
-        data={conversationDetail?.created_at || ""}
+        data={conversationDetail?.created_at || ("" as any)}
         size="small"
       />
       <ListData

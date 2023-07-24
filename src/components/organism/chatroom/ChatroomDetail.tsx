@@ -20,7 +20,6 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
   isExpanded,
   chatroomDetail,
 }) => {
-  console.log(chatroomDetail?.notes, "<<<");
   const { setNotes } = useChatroomContext();
   const [tags, setTags] = useState<ISelectOpt[]>([]);
   const [agent, setAgent] = useState("");
