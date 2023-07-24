@@ -1,4 +1,4 @@
-import Chatroom from "./Chatroom";
+import Chatroom from "./chatroom/Chatroom";
 import ChatroomDetail from "./ChatroomDetail";
 import Messages from "./messages/Messages";
 

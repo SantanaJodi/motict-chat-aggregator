@@ -7,12 +7,18 @@ import { Line } from "../../atoms";
 import { CustomerDetail } from "../../molecules";
 import { Agent, ChatroomInfo, Note, Tags } from "../../molecules/node";
 import { toast } from "react-hot-toast";
+import { IChatroomDetail } from "./messages/types/MessagesTypes";
+import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 
 interface ChatroomDetailProps {
   isExpanded?: boolean;
+  chatroomDetail?: IConversationDetail;
 }
 
-const ChatroomDetail: React.FC<ChatroomDetailProps> = ({ isExpanded }) => {
+const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
+  isExpanded,
+  chatroomDetail,
+}) => {
   const [note, setNote] = useState("");
   const [tags, setTags] = useState<SelectOpt[]>([]);
   const [agent, setAgent] = useState("");
@@ -28,14 +34,19 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({ isExpanded }) => {
       </div>
       <div className="">
         <div className="p-6 flex flex-col gap-6 h-full mt-[73px]">
-          <CustomerDetail />
+          <CustomerDetail chatroomDetail={chatroomDetail} />
           <Line />
-          <ChatroomInfo />
+          <ChatroomInfo conversationDetail={chatroomDetail} />
           <Line />
-          <Note notes={note} onSave={(value) => setNote(value)} />
+          <Note
+            notes={chatroomDetail?.notes}
+            onSave={(value) => setNote(value)}
+          />
           <Line />
           <Tags
-            tags={tags}
+            tags={
+              chatroomDetail?.tags.map((t) => ({ label: t, value: t })) as any
+            }
             onSave={(value) => {
               setTags(value);
               console.log("🚀 -> value:", value);
@@ -43,7 +54,7 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({ isExpanded }) => {
           />
           <Line />
           <Agent
-            agent={agent}
+            agent={chatroomDetail?.agents.map((t) => t.name).join(", ")}
             onAssign={(value) => {
               setAgent(value);
               toast.success("Agent Assigned");

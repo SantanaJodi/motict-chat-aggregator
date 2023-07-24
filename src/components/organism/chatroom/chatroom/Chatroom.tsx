@@ -1,47 +1,41 @@
 "use client";
 
 import { ChatIcon } from "@/public/icons/outline";
-import React, { useMemo, useState } from "react";
-import { ChatTime } from "../../atoms/divider";
-import { MessageAssignmentEnum } from "../../atoms/tag";
-import { ChatCard, ChatroomHeader } from "../../molecules";
-import { ChatProperties } from "../../molecules/footer";
-import StatesContainer from "../StatesContainer";
-import { CHATS, DUMMY_CHAT } from "./dummy";
+import { ChatTime } from "@/src/components/atoms";
+import { ChatroomHeader, ChatCard } from "@/src/components/molecules";
+import { ChatProperties } from "@/src/components/molecules/footer";
+import React from "react";
+import StatesContainer from "../../StatesContainer";
+import { CHATS } from "../dummy";
+import { ChatroomViewModel } from "./viewModel/ChatRoomViewModel";
+import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 
 interface ChatroomProps {
-  chatId: number | undefined;
+  chatroomDetail?: IConversationDetail;
   isChatExpanded?: boolean;
   onChatExpanded: () => void;
 }
 
 const Chatroom: React.FC<ChatroomProps> = ({
-  chatId,
+  chatroomDetail,
   onChatExpanded,
   isChatExpanded,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-
-  const chat: any = useMemo(() => {
-    if (!chatId) return;
-
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    const c = DUMMY_CHAT.filter((item) => item.id === chatId);
-    if (c.length) return c[0];
-  }, [chatId]);
+  const {
+    chatroomDetails,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    messageHeader,
+  } = ChatroomViewModel({ chatroomDetail: chatroomDetail });
 
   return (
     <div className="w-full h-full overflow-hidden relative">
       <ChatroomHeader
-        isResolved={chat?.status === MessageAssignmentEnum.resolved}
+        isResolved={messageHeader?.conversation_status === "resolved"}
         isChatExpanded={isChatExpanded}
         onChatExpanded={onChatExpanded}
+        header={chatroomDetail}
       />
       <div className="h-full w-full flex flex-col justify-between relative">
         {/* CHATS */}
@@ -77,9 +71,9 @@ const Chatroom: React.FC<ChatroomProps> = ({
 
         {/* STATES */}
         <StatesContainer
-          isLoading={isLoading}
-          isEmpty={!chat?.id}
-          isError={error}
+          isLoading={isFetching}
+          isEmpty={!chatroomDetail?.conversation_id}
+          // isError={error}
           emptyMsg="Choose chatroom from the left sidebar"
           onReload={() => alert("reload")}
           EmptyIcon={ChatIcon}

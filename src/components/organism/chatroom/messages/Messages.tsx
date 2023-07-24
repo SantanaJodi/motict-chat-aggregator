@@ -1,25 +1,23 @@
 "use client";
 
 import { ChatIcon } from "@/public/icons/outline";
-import React, { useState } from "react";
+import React from "react";
 import { ChatHeader, MessageCard } from "../../../molecules";
 import StatesContainer from "../../StatesContainer";
 
-import { GlobalResData, PaginateResponseDTO } from "@/src/types/common-types";
-import { MessagesDTO } from "./types/MessagesTypes";
-import { useQuery } from "react-query";
+import { IChatroomDetail } from "./types/MessagesTypes";
 import { MessagesViewModel } from "./viewModel/MessagesViewModel";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "@/src/components/atoms";
 
 interface MessagesProps {
-  selectedChatId: number | undefined;
-  onSelectChat: (chatId: number) => void;
+  selectedChatroom: IChatroomDetail | undefined;
+  onSelectChat: (chatroomDetail: IChatroomDetail) => void;
 }
 
 const Messages: React.FC<MessagesProps> = ({
   onSelectChat,
-  selectedChatId,
+  selectedChatroom,
 }) => {
   const {
     chatroom,
@@ -59,12 +57,14 @@ const Messages: React.FC<MessagesProps> = ({
             hasMore={hasNextPage || false}
             scrollableTarget="scrollableDiv"
           >
-            {messages.map((c: MessagesDTO) => (
+            {messages.map((c: IChatroomDetail) => (
               <MessageCard
                 key={c.conversation_id}
                 data={c}
                 onSelectChat={onSelectChat}
-                isSelectedChat={c.assigned_agent_id === selectedChatId}
+                isSelectedChat={
+                  c.conversation_id === selectedChatroom?.conversation_id
+                }
               />
             ))}
           </InfiniteScroll>

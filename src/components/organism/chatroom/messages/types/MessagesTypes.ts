@@ -1,6 +1,6 @@
 import { PaginateRequestDTO } from "@/src/types/common-types";
 
-export interface MessagesDTO {
+export interface IChatroomDetail {
   conversation_id: number;
   from_user_photo: null;
   from_user_name: string;
@@ -12,6 +12,8 @@ export interface MessagesDTO {
   unread_counter: number;
   is_expired: boolean;
   expire_at: Date;
+  // TODO: user id
+  // TODO: field kurang replied : boolean
 }
 
 export interface LastMessageDTO {
@@ -21,7 +23,7 @@ export interface LastMessageDTO {
 }
 
 export interface IPaginateMessageReq extends PaginateRequestDTO {
-  search: string;
+  search?: string;
   status?: StatusEnum;
   assignee?: string;
 }

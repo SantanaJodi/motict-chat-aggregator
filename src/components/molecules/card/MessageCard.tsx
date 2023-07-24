@@ -7,7 +7,7 @@ import {
   MessageAssignmentEnum,
   NotificationCount,
 } from "../../atoms/tag";
-import { MessagesDTO } from "../../organism/chatroom/messages/types/MessagesTypes";
+import { IChatroomDetail } from "../../organism/chatroom/messages/types/MessagesTypes";
 
 export enum SessionEnum {
   open = "open",
@@ -28,9 +28,9 @@ interface IMessage {
 }
 
 interface MessageCardProps {
-  data: MessagesDTO;
+  data: IChatroomDetail;
   isSelectedChat?: boolean;
-  onSelectChat: (id: number) => void;
+  onSelectChat: (chatroomDetail: IChatroomDetail) => void;
 }
 
 const flexRow = "flex flex-row items-center";
@@ -48,7 +48,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
       className={
         "flex flex-row items-start gap-2 bg-white px-4 py-6 w-full relative hover:bg-[#EEF5FF] cursor-pointer"
       }
-      onClick={() => onSelectChat(data.conversation_id)}
+      onClick={() => onSelectChat(data)}
     >
       {/* AVATAR */}
       <Avatar withChannel url={data.from_user_photo || (null as any)} />

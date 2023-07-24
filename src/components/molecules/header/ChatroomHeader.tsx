@@ -5,11 +5,13 @@ import clsx from "clsx";
 import React from "react";
 import { Button } from "../../atoms";
 import CustomerData from "../data/CustomerData";
+import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 
 interface ChatroomHeaderProps {
   isResolved?: boolean;
   isChatExpanded?: boolean;
   onChatExpanded: () => void;
+  header?: IConversationDetail;
 }
 
 const flex = "flex flex-row items-center gap-6";
@@ -18,6 +20,7 @@ const ChatroomHeader: React.FC<ChatroomHeaderProps> = ({
   isResolved,
   isChatExpanded,
   onChatExpanded,
+  header,
 }) => {
   return (
     <div
@@ -26,7 +29,7 @@ const ChatroomHeader: React.FC<ChatroomHeaderProps> = ({
         "bg-white pl-6 justify-between border-b border-[#EEF5FF]"
       )}
     >
-      <CustomerData agent={null} />
+      <CustomerData header={header} />
 
       <div className={flex}>
         <Button

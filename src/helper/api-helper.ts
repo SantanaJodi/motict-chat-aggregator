@@ -2,16 +2,10 @@ import axios from "axios";
 
 import Cookies from "js-cookie";
 
-export const baseAxios = (nonAuth?: boolean) => {
-  let Authorization;
-  if (!nonAuth) {
-    const cookieToken = Cookies.get("token");
-    Authorization = "Bearer " + cookieToken;
-  }
+export const baseAxios = () => {
   const baseApi = axios.create({
     timeout: 30000,
     timeoutErrorMessage: "Time out!",
-    headers: { Authorization },
   });
 
   baseApi.interceptors.response.use(

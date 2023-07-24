@@ -2,7 +2,7 @@
 import { GlobalResData, PaginateResponseDTO } from "@/src/types/common-types";
 import {
   IPaginateMessageReq,
-  MessagesDTO,
+  IChatroomDetail,
   StatusEnum,
 } from "../types/MessagesTypes";
 import React, { useMemo, useState } from "react";
