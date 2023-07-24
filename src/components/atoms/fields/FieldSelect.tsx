@@ -1,31 +1,32 @@
-import React from "react";
 import { useController } from "react-hook-form";
-import { TextInput, TextInputProps } from "../input";
+import { DropdownInput } from "../input";
+import { DropdownInputProps } from "../input/DropdownInput";
 
-interface FieldInputProps extends Omit<TextInputProps, "value" | "onChange"> {
+interface FieldSelectProps<T>
+  extends Omit<DropdownInputProps<T>, "value" | "onChange"> {
   name: string;
   label?: string;
 }
 
-const FieldInput: React.FC<FieldInputProps> = ({
-  name,
+const FieldSelect = <T extends object>({
+  options,
   label,
-  placeholder,
+  name,
   ...props
-}) => {
+}: FieldSelectProps<T>) => {
   const { field } = useController({ name });
 
   return (
     <div className="flex flex-col gap-2">
       {label && <p className="font-bold text-[#0D0F12]">{label}</p>}
-      <TextInput
+      <DropdownInput
+        options={options}
         value={field.value}
         onChange={field.onChange}
-        placeholder={placeholder}
         {...props}
       />
     </div>
   );
 };
 
-export default FieldInput;
+export default FieldSelect;

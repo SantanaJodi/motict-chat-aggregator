@@ -1,6 +1,7 @@
 import { DownloadIcon, SearchIcon, TrashIcon } from "@/public/icons/outline";
 import { IContact } from "@/src/modules/contact/types/contact-type";
 import { ISelectOpt } from "@/src/types";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { Button, DropdownInput, TextInput } from "../../atoms";
 
@@ -21,6 +22,7 @@ const ContactHeader: React.FC<ContactHeaderProps> = ({
   selectedRow,
   onDeleteContact,
 }) => {
+  const router = useRouter();
   const isSelected = !!selectedRow?.length;
   return (
     <div className=" w-full p-6 flex flex-col gap-6">
@@ -53,6 +55,7 @@ const ContactHeader: React.FC<ContactHeaderProps> = ({
               onDeleteContact();
               return;
             }
+            router.push("/contact/add");
           }}
         />
         <Button

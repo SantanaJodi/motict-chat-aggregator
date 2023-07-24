@@ -45,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({
         className
       )}
       style={{
-        background: variant === "primary" ? color : "",
+        background: !disabled && variant === "primary" ? color : "",
       }}
     >
       {Icon && (
