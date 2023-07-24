@@ -1,30 +1,16 @@
 import { ReplyIcon, TagIcon } from "@/public/icons/outline";
 import clsx from "clsx";
-import React from "react";
+import { formatRelative } from "date-fns";
+import enGB from "date-fns/locale/en-GB";
+import React, { useMemo } from "react";
 import { Avatar } from "../../atoms";
-import {
-  MessageAssignment,
-  MessageAssignmentEnum,
-  NotificationCount,
-} from "../../atoms/tag";
+import { MessageAssignment, NotificationCount } from "../../atoms/tag";
 import { IChatroomDetail } from "../../organism/chatroom/messages/types/MessagesTypes";
 
 export enum SessionEnum {
   open = "open",
   expiring = "expiring",
   expired = "expired",
-}
-
-interface IMessage {
-  id: number;
-  name: string;
-  date: string;
-  lastChat: string;
-  unreadChatCount: number;
-  tag: string | null;
-  status: MessageAssignmentEnum;
-  session: SessionEnum;
-  isReplied?: boolean;
 }
 
 interface MessageCardProps {
@@ -43,6 +29,26 @@ const MessageCard: React.FC<MessageCardProps> = ({
   onSelectChat,
   isSelectedChat,
 }) => {
+  const messageTime = useMemo(() => {
+    const time = data.last_message.time;
+    const formatRelativeLocale: any = {
+      lastWeek: "'last' eeee',' kk:mm",
+      yesterday: "'yesterday,' kk:mm",
+      today: "'today,' kk:mm",
+      tomorrow: "'tomorrow,' kk:mm",
+      nextWeek: "eeee',' kk:mm",
+      other: "PPP, kk:mm",
+    };
+
+    const locale = {
+      // is t use ID locale or not?
+      ...enGB,
+      formatRelative: (token: any) => formatRelativeLocale[token],
+    };
+
+    return formatRelative(new Date(time), new Date(), { locale });
+  }, [data.last_message.time]);
+
   return (
     <div
       className={
@@ -62,9 +68,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
           <p className="font-bold text-[#0D0F12] leading-[20.83px] truncate max-w-[150px]">
             {data.from_user_name}
           </p>
-          <p className={clsx(textColor, "text-[12px]")}>
-            {data.last_message?.time as any}
-          </p>
+          <p className={clsx(textColor, "text-[12px]")}>{messageTime}</p>
         </div>
 
         <div className={flexBetween}>
