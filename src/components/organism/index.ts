@@ -1,6 +1,4 @@
-import Table from "./Table";
-
 export * from "./chatroom";
+export * from "./contact";
 export * from "./navigation";
-
-export { Table };
+export * from "./table";

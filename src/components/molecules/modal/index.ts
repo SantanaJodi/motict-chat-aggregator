@@ -1,3 +1,4 @@
 import AssignAgentModal from "./AssignAgentModal";
+import DeleteRecipientGroupModal from "./DeleteRecipientGroupModal";
 
-export { AssignAgentModal };
+export { DeleteRecipientGroupModal, AssignAgentModal };

@@ -2,16 +2,16 @@
 
 import { PenIcon, SaveIcon, TagIcon } from "@/public/icons/outline";
 import { Button, DropdownInput, IconButton } from "@/src/components/atoms";
-import { SelectOpt } from "@/src/types";
+import { ISelectOpt } from "@/src/types";
 import React, { useState } from "react";
 
 interface TagsProps {
-  tags: SelectOpt[];
+  tags: ISelectOpt[];
   onSave: (value: any) => void;
 }
 
 const Tags: React.FC<TagsProps> = ({ tags, onSave }) => {
-  const [value, setValue] = useState<SelectOpt[]>(tags);
+  const [value, setValue] = useState<ISelectOpt[]>(tags);
   const [isEdit, setIsEdit] = useState(false);
 
   let bodyContent;

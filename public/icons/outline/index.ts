@@ -35,9 +35,11 @@ import SnackbarErrorIcon from "./SnackbarErrorIcon";
 import SnackbarSuccessIcon from "./SnackbarSuccessIcon";
 import SnackbarWarningIcon from "./SnackbarWarningIcon";
 import TagIcon from "./TagIcon";
+import TrashIcon from "./TrashIcon";
 import XIcon from "./XIcon";
 
 export {
+  TrashIcon,
   ChevronDownIcon,
   SaveIcon,
   InfoIcon,

@@ -62,6 +62,8 @@ const AssignAgentModal: React.FC<AssignAgentModalProps> = ({
       title="Agent Assignment"
       onClose={onClose}
       visible={visible}
+      width={480}
+      height={560}
       footer={
         <Button
           label="Assign"
@@ -84,7 +86,7 @@ const AssignAgentModal: React.FC<AssignAgentModalProps> = ({
           Icon={SearchIcon}
         />
         <div className="flex flex-col h-full relative">
-          <div className="flex flex-col  overflow-y-auto">
+          <div className="flex flex-col  overflow-y-auto mb-16">
             {agents.map((item, id) => (
               <Radio
                 key={id}

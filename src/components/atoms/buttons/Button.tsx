@@ -6,7 +6,7 @@ import React from "react";
 interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, "size"> {
   variant: "primary" | "subtle" | "ghost" | "link";
   Icon?: React.ElementType;
-  label: string;
+  label?: string;
   onClick?: () => void;
   isLoading?: boolean;
   disabled?: boolean;
@@ -33,7 +33,6 @@ const Button: React.FC<ButtonProps> = ({
       disabled={isLoading || disabled}
       className={clsx(
         "rounded-lg gap-1 w-max flex flex-row items-center justify-center",
-        variant === "primary" && `bg-[${color}]`,
         variant === "subtle" && "border border-[#D7E4F5] hover:bg-[#EEF5FF]",
         variant === "ghost" && "hover:bg-[#EEF5FF]",
         variant === "link" ? `w-max p-0` : "p-2",
@@ -45,6 +44,9 @@ const Button: React.FC<ButtonProps> = ({
         },
         className
       )}
+      style={{
+        background: !disabled && variant === "primary" ? color : "",
+      }}
     >
       {Icon && (
         <Icon
@@ -62,23 +64,26 @@ const Button: React.FC<ButtonProps> = ({
           )}
         />
       )}
-      <p
-        className={clsx(
-          "font-medium",
-          variant === "primary" && "text-white",
-          disabled && {
-            "!text-[#67768B]": variant === "primary",
-            "!text-[#8B9EB7]": variant === "subtle",
-          },
-          variant === "link" &&
-            `text-[${color}] underline text-[14px] leading-[18.23px] !font-normal`,
-          size === "medium" && variant !== "link" && "text-[16px]",
-          size === "small" && "text-[14px] leading-[18.23px]"
-        )}
-        style={variant === "link" ? { color } : {}}
-      >
-        {label}
-      </p>
+      {label && (
+        <p
+          className={clsx(
+            "font-medium",
+            variant === "primary" && "text-white",
+            disabled && {
+              "!text-[#67768B]": variant === "primary",
+              "!text-[#8B9EB7]": variant === "subtle",
+            },
+            variant === "link" &&
+              `text-[${color}] underline text-[14px] leading-[18.23px] !font-normal`,
+            variant == "ghost" && `text-[${color}]`,
+            size === "medium" && variant !== "link" && "text-[16px]",
+            size === "small" && "text-[14px] leading-[18.23px]"
+          )}
+          style={variant === "link" ? { color } : {}}
+        >
+          {label}
+        </p>
+      )}
     </button>
   );
 };

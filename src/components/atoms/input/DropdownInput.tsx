@@ -1,16 +1,15 @@
 "use client";
 
 import { ChevronDownIcon, XIcon } from "@/public/icons/outline";
-import { SelectOpt } from "@/src/types";
-import React from "react";
 import Select, { MultiValueRemoveProps, components } from "react-select";
 
-interface DropdownInputProps {
-  placeholder: string;
-  options: SelectOpt[];
+export interface DropdownInputProps<T> {
+  placeholder?: string;
+  options: T[];
   onChange: (value: any) => void;
   value: any;
   isMulti?: boolean;
+  menuPlacement?: "auto" | "bottom" | "top";
 }
 
 const DropdownIndicator = () => <ChevronDownIcon className="cursor-pointer" />;
@@ -21,13 +20,14 @@ const MultiValueRemove = (props: MultiValueRemoveProps) => (
   </components.MultiValueRemove>
 );
 
-const DropdownInput: React.FC<DropdownInputProps> = ({
+const DropdownInput = <T extends any>({
   placeholder,
   options,
   isMulti,
   onChange,
   value,
-}) => {
+  menuPlacement,
+}: DropdownInputProps<T>) => {
   return (
     <Select
       options={options}
@@ -41,6 +41,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
         DropdownIndicator,
         MultiValueRemove,
       }}
+      menuPlacement={menuPlacement}
       styles={{
         control: (base) => ({
           ...base,
@@ -89,19 +90,25 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
           padding: 0,
           border: "1px solid #EEF5FF",
           boxShadow: "0px 0px 16px 0px rgba(0, 0, 0, 0.08)",
-          borderRadius: 8,
         }),
         menuList: (base) => ({
           ...base,
           padding: 0,
+          borderRadius: 8,
         }),
-        option: (base) => ({
+        option: (base, state) => ({
           ...base,
           padding: 16,
           fontSize: 16,
           fontWeight: 400,
           lineHeight: "20.83px",
-          color: "#0D0F12",
+          color: state.isSelected ? "#fff" : "#0D0F12",
+          backgroundColor: state.isSelected ? "#C02716" : "#fff",
+          cursor: "pointer",
+          ":hover": {
+            backgroundColor: "#D7E4F5",
+            color: "#0D0F12",
+          },
         }),
       }}
     />

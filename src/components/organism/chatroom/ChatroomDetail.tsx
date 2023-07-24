@@ -1,6 +1,6 @@
 "use client";
 
-import { SelectOpt } from "@/src/types";
+import { ISelectOpt } from "@/src/types";
 import clsx from "clsx";
 import React, { useState } from "react";
 import { Line } from "../../atoms";
@@ -20,7 +20,7 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
   chatroomDetail,
 }) => {
   const [note, setNote] = useState("");
-  const [tags, setTags] = useState<SelectOpt[]>([]);
+  const [tags, setTags] = useState<ISelectOpt[]>([]);
   const [agent, setAgent] = useState("");
   return (
     <div

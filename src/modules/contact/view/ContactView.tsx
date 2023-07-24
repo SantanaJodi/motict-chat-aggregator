@@ -1,119 +1,70 @@
 "use client";
 
-import { ChannelWa, ChannelWaUnmasking } from "@/public/icons/logo";
 import { PeoplesIcon } from "@/public/icons/outline";
-import { Button, ContactHeader, Container, Table } from "@/src/components";
+import { ContactHeader, Container, Table } from "@/src/components";
+import { DeleteRecipientGroupModal } from "@/src/components/molecules/modal";
 import StatesContainer from "@/src/components/organism/StatesContainer";
-import { ColumnDef } from "@tanstack/react-table";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { IContact } from "../types/contact-type";
+import ContactViewModel from "../view-model/ContactViewModel";
 
-interface ContactViewProps {}
+interface ContactViewProps {
+  contact: IContact[];
+}
 
-const data = [
-  {
-    name: "John Doe",
-    id: "+628851595612",
-    channel: "whatsapp",
-    last_activity: "12 Oktober 2022 at 14:00",
-  },
-  {
-    name: "John Doe",
-    id: "+628851335612",
-    channel: "whatsapp",
-    last_activity: "12 Oktober 2022 at 14:00",
-  },
-  {
-    name: "John Doe",
-    id: "+628851595542",
-    channel: "whatsapp",
-    last_activity: "12 Oktober 2022 at 14:00",
-  },
-  {
-    name: "John Doe",
-    id: "+628823595612",
-    channel: "whatsapp",
-    last_activity: "12 Oktober 2022 at 14:00",
-  },
-];
-
-const ContactView: React.FC<ContactViewProps> = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [contacts, setContacts] = useState<any[]>([]);
-  const [search, setSearch] = useState("");
-  const [channel, setChannel] = useState("");
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-      setContacts(data);
-    }, 3000);
-  }, []);
-
-  const columns: ColumnDef<any>[] = [
-    {
-      accessorKey: "name",
-      header: "Name",
-      footer: (props) => props.column.id,
-      cell: (props) => props.getValue(),
+const ContactView: React.FC<ContactViewProps> = ({ contact }) => {
+  const {
+    state: {
+      data,
+      channel,
+      error,
+      isLoading,
+      search,
+      selectedRow,
+      deleteModal,
     },
-    {
-      accessorKey: "id",
-      header: "ID",
-      footer: (props) => props.column.id,
-      cell: (props) => props.getValue(),
-    },
-    {
-      accessorKey: "channel",
-      header: "Channel",
-      footer: (props) => props.column.id,
-      cell: (props) => {
-        return props.getValue() === "whatsapp" ? (
-          <ChannelWa />
-        ) : (
-          <ChannelWaUnmasking />
-        );
-      },
-    },
-    {
-      accessorKey: "last_activity",
-      header: "Last Acitivy",
-      footer: (props) => props.column.id,
-      cell: (props: any) => (
-        <div className="flex flex-row items-center justify-between pr-6">
-          <p>{props.getValue()}</p>
-          <Button label="See Detail" variant="subtle" />
-        </div>
-      ),
-    },
-  ];
+    table,
+    handleSearch,
+    handleChangeChannel,
+    handleDeleteModal,
+    handleDeleteContact,
+  } = ContactViewModel({ contact });
 
   return (
     <Container>
-      <div className="w-full h-full flex flex-col">
+      <div className="w-full h-screen flex flex-col overflow-hidden">
         <ContactHeader
           search={search}
           channel={channel}
-          onSearch={(val) => setSearch(val)}
-          onSelectChannel={(val) => setChannel(val)}
+          selectedRow={selectedRow}
+          onSearch={handleSearch}
+          onSelectChannel={handleChangeChannel}
+          onDeleteContact={() => handleDeleteModal(true)}
         />
-        <div className="w-full h-full relative">
+        <div className="w-full h-[calc(100%_-_150px)] relative">
           <div className="absolute w-full h-full">
-            <Table data={contacts} columns={columns} />
+            <Table table={table} data={data} />
           </div>
 
           <StatesContainer
             isLoading={isLoading}
-            isEmpty={!contacts.length}
+            isEmpty={!data?.length}
             isError={error}
             EmptyIcon={PeoplesIcon}
             onReload={() => alert("reload")}
             emptyMsg="You don’t have any contact"
-            noResult={!!search && !contacts.length}
+            noResult={!!search && !data?.length}
             disableErrorToast
           />
         </div>
       </div>
+      <DeleteRecipientGroupModal
+        visible={deleteModal}
+        title={`Delete ${selectedRow.length} Contact(s)`}
+        content={`Are you sure want to delete ${selectedRow.length} Contact(s)? You cannot undo this action.`}
+        onDelete={handleDeleteContact}
+        onClose={() => handleDeleteModal(false)}
+      />
     </Container>
   );
 };

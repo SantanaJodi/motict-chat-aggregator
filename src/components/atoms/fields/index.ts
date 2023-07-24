@@ -1,3 +1,4 @@
 import FieldInput from "./FieldInput";
+import FieldSelect from "./FieldSelect";
 
-export { FieldInput };
+export { FieldSelect, FieldInput };
