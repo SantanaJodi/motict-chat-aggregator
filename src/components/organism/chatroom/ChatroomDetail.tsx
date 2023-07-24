@@ -45,7 +45,7 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
           <Line />
           <Tags
             tags={
-              chatroomDetail?.tags.map((t) => ({ label: t, value: t })) as any
+              chatroomDetail?.tags?.map((t) => ({ label: t, value: t })) as any
             }
             onSave={(value) => {
               setTags(value);
@@ -54,7 +54,7 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
           />
           <Line />
           <Agent
-            agent={chatroomDetail?.agents.map((t) => t.name).join(", ")}
+            agent={chatroomDetail?.agents?.map((t) => t.name).join(", ")}
             onAssign={(value) => {
               setAgent(value);
               toast.success("Agent Assigned");

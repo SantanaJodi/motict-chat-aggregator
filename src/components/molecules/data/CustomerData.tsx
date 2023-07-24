@@ -26,10 +26,10 @@ const CustomerData: React.FC<CustomerDataProps> = ({ header }) => {
   };
   return (
     <div className="flex flex-row items-center gap-2 w-full">
-      <Avatar withChannel url={header?.sender.from_user_photo || undefined} />
+      <Avatar withChannel url={header?.sender?.from_user_photo || undefined} />
       <div className="flex flex-col items-start gap-1 w-full">
         <p className="text-[#0D0F12] font-bold leading[20.83px]">
-          {header?.sender.from_user_name}
+          {header?.sender?.from_user_name}
         </p>
         <div className="flex flex-row items-center gap-1 w-full">
           <HeadsetIcon
@@ -40,7 +40,7 @@ const CustomerData: React.FC<CustomerDataProps> = ({ header }) => {
           />
         </div>
 
-        {header && header.agents.length > 0 ? (
+        {header && header.agents?.length > 0 ? (
           <div className="flex flex-row items-center gap-1 w-full">
             <p className="text-[#67768B] text-[14px] leading-[18.23px] mr-1">
               {/* TODO ALVIN: show "and {number} more" if agent > 2 */}

@@ -7,30 +7,24 @@ import { flatten } from "lodash";
 import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 
 export interface IChatroomViewModel {
-  chatroomDetail?: IConversationDetail;
+  selectedChat?: IChatroomDetail;
 }
 
 const chatroomApi = ChatroomApi();
 
-export const ChatroomViewModel = ({ chatroomDetail }: IChatroomViewModel) => {
+export const ChatroomViewModel = ({ selectedChat }: IChatroomViewModel) => {
   const { isFetching, data, fetchNextPage, hasNextPage, refetch } =
     useInfiniteQuery({
-      queryFn: ({ pageParam = 1 }) => {
-        const conversation_id = chatroomDetail?.conversation_id;
+      queryKey: [selectedChat?.conversation_id],
+      queryFn: ({ pageParam = 1, queryKey }) => {
         // @ts-ignore
-        return chatroomApi.GetMessages(conversation_id, {
+        return chatroomApi.GetConversationChatList(queryKey[0], {
           page: pageParam,
           page_size: 10,
         });
       },
-      enabled: !!chatroomDetail?.conversation_id,
+      enabled: !!selectedChat?.conversation_id,
     });
-
-  useEffect(() => {
-    if (chatroomDetail?.conversation_id) {
-      refetch();
-    }
-  }, [chatroomDetail?.conversation_id, refetch]);
 
   const chatroomDetails = useMemo(() => {
     return data?.pages.map((t) => t.data);

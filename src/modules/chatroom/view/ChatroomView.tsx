@@ -1,13 +1,9 @@
 "use client";
 
-import {
-  Chatroom,
-  ChatroomDetail,
-  Container,
-  Messages,
-} from "@/src/components";
+import { ChatroomDetail, Container, Messages } from "@/src/components";
 import React from "react";
 import { ChatroomViewModel } from "../viewModel/ChatroomViewModel";
+import ChatroomComponent from "@/src/components/organism/chatroom/chatroom/ChatroomComponent";
 
 interface ChatroomViewProps {}
 
@@ -28,9 +24,10 @@ const ChatroomView: React.FC<ChatroomViewProps> = () => {
           selectedChatroom={selectedChat}
           onSelectChat={(val) => setSelectedChat(val)}
         />
-        <Chatroom
+        <ChatroomComponent
           chatroomDetail={conversationDetail}
           isChatExpanded={isExpanded}
+          selectedChat={selectedChat}
           onChatExpanded={() => setIsExpanded((prev) => !prev)}
         />
         <ChatroomDetail

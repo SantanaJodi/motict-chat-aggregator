@@ -9,6 +9,18 @@ import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes"
 export const ChatroomApi = () => {
   const api = baseAxios();
 
+  const GetConversationChatList = async (
+    id: string,
+    params: IPaginateMessageReq
+  ) => {
+    const res = await api.get<
+      any,
+      AxiosResponse<GlobalResData<ChatroomPaginateResponse>>
+    >(`api/conversations/${id}/messages`, { params });
+
+    return res?.data.data;
+  };
+
   const GetConversationDetail = async (id: string) => {
     const res = await api.get<
       any,
@@ -18,5 +30,5 @@ export const ChatroomApi = () => {
     return res?.data?.data;
   };
 
-  return { GetConversationDetail };
+  return { GetConversationDetail, GetConversationChatList };
 };

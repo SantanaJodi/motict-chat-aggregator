@@ -12,7 +12,7 @@ const ChatroomInfo: React.FC<ChatroomInfoProps> = ({ conversationDetail }) => {
       <p className="font-bold leading-[20.83px]">Chatroom Detail</p>
       <ListData
         label="Integration"
-        data={conversationDetail?.sender.platform || ""}
+        data={conversationDetail?.sender?.platform || ""}
         subData={conversationDetail?.sender?.whatsapp?.whatsapp_id || ""}
         size="small"
       />
@@ -26,7 +26,7 @@ const ChatroomInfo: React.FC<ChatroomInfoProps> = ({ conversationDetail }) => {
         data={"data belum ada dari backeend"}
         size="small"
       />
-      <ListSession session={conversationDetail?.session.text || ""} />
+      <ListSession session={conversationDetail?.session?.text || ""} />
     </div>
   );
 };

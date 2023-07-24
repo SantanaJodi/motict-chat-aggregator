@@ -9,17 +9,20 @@ import StatesContainer from "../../StatesContainer";
 import { CHATS } from "../dummy";
 import { ChatroomViewModel } from "./viewModel/ChatRoomViewModel";
 import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
+import { IChatroomDetail } from "../messages/types/MessagesTypes";
 
-interface ChatroomProps {
+interface ChatroomComponentProps {
   chatroomDetail?: IConversationDetail;
   isChatExpanded?: boolean;
+  selectedChat?: IChatroomDetail;
   onChatExpanded: () => void;
 }
 
-const Chatroom: React.FC<ChatroomProps> = ({
+const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
   chatroomDetail,
   onChatExpanded,
   isChatExpanded,
+  selectedChat,
 }) => {
   const {
     chatroomDetails,
@@ -27,7 +30,7 @@ const Chatroom: React.FC<ChatroomProps> = ({
     hasNextPage,
     isFetching,
     messageHeader,
-  } = ChatroomViewModel({ chatroomDetail: chatroomDetail });
+  } = ChatroomViewModel({ selectedChat: selectedChat });
 
   return (
     <div className="w-full h-full overflow-hidden relative">
@@ -83,4 +86,4 @@ const Chatroom: React.FC<ChatroomProps> = ({
   );
 };
 
-export default Chatroom;
+export default ChatroomComponent;

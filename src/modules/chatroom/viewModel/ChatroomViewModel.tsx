@@ -1,6 +1,6 @@
 import { ChatroomApi } from "@/src/components/organism/chatroom/chatroom/api/ChatroomApi";
 import { IChatroomDetail } from "@/src/components/organism/chatroom/messages/types/MessagesTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
 const chatroomApi = ChatroomApi();
@@ -12,13 +12,11 @@ export const ChatroomViewModel = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const { data: conversationDetail, isFetching: isFetchingConversationDetail } =
-    useQuery({
-      // @ts-ignore
-      queryKey: [selectedChat?.conversation_id],
+    useQuery(["getConversationDetail", selectedChat?.conversation_id], {
       queryFn: ({ queryKey }) => {
         return chatroomApi.GetConversationDetail(
           // @ts-ignore
-          queryKey[0]
+          queryKey[1]
         );
       },
 
