@@ -1,4 +1,5 @@
+import ListContactHandle from "./ListContactHandle";
 import ListData from "./ListData";
 import ListSession from "./ListSession";
 
-export { ListSession, ListData };
+export { ListContactHandle, ListSession, ListData };
