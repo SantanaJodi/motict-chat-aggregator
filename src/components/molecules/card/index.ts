@@ -1,5 +1,6 @@
+import ContactHistoryCard from "./ContactHistoryCard";
 import MessageCard from "./MessageCard";
 import UploadedFileCard from "./UploadedFileCard";
 
 export * from "./chat";
-export { UploadedFileCard as UploadedFile, MessageCard };
+export { ContactHistoryCard, UploadedFileCard as UploadedFile, MessageCard };

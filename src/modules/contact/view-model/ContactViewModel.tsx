@@ -4,6 +4,7 @@ import { Button } from "@/src/components";
 import useReactTable from "@/src/hooks/useReactTable";
 import { ISelectOpt } from "@/src/types";
 import { ColumnDef } from "@tanstack/react-table";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useImmer } from "use-immer";
@@ -23,45 +24,8 @@ interface IState {
   deleteModal: boolean;
 }
 
-const columns: ColumnDef<IContact>[] = [
-  {
-    accessorKey: "name",
-    header: "Name",
-    footer: (props) => props.column.id,
-    cell: (props) => props.getValue(),
-  },
-  {
-    accessorKey: "phone_number",
-    header: "ID",
-    footer: (props) => props.column.id,
-    cell: (props) => props.getValue(),
-  },
-  {
-    accessorKey: "channel",
-    header: "Channel",
-    footer: (props) => props.column.id,
-    cell: (props) => {
-      return props.getValue() === "whatsapp" ? (
-        <ChannelWa />
-      ) : (
-        <ChannelWaUnmasking />
-      );
-    },
-  },
-  {
-    accessorKey: "last_activity",
-    header: "Last Acitivy",
-    footer: (props) => props.column.id,
-    cell: (props: any) => (
-      <div className="flex flex-row items-center justify-between pr-6">
-        <p>{props.getValue()}</p>
-        <Button label="See Detail" variant="subtle" />
-      </div>
-    ),
-  },
-];
-
 const ContactViewModel = ({ contact }: ContactViewModelProps) => {
+  const router = useRouter();
   const [state, update] = useImmer<IState>({
     isLoading: true,
     error: false,
@@ -74,6 +38,50 @@ const ContactViewModel = ({ contact }: ContactViewModelProps) => {
     selectedRow: [],
     deleteModal: false,
   });
+
+  const columns: ColumnDef<IContact>[] = [
+    {
+      accessorKey: "name",
+      header: "Name",
+      footer: (props) => props.column.id,
+      cell: (props) => props.getValue(),
+    },
+    {
+      accessorKey: "phone_number",
+      header: "ID",
+      footer: (props) => props.column.id,
+      cell: (props) => props.getValue(),
+    },
+    {
+      accessorKey: "channel",
+      header: "Channel",
+      footer: (props) => props.column.id,
+      cell: (props) => {
+        return props.getValue() === "whatsapp" ? (
+          <ChannelWa />
+        ) : (
+          <ChannelWaUnmasking />
+        );
+      },
+    },
+    {
+      accessorKey: "last_activity",
+      header: "Last Acitivy",
+      footer: (props) => props.column.id,
+      cell: (props: any) => {
+        return (
+          <div className="flex flex-row items-center justify-between pr-6">
+            <p>{props.getValue()}</p>
+            <Button
+              label="See Detail"
+              variant="subtle"
+              onClick={() => router.push(`/contact/${Number(props.row.id)}`)}
+            />
+          </div>
+        );
+      },
+    },
+  ];
 
   const table = useReactTable({
     data: state.data,

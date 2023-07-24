@@ -82,7 +82,7 @@ const TablePagination = <T extends object>({
           <DropdownInput
             options={rowSelectOption}
             value={rows}
-            menuPlacement="auto"
+            menuPlacement="top"
             onChange={handleChangeShowRow}
           />
         </div>
