@@ -5,11 +5,11 @@ import React from "react";
 import { ChatHeader, MessageCard } from "../../../molecules";
 import StatesContainer from "../../StatesContainer";
 
-import { IChatroomDetail } from "./types/MessagesTypes";
-import { MessagesViewModel } from "./viewModel/MessagesViewModel";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { Loading } from "@/src/components/atoms";
 import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { IChatroomDetail } from "./types/MessagesTypes";
+import { MessagesViewModel } from "./viewModel/MessagesViewModel";
 
 interface MessagesProps {}
 
@@ -48,8 +48,8 @@ const Messages: React.FC<MessagesProps> = ({}) => {
         status={msgStatus}
         onChangeStatus={setMsgStatus}
       />
-      <div className=" h-full flex flex-col items-start justify-start mt-4  pb-[150px] relative">
-        <div className="h-full overflow-y-auto">
+      <div className=" h-full w-full flex flex-col items-start justify-start mt-4  pb-[150px] relative">
+        <div className="h-full w-full overflow-y-auto">
           <InfiniteScroll
             dataLength={
               data?.pages.reduce((acc, page) => acc + page.count, 0) || 0
