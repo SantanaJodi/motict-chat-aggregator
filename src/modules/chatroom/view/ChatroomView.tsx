@@ -30,7 +30,7 @@ const Children: React.FC<ChatroomViewProps> = () => {
           chatroomDetail={conversationDetail}
           isChatExpanded={isExpanded}
           selectedChat={selectedChat}
-          onChatExpanded={() => setIsExpanded((prev) => !prev)}
+          onChatExpanded={() => setIsExpanded(!isExpanded)}
         />
         <ChatroomDetail
           isExpanded={isExpanded}
