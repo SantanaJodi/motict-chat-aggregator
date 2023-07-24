@@ -1,5 +1,17 @@
 import { ISelectOpt } from "@/src/types";
 
+export enum ChannelEnum {
+  WhatsApp,
+  WhatsApp_Official,
+}
+
+export enum AgentAssignmentEnum {
+  WAITING,
+  ASSIGNED_TO_ME,
+  ASSIGNED,
+  CAMPAIGN,
+  RESOLVED,
+}
 export interface IContact {
   name: string;
   email?: string;
@@ -16,4 +28,12 @@ export interface IContactCreate {
   channel: ISelectOpt;
   account: ISelectOpt;
   phoneNumber: string;
+}
+
+export interface IAssociatedAgents {
+  name: string;
+  email: string;
+  channel: ChannelEnum;
+  status: AgentAssignmentEnum;
+  date: string;
 }
