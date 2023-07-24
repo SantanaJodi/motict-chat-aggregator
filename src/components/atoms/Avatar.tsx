@@ -1,13 +1,13 @@
-import { ChannelWa } from "@/public/icons/logo";
 import Image from "next/image";
 import React from "react";
+import LogoChannel from "./LogoChannel";
 
 interface AvatarProps {
   url?: string;
-  withChannel?: boolean;
+  channel?: string;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ url, withChannel }) => {
+const Avatar: React.FC<AvatarProps> = ({ url, channel }) => {
   const image = (
     <Image
       alt="avatar"
@@ -18,13 +18,13 @@ const Avatar: React.FC<AvatarProps> = ({ url, withChannel }) => {
     />
   );
 
-  if (!withChannel) return image;
+  if (!channel) return image;
 
   return (
     <div className="relative flex-shrink-0">
       {image}
       <div className="p-1 rounded-full bg-white flex flex-shrink-0 absolute -bottom-3 left-[12px]">
-        <ChannelWa width={16} height={16} />
+        <LogoChannel type={channel} width={16} height={16} />
       </div>
     </div>
   );
