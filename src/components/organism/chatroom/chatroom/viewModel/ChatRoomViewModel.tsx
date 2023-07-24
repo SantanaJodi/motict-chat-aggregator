@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { IChatroomDetail } from "../../messages/types/MessagesTypes";
 import { useInfiniteQuery } from "react-query";
-import { ChatroomApi } from "../api/ChatroomApi";
+import { ChatroomApi } from "@/src/modules/chatroom/api/ChatroomApi";
 
 export interface IChatroomViewModel {
   selectedChat?: IChatroomDetail;

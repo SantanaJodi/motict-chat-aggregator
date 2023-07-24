@@ -9,6 +9,7 @@ import { Agent, ChatroomInfo, Note, Tags } from "../../molecules/node";
 import { toast } from "react-hot-toast";
 import { IChatroomDetail } from "./messages/types/MessagesTypes";
 import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
+import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
 
 interface ChatroomDetailProps {
   isExpanded?: boolean;
@@ -19,7 +20,8 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
   isExpanded,
   chatroomDetail,
 }) => {
-  const [note, setNote] = useState("");
+  console.log(chatroomDetail?.notes, "<<<");
+  const { setNotes } = useChatroomContext();
   const [tags, setTags] = useState<ISelectOpt[]>([]);
   const [agent, setAgent] = useState("");
   return (
@@ -40,7 +42,7 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
           <Line />
           <Note
             notes={chatroomDetail?.notes}
-            onSave={(value) => setNote(value)}
+            onSave={async (value) => await setNotes(value)}
           />
           <Line />
           <Tags
