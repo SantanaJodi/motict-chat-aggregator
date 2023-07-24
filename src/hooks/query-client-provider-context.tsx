@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { PropsWithChildren } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useAuthContext } from "./auth-context";
+import { toast } from "react-hot-toast";
 export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
   children,
 }) => {
@@ -17,8 +18,13 @@ export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
 
             if (res) {
               handleRevokeToken();
+
+              toast.error("Unauthorized, please login again.");
+
+              return;
             }
           }
+          toast.error("Please contact your administrator.");
           return;
         },
       },

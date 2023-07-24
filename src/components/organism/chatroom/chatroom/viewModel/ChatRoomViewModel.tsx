@@ -24,7 +24,7 @@ export const ChatroomViewModel = ({ selectedChat }: IChatroomViewModel) => {
     });
 
   const chatroomDetails = useMemo(() => {
-    return data?.pages.map((t) => t.data);
+    return data?.pages.map((t) => t.data)[0] || {};
   }, [data]);
 
   const messageHeader = useMemo(() => {
