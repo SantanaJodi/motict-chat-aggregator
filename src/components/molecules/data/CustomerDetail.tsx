@@ -21,16 +21,16 @@ const CustomerDetail: React.FC<CustomerDetailProps> = ({ chatroomDetail }) => {
             <ChannelWa width={16} height={16} />
             <div className="flex flex-row items-center gap-1 w-full">
               <p className="text-[#0D0F12] text-[14px] leading-[18.23px] mr-1">
-                {/* TODO: DATA MOBILE PHONE BELUM ADA */}
+                {/* TODO: DATA MOBILE PHONE BELUM ADAm  */}
                 {chatroomDetail?.sender?.whatsapp?.whatsapp_id}
               </p>
               {/* TODO: DATA DARI BACKEDN BELUM ADA */}
-              <Button
+              {/* <Button
                 variant="link"
                 label="• 2 more contact(s) DATA BE BELUM ADA"
                 onClick={() => alert("change")}
                 color="#67768B"
-              />
+              /> */}
             </div>
           </div>
         </div>
