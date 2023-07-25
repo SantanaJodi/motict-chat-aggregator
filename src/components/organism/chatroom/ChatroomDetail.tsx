@@ -1,15 +1,14 @@
 "use client";
 
+import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
+import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 import { ISelectOpt } from "@/src/types";
 import clsx from "clsx";
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 import { Line } from "../../atoms";
 import { CustomerDetail } from "../../molecules";
 import { Agent, ChatroomInfo, Note, Tags } from "../../molecules/node";
-import { toast } from "react-hot-toast";
-import { IChatroomDetail } from "./messages/types/MessagesTypes";
-import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
-import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
 
 interface ChatroomDetailProps {
   isExpanded?: boolean;
@@ -48,10 +47,7 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
             tags={
               chatroomDetail?.tags?.map((t) => ({ label: t, value: t })) as any
             }
-            onSave={(value) => {
-              setTags(value);
-              console.log("🚀 -> value:", value);
-            }}
+            onSave={setTags}
           />
           <Line />
           <Agent
