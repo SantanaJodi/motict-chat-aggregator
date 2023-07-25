@@ -7,8 +7,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const conversation_id = req.cookies["token"];
-    const token = req.headers.cookie?.substring(6);
+    const conversation_id = req.query["id"];
+    const token = req.cookies["token"];
 
     return await axios
       .post(`${BASEURL}/conversations/${conversation_id}/resolve`, req.body, {
