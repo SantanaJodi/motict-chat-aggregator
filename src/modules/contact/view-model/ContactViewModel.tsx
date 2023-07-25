@@ -65,19 +65,16 @@ const ContactViewModel = ({ contact }: ContactViewModelProps) => {
       },
     },
     {
-      accessorKey: "last_activity",
-      header: "Last Acitivy",
+      accessorKey: "detail",
+      header: "",
       footer: (props) => props.column.id,
       cell: (props: any) => {
         return (
-          <div className="flex flex-row items-center justify-between pr-6">
-            <p>{props.getValue()}</p>
-            <Button
-              label="See Detail"
-              variant="subtle"
-              onClick={() => router.push(`/contact/${Number(props.row.id)}`)}
-            />
-          </div>
+          <Button
+            label="See Detail"
+            variant="subtle"
+            onClick={() => router.push(`/contact/${Number(props.row.id)}`)}
+          />
         );
       },
     },
