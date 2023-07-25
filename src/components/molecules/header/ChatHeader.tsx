@@ -1,17 +1,24 @@
 "use client";
 
 import { SearchIcon } from "@/public/icons/outline";
-import React from "react";
+import { StatusEnumTranslator } from "@/src/utils";
+import { groupBy } from "lodash";
+import React, { useCallback } from "react";
 import { TextInput } from "../../atoms";
 import { Filter } from "../../atoms/tag";
-import { StatusEnum } from "../../organism/chatroom/messages/types/MessagesTypes";
+import {
+  IChatroomDetail,
+  StatusEnum,
+} from "../../organism/chatroom/messages/types/MessagesTypes";
+import { AxiosError } from "axios";
 
 interface ChatHeaderProps {
   search?: string;
   onSearch: (value: string) => void;
   status?: string;
   onChangeStatus: (value: StatusEnum) => void;
-  hideInput?: boolean;
+  messages?: IChatroomDetail[];
+  error?: AxiosError;
 }
 
 const ChatHeader: React.FC<ChatHeaderProps> = ({
@@ -19,8 +26,24 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
   onSearch,
   onChangeStatus,
   status,
-  hideInput,
+  messages,
+  error,
 }) => {
+  const getLabel = useCallback(
+    (item: StatusEnum) => {
+      if (item === StatusEnum.WAITING || item === StatusEnum.ASSIGNED_TO_ME) {
+        const count = groupBy(messages, "status")[item]?.length;
+        return (
+          StatusEnumTranslator(item) +
+          (count > 0 ? ` • ${count <= 99 ? count : "+99"}` : "")
+        );
+      }
+
+      return StatusEnumTranslator(item);
+    },
+    [messages]
+  );
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4 px-4">
@@ -36,31 +59,27 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
             </div>
           </div> */}
         </div>
-        {!hideInput && (
+        {!error?.code && (
           <TextInput
             Icon={SearchIcon}
             value={search || ""}
             onChange={onSearch}
-            placeholder="Search chatroom or conversation"
+            placeholder="Search username or phone number"
           />
         )}
       </div>
-      <div className="flex flex-row items-center gap-2 overflow-x-auto  ml-4 no-scrollbar">
-        {[
-          StatusEnum.ALL,
-          StatusEnum.WAITING,
-          StatusEnum.ASSIGNED,
-          StatusEnum.RESOLVED,
-          StatusEnum.EXPIRED,
-        ].map((item) => (
-          <Filter
-            key={item}
-            label={item}
-            onClick={() => onChangeStatus(item)}
-            isActive={status === item}
-          />
-        ))}
-      </div>
+      {!error?.code && (
+        <div className="flex flex-row items-center gap-2 overflow-x-auto  ml-4 no-scrollbar">
+          {Object.values(StatusEnum).map((item) => (
+            <Filter
+              key={item}
+              label={getLabel(item)}
+              onClick={() => onChangeStatus(item)}
+              isActive={status === item}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
