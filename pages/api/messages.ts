@@ -7,11 +7,12 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
+    const token = req.cookies["token"];
     await axios
       .get(`${BASEURL}/conversations`, {
         params: req.query,
         headers: {
-          Authorization: req.headers.authorization,
+          Authorization: "Bearer " + token,
         },
       })
       .then((r) => {

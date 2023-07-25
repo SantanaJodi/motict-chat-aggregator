@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     const conversation_id = req.query["id"];
-    const token = req.headers.cookie?.substring(6);
+    const token = req.cookies["token"];
     return await axios
       .get(`${BASEURL}/conversations/${conversation_id}`, {
         params: req.query,

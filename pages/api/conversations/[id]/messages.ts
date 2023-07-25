@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    const conversation_id = req.query["id"];
+    const conversation_id = req.cookies["token"];
     const token = req.headers.cookie?.substring(6);
     return await axios
       .get(`${BASEURL}/conversations/${conversation_id}/messages`, {
