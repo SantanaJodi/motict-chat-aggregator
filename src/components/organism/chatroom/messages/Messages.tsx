@@ -39,14 +39,14 @@ const Messages: React.FC<MessagesProps> = ({}) => {
         onChangeStatus={setMsgStatus}
         messages={messages}
       />
-      <div className=" h-full w-full flex flex-col items-start justify-start mt-4  pb-[150px] relative">
-        <div className="h-full w-full overflow-y-auto">
+      <div className=" h-full w-full flex flex-col items-start justify-start mt-4 relative">
+        <div id="messages" className="h-full w-full overflow-auto pb-[145px]">
           <InfiniteScroll
             dataLength={messages.length}
             next={fetchNextPage}
             loader={<Loading />}
             hasMore={hasNextPage || false}
-            scrollableTarget="scrollableDiv"
+            scrollableTarget="messages"
           >
             {messages.map((c: IChatroomDetail) => (
               <MessageCard
@@ -60,7 +60,6 @@ const Messages: React.FC<MessagesProps> = ({}) => {
             ))}
           </InfiniteScroll>
         </div>
-
         <StatesContainer
           isLoading={isLoading}
           isEmpty={messages.length === 0}
