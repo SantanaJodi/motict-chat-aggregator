@@ -25,9 +25,9 @@ const DetailContactHeader: React.FC<DetailContactHeaderProps> = ({}) => {
         <Avatar url="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg" />
         <div className="flex flex-col items-start gap1">
           <p className="font-medium text-[#0D0F12]">Jon Raynor</p>
-          <p className="text-[14px] text-[#8B9EB7]">
+          {/* <p className="text-[14px] text-[#8B9EB7]">
             Last activity: 27 November 2022 at 12:36
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

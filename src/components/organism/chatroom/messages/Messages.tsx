@@ -7,35 +7,26 @@ import StatesContainer from "../../StatesContainer";
 
 import { Loading } from "@/src/components/atoms";
 import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
+import { AxiosError } from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { IChatroomDetail } from "./types/MessagesTypes";
+import { IChatroomDetail, StatusEnum } from "./types/MessagesTypes";
 import { MessagesViewModel } from "./viewModel/MessagesViewModel";
 
 interface MessagesProps {}
 
 const Messages: React.FC<MessagesProps> = ({}) => {
+  const { selectedChat, setSelectedChat, conversationDetail } =
+    useChatroomContext();
   const {
-    selectedChat,
-
-    setSelectedChat,
-    conversationDetail,
-  } = useChatroomContext();
-  const {
-    chatroom,
-    data,
     error,
-    isLoading,
-    msgStatus,
-    noResult,
     search,
-    setChatroom,
-    setError,
-    setMsgStatus,
-    setNoResult,
-    setSearch,
+    msgStatus,
+    isLoading,
     messages,
-    fetchNextPage,
     hasNextPage,
+    setSearch,
+    setMsgStatus,
+    fetchNextPage,
   } = MessagesViewModel();
 
   return (
@@ -43,18 +34,19 @@ const Messages: React.FC<MessagesProps> = ({}) => {
       <ChatHeader
         search={search}
         onSearch={(val) => setSearch(val)}
-        hideInput={error}
+        error={error as AxiosError}
         status={msgStatus}
         onChangeStatus={setMsgStatus}
+        messages={messages}
       />
-      <div className=" h-full w-full flex flex-col items-start justify-start mt-4  pb-[150px] relative">
-        <div className="h-full w-full overflow-y-auto">
+      <div className=" h-full w-full flex flex-col items-start justify-start mt-4 relative">
+        <div id="messages" className="h-full w-full overflow-auto pb-[145px]">
           <InfiniteScroll
             dataLength={messages.length}
             next={fetchNextPage}
             loader={<Loading />}
             hasMore={hasNextPage || false}
-            scrollableTarget="scrollableDiv"
+            scrollableTarget="messages"
           >
             {messages.map((c: IChatroomDetail) => (
               <MessageCard
@@ -68,13 +60,13 @@ const Messages: React.FC<MessagesProps> = ({}) => {
             ))}
           </InfiniteScroll>
         </div>
-
-        {/* STATE */}
         <StatesContainer
           isLoading={isLoading}
           isEmpty={messages.length === 0}
-          isError={error}
-          noResult={noResult}
+          isError={error as any}
+          noResult={
+            (!!search || msgStatus !== StatusEnum.ALL) && !messages.length
+          }
           emptyMsg="You have no chatroom"
           onReload={() => alert("reload")}
           EmptyIcon={ChatIcon}

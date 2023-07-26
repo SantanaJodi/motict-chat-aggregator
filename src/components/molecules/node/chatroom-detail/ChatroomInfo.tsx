@@ -21,11 +21,11 @@ const ChatroomInfo: React.FC<ChatroomInfoProps> = ({ conversationDetail }) => {
         data={conversationDetail?.created_at || ("" as any)}
         size="small"
       />
-      <ListData
+      {/* <ListData
         label="Last Seen"
         data={"data belum ada dari backeend"}
         size="small"
-      />
+      /> */}
       <ListSession session={conversationDetail?.session?.text || ""} />
     </div>
   );

@@ -1,17 +1,11 @@
 import { ReplyIcon, TagIcon } from "@/public/icons/outline";
+import { getCustomDate } from "@/src/utils";
 import clsx from "clsx";
-import { formatRelative } from "date-fns";
-import enGB from "date-fns/locale/en-GB";
-import React, { useMemo } from "react";
-import { Avatar } from "../../atoms";
+import { differenceInHours } from "date-fns";
+import React from "react";
+import { Avatar, ChatStatus } from "../../atoms";
 import { MessageAssignment, NotificationCount } from "../../atoms/tag";
 import { IChatroomDetail } from "../../organism/chatroom/messages/types/MessagesTypes";
-
-export enum SessionEnum {
-  open = "open",
-  expiring = "expiring",
-  expired = "expired",
-}
 
 interface MessageCardProps {
   data: IChatroomDetail;
@@ -29,26 +23,8 @@ const MessageCard: React.FC<MessageCardProps> = ({
   onSelectChat,
   isSelectedChat,
 }) => {
-  const messageTime = useMemo(() => {
-    const time = data.last_message.time;
-    const formatRelativeLocale: any = {
-      lastWeek: "'last' eeee',' kk:mm",
-      yesterday: "'yesterday,' kk:mm",
-      today: "'today,' kk:mm",
-      tomorrow: "'tomorrow,' kk:mm",
-      nextWeek: "eeee',' kk:mm",
-      other: "PPP, kk:mm",
-    };
-
-    const locale = {
-      // is t use ID locale or not?
-      ...enGB,
-      formatRelative: (token: any) => formatRelativeLocale[token],
-    };
-
-    return formatRelative(new Date(time), new Date(), { locale });
-  }, [data.last_message.time]);
-
+  const diffHours = differenceInHours(new Date(data.expire_at), new Date());
+  const unreadCount = data.unread_counter <= 99 ? data.unread_counter : "+99";
   return (
     <div
       className={
@@ -68,46 +44,43 @@ const MessageCard: React.FC<MessageCardProps> = ({
           <p className="font-bold text-[#0D0F12] leading-[20.83px] truncate max-w-[150px]">
             {data.from_user_name}
           </p>
-          <p className={clsx(textColor, "text-[12px]")}>{messageTime}</p>
+          <p className={clsx(textColor, "text-[12px]")}>
+            {getCustomDate(data.last_message.time)}
+          </p>
         </div>
 
+        {/* LAST MESSAGE */}
         <div className={flexBetween}>
-          {data.unread_counter > 0 ? (
-            <div className={clsx(flexRow, "gap-1 w-full")}>
+          <p
+            className={clsx(
+              textColor,
+              textMsg,
+              flexRow,
+              "gap-1 max-w-[265px]",
+              !data.unread_counter ? "font-normal" : "font-bold"
+            )}
+          >
+            {!data.unread_counter && (
               <ReplyIcon
                 width={16}
                 height={16}
                 fill="#67768B"
                 className="flex-shrink-0 mb-[1px]"
               />
-              <p
-                className={clsx(
-                  textColor,
-                  textMsg,
-                  "font-normal max-w-[268px]"
-                )}
-              >
-                {data.last_message?.text}
-              </p>
-            </div>
-          ) : (
-            <p className={clsx(textColor, textMsg, "font-bold max-w-[265px]")}>
-              {data.last_message?.text}
-            </p>
-          )}
-
-          {data.unread_counter > 0 && (
-            <NotificationCount count={data.unread_counter} />
-          )}
+            )}
+            {data.last_message?.text}
+          </p>
+          {data.unread_counter > 0 && <NotificationCount count={unreadCount} />}
         </div>
 
+        {/* TAGS */}
         {data.tags?.length > 0 && (
           <div className={clsx(flexRow, "gap-1")}>
             <TagIcon width={16} height={16} fill="#8B9EB7" />
             <p
               className={clsx(textColor, "text-[12px] truncate max-w-[268px]")}
             >
-              {data.tags[1]}
+              {data.tags.join(", ")}
             </p>
           </div>
         )}
@@ -116,24 +89,10 @@ const MessageCard: React.FC<MessageCardProps> = ({
           className={clsx(
             "w-full",
             "flex flex-row",
-            data.status === SessionEnum.open
-              ? "justify-end"
-              : "items-end justify-between"
+            diffHours >= 12 ? "justify-end" : "items-end justify-between"
           )}
         >
-          {/* CHANGE BY MESSAGE TIME */}
-          {data.status !== SessionEnum.open && (
-            <p
-              className={clsx("text-[12px] leading-[15.62px]", {
-                "text-[#F0A22E]": data.status === SessionEnum.expiring,
-                "text-[#CB5237]": data.status === SessionEnum.expired,
-              })}
-            >
-              {data.status === SessionEnum.expiring
-                ? "Expired in 59 minute(s)"
-                : "Expired"}
-            </p>
-          )}
+          <ChatStatus expireAt={data.expire_at} />
           <MessageAssignment type={data.assigned_agent_id} />
         </div>
       </div>

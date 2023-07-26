@@ -32,7 +32,7 @@ export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
 
             toast.error(err.response.data?.message as string);
           }
-
+          // toast.error("Please contact your administrator.");
           return;
         },
       },

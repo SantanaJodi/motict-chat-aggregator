@@ -31,6 +31,7 @@ export interface IPaginateMessageReq extends PaginateRequestDTO {
 export enum StatusEnum {
   ALL = "all",
   WAITING = "waiting",
+  ASSIGNED_TO_ME = "assigned_to_me",
   ASSIGNED = "assigned",
   RESOLVED = "resolved",
   EXPIRED = "expired",

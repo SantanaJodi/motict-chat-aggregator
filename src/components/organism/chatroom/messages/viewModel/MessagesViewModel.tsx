@@ -1,39 +1,45 @@
 "use client";
-import { GlobalResData, PaginateResponseDTO } from "@/src/types/common-types";
-import {
-  IPaginateMessageReq,
-  IChatroomDetail,
-  StatusEnum,
-} from "../types/MessagesTypes";
-import React, { useMemo, useState } from "react";
-import { useInfiniteQuery } from "react-query";
-import { MessagesApi } from "../api/MessagesApi";
+import useDebounce from "@/src/hooks/useDebounce";
 import { flatten } from "lodash";
+import { useMemo } from "react";
+import { useInfiniteQuery } from "react-query";
+import { useImmer } from "use-immer";
+import { MessagesApi } from "../api/MessagesApi";
+import { IPaginateMessageReq, StatusEnum } from "../types/MessagesTypes";
 
 export interface MessageViewModelProps {}
 
 const messagesApi = MessagesApi();
-// @ts-ignore
+
 export const MessagesViewModel = () => {
-  const [chatroom, setChatroom] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [noResult, setNoResult] = useState(false);
-  const [filter, setFilter] = useState<Partial<IPaginateMessageReq>>({
+  const [{ assignee, search, status }, update] = useImmer<
+    Partial<IPaginateMessageReq>
+  >({
     search: "",
-    status: undefined,
+    status: StatusEnum.ALL,
     assignee: "",
   });
 
-  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
-    queryKey: [filter?.search, filter?.assignee, filter?.status],
+  const debouncedSearch = useDebounce(search || "", 500);
+
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetching: isLoading,
+    error,
+  } = useInfiniteQuery({
+    queryKey: [debouncedSearch, assignee, status],
     queryFn: ({ pageParam = 1, queryKey }) => {
       return messagesApi.GetMessages({
         assignee: queryKey[1] as string,
         page: pageParam,
         page_size: 10,
-        search: queryKey[0] as string,
-        status: queryKey[2] as StatusEnum,
+        search: queryKey[0],
+        status:
+          queryKey[2] === StatusEnum.ALL
+            ? undefined
+            : (queryKey[2] as StatusEnum),
       });
     },
     getNextPageParam: (lastPage) => {
@@ -60,33 +66,26 @@ export const MessagesViewModel = () => {
   }, [data]);
 
   const setSearch = (val: string) => {
-    setFilter({ ...filter, search: val });
+    update((s) => {
+      s.search = val;
+    });
   };
 
   const setMsgStatus = (status: StatusEnum) => {
-    if (status === StatusEnum.ALL) {
-      setFilter({ ...data, status: undefined });
-    } else {
-      setFilter({ ...filter, status });
-    }
+    update((s) => {
+      s.status = status;
+    });
   };
 
   return {
-    search: filter?.search,
-    setSearch,
-    chatroom,
-    setChatroom,
-    isLoading: isFetching,
-    setIsLoading,
     error,
-    setError,
-    msgStatus: filter?.status,
-    setMsgStatus,
-    noResult,
-    setNoResult,
-    data,
+    search,
+    isLoading,
     messages,
-    fetchNextPage,
     hasNextPage,
+    msgStatus: status,
+    setSearch,
+    setMsgStatus,
+    fetchNextPage,
   };
 };
