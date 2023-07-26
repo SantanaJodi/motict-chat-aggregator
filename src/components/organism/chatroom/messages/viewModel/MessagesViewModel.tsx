@@ -22,44 +22,39 @@ export const MessagesViewModel = () => {
 
   const debouncedSearch = useDebounce(search || "", 500);
 
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetching: isLoading,
-    error,
-  } = useInfiniteQuery({
-    queryKey: [debouncedSearch, assignee, status],
-    queryFn: ({ pageParam = 1, queryKey }) => {
-      return messagesApi.GetMessages({
-        assignee: queryKey[1] as string,
-        page: pageParam,
-        page_size: 10,
-        search: queryKey[0],
-        status:
-          queryKey[2] === StatusEnum.ALL
-            ? undefined
-            : (queryKey[2] as StatusEnum),
-      });
-    },
-    getNextPageParam: (lastPage) => {
-      if (lastPage.has_next) {
-        const urlString = lastPage.next;
+  const { data, fetchNextPage, hasNextPage, error, isLoading } =
+    useInfiniteQuery({
+      queryKey: [debouncedSearch, assignee, status],
+      queryFn: ({ pageParam = 1, queryKey }) => {
+        return messagesApi.GetMessages({
+          assignee: queryKey[1] as string,
+          page: pageParam,
+          page_size: 10,
+          search: queryKey[0],
+          status:
+            queryKey[2] === StatusEnum.ALL
+              ? undefined
+              : (queryKey[2] as StatusEnum),
+        });
+      },
+      getNextPageParam: (lastPage) => {
+        if (lastPage.has_next) {
+          const urlString = lastPage.next;
 
-        const pagePattern = /page=(\d+)/;
-        const match = urlString.match(pagePattern);
+          const pagePattern = /page=(\d+)/;
+          const match = urlString.match(pagePattern);
 
-        if (match && match.length > 1) {
-          const pageValue = match[1];
-          return Number(pageValue);
-        } else {
-          return undefined;
+          if (match && match.length > 1) {
+            const pageValue = match[1];
+            return Number(pageValue);
+          } else {
+            return undefined;
+          }
         }
-      }
 
-      return undefined;
-    },
-  });
+        return undefined;
+      },
+    });
 
   const messages = useMemo(() => {
     return flatten(data?.pages.map((t) => t.data));
