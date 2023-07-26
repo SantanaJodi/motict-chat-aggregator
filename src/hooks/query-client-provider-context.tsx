@@ -10,7 +10,7 @@ export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 5 * 1000,
+        staleTime: 1 * 1000,
         // @ts-ignore
         onError: (err: AxiosError<IResponDataFetch>) => {
           if (err.response?.data) {
@@ -23,8 +23,16 @@ export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
 
               return;
             }
+
+            if (err.response.status >= 500) {
+              toast.error("Please contact your administrator.");
+
+              return;
+            }
+
+            toast.error(err.response.data?.message as string);
           }
-          toast.error("Please contact your administrator.");
+
           return;
         },
       },

@@ -48,10 +48,20 @@ export const ChatroomApi = () => {
     return res?.data?.data;
   };
 
+  const SetRead = async (id: number) => {
+    const res = await api.post<
+      any,
+      AxiosResponse<GlobalResData<ChatroomTypes.IConversationDetail>>
+    >(`api/conversations/${id}/read`);
+
+    return res?.data?.data;
+  };
+
   return {
     GetConversationDetail,
     GetConversationChatList,
     SetNotes,
     SetResolve,
+    SetRead,
   };
 };

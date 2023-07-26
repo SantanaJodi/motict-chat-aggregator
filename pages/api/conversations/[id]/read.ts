@@ -11,7 +11,7 @@ export default async function handler(
     const token = req.cookies["token"];
 
     return await axios
-      .post(`${BASEURL}/conversations/${conversation_id}/notes`, req.body, {
+      .post(`${BASEURL}/conversations/${conversation_id}/read`, undefined, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -24,9 +24,9 @@ export default async function handler(
       .catch((err) => {
         const { status, data } = err.response;
 
-        throw res.status(status).json(data);
+        return res.status(status).json(data);
       });
   } else {
-    throw res.status(403).json({ message: "Forbidden to access." });
+    return res.status(403).json({ message: "Forbidden to access." });
   }
 }

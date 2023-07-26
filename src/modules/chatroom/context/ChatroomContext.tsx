@@ -22,17 +22,6 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
     isExpanded: false,
   });
 
-  const setIsExpanded = (v: boolean) => {
-    update((t) => {
-      t.isExpanded = v;
-    });
-  };
-
-  const setSelectedChat = (v?: IChatroomDetail) => {
-    update((t) => {
-      t.selectedChat = v;
-    });
-  };
   const {
     data: conversationDetail,
     isFetching: isFetchingConversationDetail,
@@ -79,6 +68,37 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
       },
     }
   );
+
+  const { mutateAsync: setRead } = useMutation(
+    ["setRead", selectedChat?.conversation_id],
+
+    {
+      onSuccess: () => {
+        toast.success("Data successfully resolved.");
+        refetch();
+      },
+      mutationFn: (conversation_id: number) => {
+        // @ts-ignore
+        return ChatroomApi().SetRead(conversation_id);
+      },
+    }
+  );
+
+  const setIsExpanded = (v: boolean) => {
+    update((t) => {
+      t.isExpanded = v;
+    });
+  };
+
+  const setSelectedChat = async (v?: IChatroomDetail) => {
+    if (v && v.unread_counter > 0) {
+      await setRead(v.conversation_id as number);
+    }
+
+    update((t) => {
+      t.selectedChat = v;
+    });
+  };
 
   return (
     <ChatroomContext.Provider
