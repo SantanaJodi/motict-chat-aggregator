@@ -59,7 +59,7 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
 
     {
       onSuccess: () => {
-        toast.success("Data successfully resolved.");
+        toast.success("Chatroom Resolved");
         refetch();
       },
       mutationFn: () => {
