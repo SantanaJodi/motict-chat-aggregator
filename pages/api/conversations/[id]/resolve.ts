@@ -28,6 +28,6 @@ export default async function handler(
         throw res.status(status).json(data);
       });
   } else {
-    throw res.status(403).json({ message: "Forbidden to access." });
+    throw res.status(407).json({ message: "Forbidden to access." });
   }
 }
