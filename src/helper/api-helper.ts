@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const baseAxios = () => {
   const baseApi = axios.create({
-    timeout: 1000,
+    timeout: 30000,
     timeoutErrorMessage: "Time out!",
   });
 
