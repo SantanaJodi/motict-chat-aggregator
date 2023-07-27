@@ -26,11 +26,8 @@ const Modal: React.FC<ModalProps> = ({
       )}
     >
       <div
-        className={clsx(
-          "bg-white rounded-2xl relative overflow-hidden flex flex-col",
-          `w-[${width}px]`,
-          `h-[${height}px]`
-        )}
+        className="bg-white rounded-2xl relative overflow-hidden flex flex-col"
+        style={{ width, height }}
       >
         <ModalHeader title={title} onClose={onClose} />
         <div className="flex flex-col justify-between h-[calc(100%_-_65px)]">
