@@ -10,7 +10,7 @@ export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 1 * 1000,
+        staleTime: 5 * 1000,
         // @ts-ignore
         onError: (err: AxiosError<IResponDataFetch>) => {
           if (err.response?.data) {
