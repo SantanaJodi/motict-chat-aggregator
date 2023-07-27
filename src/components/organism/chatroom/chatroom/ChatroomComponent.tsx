@@ -2,15 +2,15 @@
 
 import { ChatIcon } from "@/public/icons/outline";
 import { ChatTime, Loading } from "@/src/components/atoms";
-import { ChatroomHeader, ChatCard } from "@/src/components/molecules";
+import { ChatCard, ChatroomHeader } from "@/src/components/molecules";
 import { ChatProperties } from "@/src/components/molecules/footer";
-import React, { useMemo } from "react";
-import StatesContainer from "../../StatesContainer";
-import { ChatroomViewModel } from "./viewModel/ChatRoomViewModel";
-import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
-import { IChatroomDetail } from "../messages/types/MessagesTypes";
 import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
+import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
+import React, { useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import StatesContainer from "../../StatesContainer";
+import { IChatroomDetail } from "../messages/types/MessagesTypes";
+import { ChatroomViewModel } from "./viewModel/ChatRoomViewModel";
 
 interface ChatroomComponentProps {
   chatroomDetail?: IConversationDetail;
@@ -90,7 +90,10 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
           </InfiniteScroll>
         </div>
 
-        <ChatProperties onSend={() => alert("send...")} />
+        <ChatProperties
+          onSend={() => alert("send...")}
+          isExpired={chatroomDetail?.session.text === "Expired"}
+        />
 
         {/* STATES */}
         <StatesContainer
