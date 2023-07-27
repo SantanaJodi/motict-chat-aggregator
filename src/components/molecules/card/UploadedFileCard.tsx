@@ -12,7 +12,7 @@ const UploadedFileCard: React.FC<UploadedFileCardProps> = ({ onCancel }) => {
         <p className="font-bold text-[#0D0F12]">Dummy Upload File.csv</p>
         <p className="text-[#67768B] text-[14px]">100kb</p>
       </div>
-      <XIcon onClick={onCancel} className="cursor-pointer" />
+      <XIcon onClick={onCancel} className="cursor-pointer" fill="#0D0F12" />
     </div>
   );
 };
