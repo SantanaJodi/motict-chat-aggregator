@@ -1,6 +1,7 @@
 "use client";
 
 import { HeadsetIcon } from "@/public/icons/outline";
+import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
 import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 import React from "react";
 import { Avatar, Button } from "../../atoms";
@@ -10,6 +11,7 @@ interface CustomerDataProps {
 }
 
 const CustomerData: React.FC<CustomerDataProps> = ({ header }) => {
+  const { setAgentModal } = useChatroomContext();
   const agents = (payload?: IConversationDetail) => {
     let value = "";
 
@@ -46,7 +48,7 @@ const CustomerData: React.FC<CustomerDataProps> = ({ header }) => {
             <Button
               variant="link"
               label="• Change"
-              onClick={() => alert("change")}
+              onClick={() => setAgentModal(true)}
               color="#67768B"
             />
           </div>
@@ -54,7 +56,7 @@ const CustomerData: React.FC<CustomerDataProps> = ({ header }) => {
           <Button
             variant="link"
             label="+ Assign Agent"
-            onClick={() => alert("add")}
+            onClick={() => setAgentModal(true)}
             color="#C02716"
           />
         )}
