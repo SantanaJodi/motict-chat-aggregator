@@ -1,8 +1,9 @@
 "use client";
 
 import { ChatroomDetail, Container, Messages } from "@/src/components";
-import React from "react";
+import { AssignAgentModal } from "@/src/components/molecules/modal";
 import ChatroomComponent from "@/src/components/organism/chatroom/chatroom/ChatroomComponent";
+import React from "react";
 import {
   ChatroomContextProvider,
   useChatroomContext,
@@ -19,8 +20,14 @@ const ChatroomView: React.FC<ChatroomViewProps> = (props) => {
 };
 
 const Children: React.FC<ChatroomViewProps> = () => {
-  const { isExpanded, selectedChat, setIsExpanded, conversationDetail } =
-    useChatroomContext();
+  const {
+    isExpanded,
+    selectedChat,
+    setIsExpanded,
+    conversationDetail,
+    agentModal,
+    setAgentModal,
+  } = useChatroomContext();
 
   return (
     <Container>
@@ -37,6 +44,12 @@ const Children: React.FC<ChatroomViewProps> = () => {
           chatroomDetail={conversationDetail}
         />
       </div>
+      <AssignAgentModal
+        // TODO change this based on assigned agent, if any
+        defaultValue={{ agent_id: 1, name: "anggih", user_id: 1 }}
+        visible={agentModal}
+        onClose={() => setAgentModal(false)}
+      />
     </Container>
   );
 };
