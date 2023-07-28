@@ -18,11 +18,14 @@ const Modal: React.FC<ModalProps> = ({
   height,
   width,
 }) => {
+  if (!visible) {
+    return null;
+  }
+
   return (
     <div
       className={clsx(
-        "fixed top-0 left-0 w-full min-h-screen bg-[#0D0F12A1] flex items-center justify-center z-50",
-        visible ? "block" : "hidden"
+        "fixed top-0 left-0 w-full min-h-screen bg-[#0D0F12A1] flex items-center justify-center z-50"
       )}
     >
       <div
