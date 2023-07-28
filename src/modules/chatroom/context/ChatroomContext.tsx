@@ -1,25 +1,29 @@
 "use client";
 
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren } from "react";
 
 import { IChatroomDetail } from "@/src/components/organism/chatroom/messages/types/MessagesTypes";
+import { toast } from "react-hot-toast";
 import { UseMutateAsyncFunction, useMutation, useQuery } from "react-query";
+import { useImmer } from "use-immer";
 import { ChatroomApi } from "../api/ChatroomApi";
 import { IConversationDetail } from "../types/ChatroomTypes";
-import { useImmer } from "use-immer";
-import { toast } from "react-hot-toast";
 
 const ChatroomContext = React.createContext<ChatroomContextProps>({} as any);
+
+interface IState {
+  selectedChat?: IChatroomDetail;
+  isExpanded: boolean;
+  agentModal: boolean;
+}
 
 export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
   children,
 }) => {
-  const [{ isExpanded, selectedChat }, update] = useImmer<{
-    selectedChat?: IChatroomDetail;
-    isExpanded: boolean;
-  }>({
+  const [{ isExpanded, selectedChat, agentModal }, update] = useImmer<IState>({
     selectedChat: undefined,
     isExpanded: false,
+    agentModal: false,
   });
 
   const {
@@ -42,7 +46,7 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
 
     {
       onSuccess: () => {
-        toast.success("Data successfully updated.");
+        // toast.success("Notes Updated");
         refetch();
       },
       mutationFn: (notes: string) => {
@@ -84,6 +88,23 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
     }
   );
 
+  const { mutateAsync: setAgent } = useMutation(
+    ["setAgent", selectedChat?.conversation_id],
+
+    {
+      onSuccess: () => {
+        toast.success("Agent Assigned");
+        refetch();
+      },
+      mutationFn: (agent_id: number) => {
+        // @ts-ignore
+        return ChatroomApi().SetAgent(selectedChat?.conversation_id, {
+          agent_id,
+        });
+      },
+    }
+  );
+
   const setIsExpanded = (v: boolean) => {
     update((t) => {
       t.isExpanded = v;
@@ -100,6 +121,12 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
     });
   };
 
+  const setAgentModal = (v: boolean) => {
+    update((t) => {
+      t.agentModal = v;
+    });
+  };
+
   return (
     <ChatroomContext.Provider
       value={{
@@ -111,6 +138,9 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
         conversationDetail,
         setNotes,
         setResolve,
+        agentModal,
+        setAgentModal,
+        setAgent,
       }}
     >
       {children}
@@ -124,7 +154,9 @@ export interface ChatroomContextProps {
   selectedChat?: IChatroomDetail;
   setSelectedChat: (_v?: IChatroomDetail) => void;
   isExpanded?: boolean;
+  agentModal?: boolean;
   setIsExpanded: (v: boolean) => void;
+  setAgentModal: (v: boolean) => void;
   conversationDetail?: IConversationDetail;
   isFetchingConversationDetail: boolean;
   setNotes: UseMutateAsyncFunction<
@@ -139,4 +171,5 @@ export interface ChatroomContextProps {
     void,
     unknown
   >;
+  setAgent: UseMutateAsyncFunction<any, unknown, number, unknown>;
 }
