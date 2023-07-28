@@ -2,9 +2,9 @@ import { baseAxios } from "@/src/helper/api-helper";
 import { GlobalResData } from "@/src/types/common-types";
 import { AxiosResponse } from "axios";
 
-import * as ChatroomTypes from "@/src/modules/chatroom/types/ChatroomTypes";
-import { IPaginateMessageReq } from "@/src/components/organism/chatroom/messages/types/MessagesTypes";
 import { ChatroomPaginateResponse } from "@/src/components/organism/chatroom/chatroom/types/ChatroomTypes";
+import { IPaginateMessageReq } from "@/src/components/organism/chatroom/messages/types/MessagesTypes";
+import * as ChatroomTypes from "@/src/modules/chatroom/types/ChatroomTypes";
 
 export const ChatroomApi = () => {
   const api = baseAxios();
@@ -57,11 +57,21 @@ export const ChatroomApi = () => {
     return res?.data?.data;
   };
 
+  const SetAgent = async (id: number, body: { agent_id: number }) => {
+    const res = await api.post<any, AxiosResponse<GlobalResData<any>>>(
+      `api/conversations/${id}/assign`,
+      body
+    );
+
+    return res?.data?.data;
+  };
+
   return {
     GetConversationDetail,
     GetConversationChatList,
     SetNotes,
     SetResolve,
     SetRead,
+    SetAgent,
   };
 };
