@@ -5,7 +5,6 @@ import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes"
 import { ISelectOpt } from "@/src/types";
 import clsx from "clsx";
 import React, { useState } from "react";
-import { toast } from "react-hot-toast";
 import { Line } from "../../atoms";
 import { CustomerDetail } from "../../molecules";
 import { Agent, ChatroomInfo, Note, Tags } from "../../molecules/node";
@@ -21,7 +20,6 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
 }) => {
   const { setNotes } = useChatroomContext();
   const [tags, setTags] = useState<ISelectOpt[]>([]);
-  const [agent, setAgent] = useState("");
   return (
     <div
       className={clsx(
@@ -50,13 +48,7 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
             onSave={setTags}
           />
           <Line />
-          <Agent
-            agent={chatroomDetail?.agents?.map((t) => t.name).join(", ")}
-            onAssign={(value) => {
-              setAgent(value);
-              toast.success("Agent Assigned");
-            }}
-          />
+          <Agent />
         </div>
       </div>
     </div>
