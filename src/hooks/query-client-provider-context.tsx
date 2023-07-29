@@ -31,8 +31,9 @@ export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
             }
 
             toast.error(err.response.data?.message as string);
+            return;
           }
-          // toast.error("Please contact your administrator.");
+          toast.error("Please contact your administrator.");
           return;
         },
       },
@@ -44,8 +45,25 @@ export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
 
             if (res) {
               handleRevokeToken();
+
+              toast.error("Unauthorized, please login again.");
+
+              return;
             }
+
+            if (err.response.status >= 500) {
+              toast.error(
+                err.response.data?.message ||
+                  "Please contact your administrator."
+              );
+
+              return;
+            }
+
+            toast.error(err.response.data?.message as string);
+            return;
           }
+          toast.error("Please contact your administrator.");
           return;
         },
       },
