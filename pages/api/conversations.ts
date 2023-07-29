@@ -19,13 +19,13 @@ export default async function handler(
       .then((r) => {
         const { status, data } = r;
 
-        return res.status(status).json(data);
+        return res.status(status || 407).json(data);
       })
       .catch((err) => {
         const { status, data } = err.response;
-        throw res.status(status).json(data);
+        return res.status(status).json(data);
       });
   } else {
-    throw res.status(407).json({ message: "Forbidden to access." });
+    return res.status(407).json({ message: "Forbidden to access." });
   }
 }

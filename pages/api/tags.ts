@@ -6,12 +6,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "POST") {
-    const conversation_id = req.query["id"];
+  if (req.method === "GET") {
     const token = req.cookies["token"];
 
     return await axios
-      .post(`${BASEURL}/conversations/${conversation_id}/resolve`, req.body, {
+      .get(`${BASEURL}/tags`, {
         params: req.query,
         headers: {
           Authorization: "Bearer " + token,
@@ -28,6 +27,6 @@ export default async function handler(
         return res.status(status).json(data);
       });
   } else {
-    return res.status(407).json({ message: "Forbidden to access." });
+    return res.status(403).json({ message: "Forbidden to access." });
   }
 }

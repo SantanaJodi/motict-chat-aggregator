@@ -24,9 +24,9 @@ export default async function handler(
       .catch((err) => {
         const { status, data } = err.response;
         console.log(status);
-        throw res.status(status).json(data);
+        return res.status(status).json(data);
       });
   } else {
-    throw res.status(407).json({ message: "Forbidden to access." });
+    return res.status(407).json({ message: "Forbidden to access." });
   }
 }

@@ -105,6 +105,23 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
     }
   );
 
+  const { mutateAsync: setTags } = useMutation(
+    ["setTags", selectedChat?.conversation_id],
+
+    {
+      onSuccess: () => {
+        toast.success("Tags Assigned");
+        refetch();
+      },
+      mutationFn: (tag_ids: number[]) => {
+        // @ts-ignore
+        return ChatroomApi().SetTags(selectedChat?.conversation_id, {
+          tag_ids,
+        });
+      },
+    }
+  );
+
   const setIsExpanded = (v: boolean) => {
     update((t) => {
       t.isExpanded = v;
@@ -141,6 +158,7 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
         agentModal,
         setAgentModal,
         setAgent,
+        setTags,
       }}
     >
       {children}
@@ -172,4 +190,5 @@ export interface ChatroomContextProps {
     unknown
   >;
   setAgent: UseMutateAsyncFunction<any, unknown, number, unknown>;
+  setTags: UseMutateAsyncFunction<any, unknown, number[], unknown>;
 }

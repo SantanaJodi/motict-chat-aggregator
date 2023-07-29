@@ -66,6 +66,15 @@ export const ChatroomApi = () => {
     return res?.data?.data;
   };
 
+  const SetTags = async (id: number, body: { tag_ids: number[] }) => {
+    const res = await api.post<any, AxiosResponse<GlobalResData<any>>>(
+      `api/conversations/${id}/assign`,
+      body
+    );
+
+    return res?.data?.data;
+  };
+
   return {
     GetConversationDetail,
     GetConversationChatList,
@@ -73,5 +82,6 @@ export const ChatroomApi = () => {
     SetResolve,
     SetRead,
     SetAgent,
+    SetTags,
   };
 };
