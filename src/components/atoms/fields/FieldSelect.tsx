@@ -1,3 +1,4 @@
+"use client";
 import { useController } from "react-hook-form";
 import { DropdownInput } from "../input";
 import { DropdownInputProps } from "../input/DropdownInput";
