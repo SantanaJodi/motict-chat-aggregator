@@ -6,12 +6,14 @@ import { TextInput, TextInputProps } from "../input";
 interface FieldInputProps extends Omit<TextInputProps, "value" | "onChange"> {
   name: string;
   label?: string;
+  hints?: string;
 }
 
 const FieldInput: React.FC<FieldInputProps> = ({
   name,
   label,
   placeholder,
+  hints,
   ...props
 }) => {
   const { field } = useController({ name });
@@ -25,6 +27,7 @@ const FieldInput: React.FC<FieldInputProps> = ({
         placeholder={placeholder}
         {...props}
       />
+      {hints && <p className="text-sm text-[#AABDD7]">{hints}</p>}
     </div>
   );
 };
