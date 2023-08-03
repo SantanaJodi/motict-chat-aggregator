@@ -17,7 +17,7 @@ const AccountManagementComponentModel = () => {
     defaultValues: {},
   });
 
-  const { data, isLoading, isError } = useQuery({
+  const { isLoading } = useQuery({
     queryFn: () => {
       const dummy: IAccountManagementType = {
         name: "Wikitoko",
@@ -50,13 +50,11 @@ const AccountManagementComponentModel = () => {
   };
 
   return {
+    isLoading,
     formModule,
     passwordModal,
     onSave,
     handlePasswordModal,
-    data,
-    isLoading,
-    isError,
   };
 };
 
