@@ -1,5 +1,6 @@
 import AttachmentIcon from "./AttachmentIcon";
 import BroadcastIcon from "./BroadcastIcon";
+import CameraIcon from "./CameraIcon";
 import ChartIcon from "./ChartIcon";
 import ChatIcon from "./ChatIcon";
 import ChevronDownIcon from "./ChevronDownIcon";
@@ -39,6 +40,7 @@ import TrashIcon from "./TrashIcon";
 import XIcon from "./XIcon";
 
 export {
+  CameraIcon,
   TrashIcon,
   ChevronDownIcon,
   SaveIcon,
