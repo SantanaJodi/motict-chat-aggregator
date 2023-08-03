@@ -5,8 +5,8 @@ import { ModalHeader } from "../molecules";
 
 interface ModalProps extends ModalType, PropsWithChildren {
   footer?: React.ReactNode;
-  width: number;
-  height: number;
+  width: string | number;
+  height: string | number;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -27,10 +27,9 @@ const Modal: React.FC<ModalProps> = ({
     >
       <div
         className={clsx(
-          "bg-white rounded-2xl relative overflow-hidden flex flex-col",
-          `w-[${width}px]`,
-          `h-[${height}px]`
+          "bg-white rounded-2xl relative overflow-hidden flex flex-col"
         )}
+        style={{ width, height }}
       >
         <ModalHeader title={title} onClose={onClose} />
         <div className="flex flex-col justify-between h-[calc(100%_-_65px)]">
