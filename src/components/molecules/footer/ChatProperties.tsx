@@ -12,12 +12,31 @@ import { AttachFile, EmojiPicker } from "../popup";
 
 interface ChatPropertiesProps {
   onSend: (value: string) => void;
+  isExpired: boolean;
 }
 
-const ChatProperties: React.FC<ChatPropertiesProps> = () => {
+const ChatProperties: React.FC<ChatPropertiesProps> = ({ isExpired }) => {
   const [value, setValue] = useState("");
   const [emoji, setEmoji] = useState(false);
   const [attachFile, setAttachFile] = useState(false);
+
+  if (isExpired) {
+    return (
+      <div className="w-full absolute bottom-[81px] bg-[#CB5237] p-4 flex flex-row items-center justify-between gap-4">
+        <p className="font-medium text-white truncate">
+          This chatroom has passed 24 hours since the custumer’s last reply
+        </p>
+        {/* remove in MVP phase */}
+        {/* <Button
+          variant="primary"
+          color="#323944"
+          label="Follow Up Customer"
+          className="!flex-shrink-0"
+        /> */}
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white  w-full p-6 flex flex-row items-center gap-4 absolute bottom-[81px] border-t border-[#EEF5FF]">
       <IconButton

@@ -13,11 +13,12 @@ interface EmojiPickerProps {
 }
 
 const EmojiPicker: React.FC<EmojiPickerProps> = ({ onClose, visible }) => {
+  if (!visible) return null;
+
   return (
     <div
       className={clsx(
-        "z-[9999] bg-white shadow-[0px_0px_16px_0px_rgba(0, 0, 0, 0.16)] rounded-lg fixed left-[370px] bottom-[88px] transition-all",
-        visible ? "block" : "hidden"
+        "z-[9999] bg-white shadow-[0px_0px_16px_0px_rgba(0, 0, 0, 0.16)] rounded-lg fixed left-[370px] bottom-[88px] transition-all"
       )}
     >
       <ReactEmojiPicker

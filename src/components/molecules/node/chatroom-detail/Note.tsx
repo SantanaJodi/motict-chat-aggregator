@@ -2,7 +2,7 @@
 
 import { PenIcon, SaveIcon } from "@/public/icons/outline";
 import { Button, IconButton, TextInput } from "@/src/components/atoms";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface NoteProps {
   notes?: string;
@@ -10,8 +10,14 @@ interface NoteProps {
 }
 
 const Note: React.FC<NoteProps> = ({ notes, onSave }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(notes || "");
   const [isEdit, setIsEdit] = useState(false);
+
+  useEffect(() => {
+    if (notes !== undefined) {
+      setValue(notes);
+    }
+  }, [notes]);
 
   let bodyContent;
   if (!notes && !isEdit) {

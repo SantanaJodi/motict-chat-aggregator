@@ -9,12 +9,12 @@ export const GlobalContext: FunctionComponent<GlobalContextProps> = ({
   children,
 }) => {
   return (
-    <QueryClientProviderContext>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <QueryClientProviderContext>
         <Toaster />
         {children}
-      </AuthContextProvider>
-    </QueryClientProviderContext>
+      </QueryClientProviderContext>
+    </AuthContextProvider>
   );
 };
 

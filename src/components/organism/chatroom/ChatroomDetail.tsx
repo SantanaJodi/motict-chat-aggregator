@@ -1,21 +1,25 @@
 "use client";
 
+import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
+import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 import { ISelectOpt } from "@/src/types";
 import clsx from "clsx";
 import React, { useState } from "react";
 import { Line } from "../../atoms";
 import { CustomerDetail } from "../../molecules";
 import { Agent, ChatroomInfo, Note, Tags } from "../../molecules/node";
-import { toast } from "react-hot-toast";
 
 interface ChatroomDetailProps {
   isExpanded?: boolean;
+  chatroomDetail?: IConversationDetail;
 }
 
-const ChatroomDetail: React.FC<ChatroomDetailProps> = ({ isExpanded }) => {
-  const [note, setNote] = useState("");
+const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
+  isExpanded,
+  chatroomDetail,
+}) => {
+  const { setNotes } = useChatroomContext();
   const [tags, setTags] = useState<ISelectOpt[]>([]);
-  const [agent, setAgent] = useState("");
   return (
     <div
       className={clsx(
@@ -28,27 +32,23 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({ isExpanded }) => {
       </div>
       <div className="">
         <div className="p-6 flex flex-col gap-6 h-full mt-[73px]">
-          <CustomerDetail />
+          <CustomerDetail chatroomDetail={chatroomDetail} />
           <Line />
-          <ChatroomInfo />
+          <ChatroomInfo conversationDetail={chatroomDetail} />
           <Line />
-          <Note notes={note} onSave={(value) => setNote(value)} />
+          <Note
+            notes={chatroomDetail?.notes}
+            onSave={async (value) => await setNotes(value)}
+          />
           <Line />
           <Tags
-            tags={tags}
-            onSave={(value) => {
-              setTags(value);
-              console.log("🚀 -> value:", value);
-            }}
+            tags={
+              chatroomDetail?.tags?.map((t) => ({ label: t, value: t })) as any
+            }
+            onSave={setTags}
           />
           <Line />
-          <Agent
-            agent={agent}
-            onAssign={(value) => {
-              setAgent(value);
-              toast.success("Agent Assigned");
-            }}
-          />
+          <Agent />
         </div>
       </div>
     </div>

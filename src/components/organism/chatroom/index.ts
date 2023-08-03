@@ -1,5 +1,5 @@
-import Chatroom from "./Chatroom";
+import ChatroomComponent from "./chatroom/ChatroomComponent";
 import ChatroomDetail from "./ChatroomDetail";
-import Messages from "./Messages";
+import Messages from "./messages/Messages";
 
-export { Messages, Chatroom, ChatroomDetail };
+export { Messages, ChatroomComponent as Chatroom, ChatroomDetail };

@@ -1,35 +1,16 @@
 import { ReplyIcon, TagIcon } from "@/public/icons/outline";
+import { getCustomDate } from "@/src/utils";
 import clsx from "clsx";
+import { differenceInHours } from "date-fns";
 import React from "react";
-import { Avatar } from "../../atoms";
-import {
-  MessageAssignment,
-  MessageAssignmentEnum,
-  NotificationCount,
-} from "../../atoms/tag";
-
-export enum SessionEnum {
-  open = 0,
-  expiring = 1,
-  expired = 2,
-}
-
-interface IMessage {
-  id: number;
-  name: string;
-  date: string;
-  lastChat: string;
-  unreadChatCount: number;
-  tag: string | null;
-  status: MessageAssignmentEnum;
-  session: SessionEnum;
-  isReplied?: boolean;
-}
+import { Avatar, ChatStatus } from "../../atoms";
+import { MessageAssignment, NotificationCount } from "../../atoms/tag";
+import { IChatroomDetail } from "../../organism/chatroom/messages/types/MessagesTypes";
 
 interface MessageCardProps {
-  data: IMessage;
+  data: IChatroomDetail;
   isSelectedChat?: boolean;
-  onSelectChat: (id: number) => void;
+  onSelectChat: (chatroomDetail: IChatroomDetail) => void;
 }
 
 const flexRow = "flex flex-row items-center";
@@ -42,63 +23,64 @@ const MessageCard: React.FC<MessageCardProps> = ({
   onSelectChat,
   isSelectedChat,
 }) => {
+  const diffHours = differenceInHours(new Date(data.expire_at), new Date());
+  const unreadCount = data.unread_counter <= 99 ? data.unread_counter : "+99";
   return (
     <div
       className={
         "flex flex-row items-start gap-2 bg-white px-4 py-6 w-full relative hover:bg-[#EEF5FF] cursor-pointer"
       }
-      onClick={() => onSelectChat(data.id)}
+      onClick={() => onSelectChat(data)}
     >
       {/* AVATAR */}
       <Avatar
-        withChannel
-        url="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg"
+        channel={data.platform}
+        url={data.from_user_photo || (null as any)}
       />
 
       {/* CONTENT */}
       <div className="flex flex-col items-start gap-1  w-full">
         <div className={flexBetween} style={{ alignItems: "flex-start" }}>
           <p className="font-bold text-[#0D0F12] leading-[20.83px] truncate max-w-[150px]">
-            {data.name}
+            {data.from_user_name}
           </p>
-          <p className={clsx(textColor, "text-[12px]")}>{data.date}</p>
+          <p className={clsx(textColor, "text-[12px]")}>
+            {getCustomDate(data.last_message.time)}
+          </p>
         </div>
 
+        {/* LAST MESSAGE */}
         <div className={flexBetween}>
-          {data.isReplied ? (
-            <div className={clsx(flexRow, "gap-1 w-full")}>
+          <p
+            className={clsx(
+              textColor,
+              textMsg,
+              flexRow,
+              "gap-1 max-w-[265px]",
+              !data.unread_counter ? "font-normal" : "font-bold"
+            )}
+          >
+            {!data.unread_counter && (
               <ReplyIcon
                 width={16}
                 height={16}
                 fill="#67768B"
                 className="flex-shrink-0 mb-[1px]"
               />
-              <p
-                className={clsx(
-                  textColor,
-                  textMsg,
-                  "font-normal max-w-[268px]"
-                )}
-              >
-                {data.lastChat}
-              </p>
-            </div>
-          ) : (
-            <p className={clsx(textColor, textMsg, "font-bold max-w-[265px]")}>
-              {data.lastChat}
-            </p>
-          )}
-
-          {!data.isReplied && <NotificationCount count={1} />}
+            )}
+            {data.last_message?.text}
+          </p>
+          {data.unread_counter > 0 && <NotificationCount count={unreadCount} />}
         </div>
 
-        {data.tag && (
+        {/* TAGS */}
+        {data.tags?.length > 0 && (
           <div className={clsx(flexRow, "gap-1")}>
             <TagIcon width={16} height={16} fill="#8B9EB7" />
             <p
               className={clsx(textColor, "text-[12px] truncate max-w-[268px]")}
             >
-              {data.tag}
+              {data.tags.join(", ")}
             </p>
           </div>
         )}
@@ -107,25 +89,11 @@ const MessageCard: React.FC<MessageCardProps> = ({
           className={clsx(
             "w-full",
             "flex flex-row",
-            data.session === SessionEnum.open
-              ? "justify-end"
-              : "items-end justify-between"
+            diffHours >= 12 ? "justify-end" : "items-end justify-between"
           )}
         >
-          {/* CHANGE BY MESSAGE TIME */}
-          {data.session !== SessionEnum.open && (
-            <p
-              className={clsx("text-[12px] leading-[15.62px]", {
-                "text-[#F0A22E]": data.session === SessionEnum.expiring,
-                "text-[#CB5237]": data.session === SessionEnum.expired,
-              })}
-            >
-              {data.session === SessionEnum.expiring
-                ? "Expired in 59 minute(s)"
-                : "Expired"}
-            </p>
-          )}
-          <MessageAssignment type={data.status} />
+          <ChatStatus expireAt={data.expire_at} />
+          <MessageAssignment type={data.assigned_agent_id} />
         </div>
       </div>
 

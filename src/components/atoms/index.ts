@@ -1,4 +1,5 @@
 import Avatar from "./Avatar";
+import ChatStatus from "./ChatStatus";
 import Container from "./Container";
 import EmptyState from "./EmptyState";
 import Header from "./Header";
@@ -26,4 +27,5 @@ export {
   IconButton,
   EmptyState,
   Loading,
+  ChatStatus,
 };
