@@ -1,5 +1,7 @@
-const SettingsPage = () => {
-  return <h1>Settings Page</h1>;
+import AccountManagementView from "@/src/modules/settings/view/AccountManagementView";
+
+const AccountManagementPage = () => {
+  return <AccountManagementView />;
 };
 
-export default SettingsPage;
+export default AccountManagementPage;
