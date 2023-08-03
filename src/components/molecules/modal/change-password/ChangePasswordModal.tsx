@@ -10,7 +10,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
   onClose,
   visible,
 }) => {
-  const { formModule, onChangePassword } = ChangePasswordModel();
+  const { formModule, onChangePassword } = ChangePasswordModel({ onClose });
 
   return (
     <FormProvider {...formModule}>
@@ -35,7 +35,6 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
                 color="#323944"
                 className="!w-full"
                 type="submit"
-                onClick={onClose}
                 disabled={!formModule.formState.isDirty}
               />
             </div>
