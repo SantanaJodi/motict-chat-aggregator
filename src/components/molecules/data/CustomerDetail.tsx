@@ -1,8 +1,6 @@
-import { ChannelWa } from "@/public/icons/logo";
-import React from "react";
-import { Avatar, Button } from "../../atoms";
-import { IChatroomDetail } from "../../organism/chatroom/messages/types/MessagesTypes";
 import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
+import React from "react";
+import { Avatar, LogoChannel } from "../../atoms";
 
 interface CustomerDetailProps {
   chatroomDetail?: IConversationDetail;
@@ -18,7 +16,11 @@ const CustomerDetail: React.FC<CustomerDetailProps> = ({ chatroomDetail }) => {
             {chatroomDetail?.sender?.from_user_name}
           </p>
           <div className="flex flex-row items-center gap-1 w-full">
-            <ChannelWa width={16} height={16} />
+            <LogoChannel
+              type={chatroomDetail?.sender.platform}
+              width={16}
+              height={16}
+            />
             <div className="flex flex-row items-center gap-1 w-full">
               <p className="text-[#0D0F12] text-[14px] leading-[18.23px] mr-1">
                 {/* TODO: DATA MOBILE PHONE BELUM ADAm  */}
