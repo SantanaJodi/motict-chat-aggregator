@@ -1,5 +1,6 @@
 import { PeoplesIcon, SearchIcon } from "@/public/icons/outline";
 import { Button, TextInput } from "@/src/components/atoms";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import StatesContainer from "../../StatesContainer";
 import Table from "../Table";
@@ -8,6 +9,8 @@ import AgentListModel from "./model/AgentListModel";
 interface TableAgentListProps {}
 
 const TableAgentList: React.FC<TableAgentListProps> = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const { table, data, search, isLoading, isError, handleSearch, refetch } =
     AgentListModel();
   return (
@@ -17,6 +20,7 @@ const TableAgentList: React.FC<TableAgentListProps> = () => {
         color="#323944"
         label="Create Agent"
         className="!self-end"
+        onClick={() => router.push("/settings/agent/create")}
       />
       <TextInput
         value={search}
@@ -25,7 +29,11 @@ const TableAgentList: React.FC<TableAgentListProps> = () => {
         placeholder="Search by name, email, or division name"
       />
       <div className="relative w-full flex flex-col">
-        <Table data={data} table={table} />
+        <Table
+          data={data}
+          table={table}
+          onRowClick={(row) => router.push(`${pathname}/${row.id}`)}
+        />
         <StatesContainer
           EmptyIcon={PeoplesIcon}
           onReload={refetch}
