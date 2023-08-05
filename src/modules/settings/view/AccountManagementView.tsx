@@ -11,7 +11,7 @@ import {
 import { ChangePasswordModal } from "@/src/components/molecules/modal";
 import React from "react";
 import { FormProvider } from "react-hook-form";
-import AccountManagementComponentModel from "../view-model/AccountManagementViewModel";
+import AccountManagementComponentModel from "../model/AccountManagementViewModel";
 
 interface AccountManagementViewProps {}
 
@@ -28,7 +28,7 @@ const AccountManagementView: React.FC<AccountManagementViewProps> = () => {
   }
 
   return (
-    <div className="bg-white overflow-y-auto relative">
+    <div className="bg-white overflow-y-auto relative w-full">
       <div className=" flex flex-row items-start justify-between p-6">
         <div>
           <h2 className="font-bold text-xl text-[#0D0F12] mb-6">
