@@ -4,7 +4,11 @@ import { flexRender } from "@tanstack/react-table";
 import TablePagination from "./TablePagination";
 import { TableProps } from "./table-type";
 
-const Table = <T extends object>({ table, data }: TableProps<T>) => {
+const Table = <T extends object>({
+  table,
+  data,
+  onRowClick,
+}: TableProps<T>) => {
   return (
     <div className="w-full flex flex-col justify-between h-full overflow-auto">
       <table className="w-full">
@@ -32,7 +36,15 @@ const Table = <T extends object>({ table, data }: TableProps<T>) => {
         <tbody className="overflow-auto h-2/3">
           {table.getRowModel().rows.map((row) => {
             return (
-              <tr key={row.id} className="border-b border-[#EEF5FF]">
+              <tr
+                key={row.id}
+                className="border-b border-[#EEF5FF] cursor-pointer"
+                onClick={() => {
+                  if (onRowClick) {
+                    onRowClick(row);
+                  }
+                }}
+              >
                 {row.getVisibleCells().map((cell) => {
                   return (
                     <td
