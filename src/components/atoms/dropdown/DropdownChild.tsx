@@ -1,6 +1,7 @@
+import useExactPath from "@/src/hooks/useExactPath";
 import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
+import React, { useMemo } from "react";
 
 interface DropdownChildProps {
   label: string;
@@ -8,8 +9,8 @@ interface DropdownChildProps {
 }
 
 const DropdownChild: React.FC<DropdownChildProps> = ({ label, path }) => {
-  const pathname = usePathname();
   const router = useRouter();
+  const pathname = useExactPath("/settings", 2);
 
   const isActive = pathname === path;
   return (
