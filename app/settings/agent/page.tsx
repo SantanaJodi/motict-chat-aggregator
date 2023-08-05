@@ -1,4 +1,4 @@
-import AgentManagementView from "@/src/modules/settings/view/AgentManagementView";
+import AgentManagementView from "@/src/modules/settings/view/agent/AgentManagementView";
 import React from "react";
 
 interface AgentManagementProps {}
