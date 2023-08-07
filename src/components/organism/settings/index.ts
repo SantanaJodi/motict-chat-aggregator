@@ -1,3 +1,4 @@
 import SettingSidePanel from "./SettingSidePanel";
+import WhatsAppAccountForm from "./integration/WhatsAppAccountForm";
 
-export { SettingSidePanel };
+export { WhatsAppAccountForm, SettingSidePanel };
