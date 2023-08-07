@@ -5,8 +5,8 @@ import { ModalHeader } from "../molecules";
 
 interface ModalProps extends ModalType, PropsWithChildren {
   footer?: React.ReactNode;
-  width: number;
-  height: number;
+  width: string | number;
+  height: string | number;
 }
 
 const Modal: React.FC<ModalProps> = ({

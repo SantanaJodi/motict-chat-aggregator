@@ -2,7 +2,7 @@ import { ChannelWa, ChannelWaUnmasking } from "@/public/icons/logo";
 import React from "react";
 
 interface LogoChannelProps extends React.SVGProps<SVGSVGElement> {
-  type: string;
+  type?: string;
 }
 
 const LogoChannel: React.FC<LogoChannelProps> = ({ type, ...props }) => {
