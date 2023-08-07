@@ -1,12 +1,13 @@
 import { PlusIcon } from "@/public/icons/line";
 import { ChevronRightIcon } from "@/public/icons/outline";
+import { IWhatsAppAccount } from "@/src/modules/settings/types/whatsapp-integration-type";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { Button, Switch } from "../../atoms";
-import { useRouter } from "next/navigation";
 
 interface IntegrationChannelCardProps {
-  account?: string;
+  account?: IWhatsAppAccount;
   toggle?: boolean;
   onToggle?: () => void;
 }
@@ -29,13 +30,16 @@ const IntegrationChannelCard: React.FC<IntegrationChannelCardProps> = ({
               height={50}
             />
             <div>
-              <p className="text-[#0D0F12]">{account}</p>
+              <p className="text-[#0D0F12]">{account.whatsappName}</p>
               <Button
                 variant="link"
                 label="Settings"
                 color="#8B9EB7"
                 Icon={ChevronRightIcon}
                 className="!flex-row-reverse"
+                onClick={() =>
+                  router.push(`/settings/integration/${account.whatsappNumber}`)
+                }
               />
             </div>
           </div>
