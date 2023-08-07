@@ -15,7 +15,7 @@ const AddWhatsAppAccountHeader: React.FC<
         items={[
           {
             label: "WhatsApp Integration",
-            path: "/settings/settings/integration",
+            path: "/settings/integration",
           },
           {
             label: "Add WhatsApp Account",

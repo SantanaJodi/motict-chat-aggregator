@@ -25,7 +25,7 @@ const WhatsAppAccountSettingView: React.FC<
           items={[
             {
               label: "WhatsApp Integration",
-              path: "/settings/settings/integration",
+              path: "/settings/integration",
             },
             {
               label: "Account Settings",
