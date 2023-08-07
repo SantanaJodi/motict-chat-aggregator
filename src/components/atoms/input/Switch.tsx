@@ -1,7 +1,8 @@
+"use client";
 import clsx from "clsx";
 import React from "react";
 
-interface SwitchProps extends React.HTMLProps<HTMLInputElement> {}
+export interface SwitchProps extends React.HTMLProps<HTMLInputElement> {}
 
 const Switch: React.FC<SwitchProps> = ({
   disabled,
