@@ -15,19 +15,21 @@ const TableAgentList: React.FC<TableAgentListProps> = () => {
     AgentListModel();
   return (
     <div className=" w-full px-4 pt-4 flex flex-col gap-8 border border-[#EEF5FF] rounded-lg">
-      <Button
-        variant="primary"
-        color="#323944"
-        label="Create Agent"
-        className="!self-end"
-        onClick={() => router.push("/settings/agent/create")}
-      />
-      <TextInput
-        value={search}
-        onChange={handleSearch}
-        Icon={SearchIcon}
-        placeholder="Search by name, email, or division name"
-      />
+      <div className="flex flex-row item  gap-8">
+        <TextInput
+          value={search}
+          onChange={handleSearch}
+          Icon={SearchIcon}
+          placeholder="Search by name, email, or division name"
+        />
+        <Button
+          variant="primary"
+          color="#323944"
+          label="Create Agent"
+          className="!flex-shrink-0"
+          onClick={() => router.push("/settings/agent/create")}
+        />
+      </div>
       <div className="relative w-full flex flex-col">
         <Table
           data={data}
