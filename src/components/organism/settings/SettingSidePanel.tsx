@@ -19,7 +19,7 @@ const SETTINGS_MENU = [
   },
   {
     path: "/settings/integration",
-    label: "WhatsApp Integration",
+    label: "Integration",
   },
 ];
 
