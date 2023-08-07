@@ -1,10 +1,13 @@
 import { Button } from "@/src/components/atoms";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 interface IntegrationHeaderProps {}
 
 const IntegrationHeader: React.FC<IntegrationHeaderProps> = () => {
+  const pathname = usePathname();
+  const router = useRouter();
   return (
     <div className="p-6 flex flex-col gap-4">
       <h2 className="font-bold text-xl text-[#0D0F12]">WhatsApp Integration</h2>
@@ -24,8 +27,16 @@ const IntegrationHeader: React.FC<IntegrationHeaderProps> = () => {
         </Link>
       </p>
       <div className="flex flex-row items-center gap-4">
-        <Button variant="subtle" label="Apply Through Us" />
-        <Button variant="subtle" label="Apply with Facebook" />
+        <Button
+          variant="subtle"
+          label="Apply Through Us"
+          onClick={() => router.push(`${pathname}/apply-us`)}
+        />
+        <Button
+          variant="subtle"
+          label="Apply with Facebook"
+          onClick={() => router.push(`${pathname}/apply-facebook`)}
+        />
       </div>
     </div>
   );
