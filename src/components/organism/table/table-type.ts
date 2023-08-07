@@ -1,8 +1,9 @@
-import { Table as ReactTable } from "@tanstack/react-table";
+import { Table as ReactTable, Row } from "@tanstack/react-table";
 
 export interface TableProps<T> {
   table: ReactTable<T>;
   data: T[];
+  onRowClick?: (row: Row<T>) => void;
 }
 
 export interface IRowSelectOption {

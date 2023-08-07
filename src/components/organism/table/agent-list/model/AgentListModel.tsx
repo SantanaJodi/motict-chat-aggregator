@@ -1,5 +1,8 @@
 "use client";
 import useDebounce from "@/src/hooks/useDebounce";
+import dummyAgent from "@/src/modules/settings/model/agent/dummy-agent.json";
+import { IAgent } from "@/src/modules/settings/types/agent-types";
+import { ISelectOpt } from "@/src/types";
 import {
   ColumnDef,
   getCoreRowModel,
@@ -8,7 +11,6 @@ import {
 import { useMemo } from "react";
 import { useQuery } from "react-query";
 import { useImmer } from "use-immer";
-import { IAgentList } from "../types";
 
 interface AgentListModelProps {}
 interface IState {
@@ -26,39 +28,18 @@ const AgentListModel = () => {
     isLoading,
     refetch,
     isError,
-  } = useQuery<IAgentList[]>({
+  } = useQuery<IAgent[]>({
     queryKey: ["agentList", debouncedSearch],
     queryFn: ({ queryKey }) => {
       const s = queryKey[1] as string;
-      console.log("🚀 -> AgentListModel -> s:", s);
-      const dummy: IAgentList[] = [
-        {
-          name: "Anggih Nur Hidayat",
-          email: "works.anggihnur@gmail.com",
-          division: "No Division",
-          channel: ["WhatsApp - Wikitoko", "WhatsApp - Tokowiki"],
-        },
-        {
-          name: "Shanelle Corkey",
-          email: "Shanelle_Corkery@@wikitoko.com",
-          division: "Operation",
-          channel: ["WhatsApp - Wikitoko"],
-        },
-        {
-          name: "Shavanna Johns",
-          email: "Savanna_Johns29@@wikitoko.com",
-          division: "Operation",
-          channel: ["WhatsApp - Wikitoko"],
-        },
-      ];
 
       if (!s) {
-        return dummy;
+        return dummyAgent.data;
       }
 
       const keyword = s.toLowerCase().trim();
 
-      return dummy.filter((item: any) => {
+      return dummyAgent.data.filter((item: any) => {
         return Object.keys(item).some((key) =>
           key === "channel"
             ? false
@@ -69,10 +50,10 @@ const AgentListModel = () => {
   });
 
   const data = useMemo(() => {
-    return agentList || ([] as IAgentList[]);
+    return agentList || ([] as IAgent[]);
   }, [agentList]);
 
-  const columns: ColumnDef<IAgentList>[] = [
+  const columns: ColumnDef<IAgent>[] = [
     {
       accessorKey: "name",
       header: "Name",
@@ -89,18 +70,18 @@ const AgentListModel = () => {
       accessorKey: "division",
       header: "Division",
       footer: (props) => props.column.id,
-      cell: (props) => props.getValue(),
+      cell: (props) => (props.getValue() as ISelectOpt).label,
     },
     {
       accessorKey: "channel",
       header: "Channel",
       footer: (props) => props.column.id,
       cell: (props) => {
-        const val = props.getValue() as string[];
+        const val = props.getValue() as ISelectOpt[];
         return (
           <div>
             {val.map((item, id) => (
-              <p key={id}>{item}</p>
+              <p key={id}>{item.label}</p>
             ))}
           </div>
         );

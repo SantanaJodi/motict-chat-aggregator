@@ -1,9 +1,8 @@
 "use client";
 
+import useExactPath from "@/src/hooks/useExactPath";
 import { clsx } from "clsx";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useMemo } from "react";
 
 export interface ISidebarMenuItem {
   path: string;
@@ -20,19 +19,7 @@ const SidebarMenuItem: React.FC<ISidebarMenuItem> = ({
   collapsed,
   isMain,
 }) => {
-  const pathname = usePathname();
-
-  const exactPath = useMemo(() => {
-    if (pathname !== "/") {
-      const pathWithoutQuery = pathname?.split("?")[0];
-      let pathArray = pathWithoutQuery?.split("/");
-      pathArray?.shift();
-
-      return "/" + (pathArray && pathArray[0]);
-    }
-    return pathname;
-  }, [pathname]);
-
+  const pathname = useExactPath("/");
   return (
     <Link
       href={path}
@@ -59,7 +46,7 @@ const SidebarMenuItem: React.FC<ISidebarMenuItem> = ({
           {label}
         </p>
       )}
-      {path === exactPath && (
+      {path === pathname && (
         <div className="w-4 h-4  flex-shrink-0 bg-[#323944] rounded-full border-4 border-white border-solid absolute -right-4 z-10" />
       )}
     </Link>
