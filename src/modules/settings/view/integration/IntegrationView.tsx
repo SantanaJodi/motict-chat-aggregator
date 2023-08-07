@@ -9,7 +9,7 @@ import {
 } from "@/src/components";
 import clsx from "clsx";
 import React from "react";
-import IntegrationViewModel from "../model/IntegrationViewModel";
+import IntegrationViewModel from "../../model/IntegrationViewModel";
 
 interface IntegrationViewProps {}
 
@@ -31,6 +31,7 @@ const IntegrationView: React.FC<IntegrationViewProps> = () => {
           <FailedToLoad onReload={refetch} />
         ) : (
           <div className="flex flex-row items-center gap-8">
+            <IntegrationChannelCard />
             <IntegrationChannelCard
               account="Wikitoko"
               toggle={toggle}

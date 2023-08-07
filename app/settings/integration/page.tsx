@@ -1,4 +1,4 @@
-import IntegrationView from "@/src/modules/settings/view/IntegrationView";
+import IntegrationView from "@/src/modules/settings/view/integration/IntegrationView";
 import React from "react";
 
 interface WhatsAppIntegrationProps {}
