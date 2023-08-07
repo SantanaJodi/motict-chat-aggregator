@@ -3,11 +3,12 @@ import { ChevronRightIcon } from "@/public/icons/outline";
 import Image from "next/image";
 import React from "react";
 import { Button, Switch } from "../../atoms";
+import { useRouter } from "next/navigation";
 
 interface IntegrationChannelCardProps {
   account?: string;
-  toggle: boolean;
-  onToggle: () => void;
+  toggle?: boolean;
+  onToggle?: () => void;
 }
 
 const IntegrationChannelCard: React.FC<IntegrationChannelCardProps> = ({
@@ -15,6 +16,7 @@ const IntegrationChannelCard: React.FC<IntegrationChannelCardProps> = ({
   toggle,
   onToggle,
 }) => {
+  const router = useRouter();
   return (
     <div className="bg-white border border-[#D7E4F5] p-4 rounded-lg w-[240px]">
       {account ? (
@@ -40,7 +42,10 @@ const IntegrationChannelCard: React.FC<IntegrationChannelCardProps> = ({
           <Switch checked={toggle} onChange={onToggle} />
         </div>
       ) : (
-        <div className="flex flex-row items-center gap-4">
+        <div
+          className="flex flex-row items-center gap-4 cursor-pointer"
+          onClick={() => router.push("/settings/integration/add")}
+        >
           <div className="w-9 h-9 rounded-full p-2 bg-[#FCEFED]">
             <PlusIcon />
           </div>
