@@ -15,7 +15,7 @@ interface StatesContainerProps {
   emptyMsg?: string;
   onReload: () => void;
   noResultMsg?: string;
-  EmptyIcon: any;
+  EmptyIcon?: any;
   disableErrorToast?: boolean;
   className?: string;
 }
