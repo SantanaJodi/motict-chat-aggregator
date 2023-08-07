@@ -1,8 +1,7 @@
-/* eslint-disable react/no-unescaped-entities */
 "use client";
 
+import { AccountManagementHeader } from "@/src/components";
 import {
-  Avatar,
   Button,
   FieldInput,
   FieldSelect,
@@ -11,13 +10,13 @@ import {
 import { ChangePasswordModal } from "@/src/components/molecules/modal";
 import React from "react";
 import { FormProvider } from "react-hook-form";
-import AccountManagementComponentModel from "../model/AccountManagementViewModel";
+import AccountManagementViewModel from "../model/AccountManagementViewModel";
 
 interface AccountManagementViewProps {}
 
 const AccountManagementView: React.FC<AccountManagementViewProps> = () => {
   const { isLoading, formModule, passwordModal, onSave, handlePasswordModal } =
-    AccountManagementComponentModel();
+    AccountManagementViewModel();
 
   if (isLoading) {
     return (
@@ -29,23 +28,7 @@ const AccountManagementView: React.FC<AccountManagementViewProps> = () => {
 
   return (
     <div className="bg-white overflow-y-auto relative w-full">
-      <div className=" flex flex-row items-start justify-between p-6">
-        <div>
-          <h2 className="font-bold text-xl text-[#0D0F12] mb-6">
-            Account Management
-          </h2>
-          <span className="text-sm text-[#323944]">
-            Easily manage your account details here.
-            <br /> Please note when you change the avatar, it will only affect
-            on this admin's avatar and remember to upload 200px x 200px (square
-            image) for better result
-          </span>
-        </div>
-        <Avatar
-          isEditable
-          url="https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?w=2000"
-        />
-      </div>
+      <AccountManagementHeader />
       <FormProvider {...formModule}>
         <form onSubmit={formModule.handleSubmit(onSave)}>
           <div className="flex flex-col p-6 gap-8">

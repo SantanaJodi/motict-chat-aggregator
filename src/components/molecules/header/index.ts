@@ -6,6 +6,7 @@ import ModalHeader from "./ModalHeader";
 import NewContactHeader from "./NewContactHeader";
 import SidebarHeader from "./SidebarHeader";
 
+export * from "./settings";
 export {
   DetailContactHeader,
   NewContactHeader,

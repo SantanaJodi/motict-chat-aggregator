@@ -8,7 +8,7 @@ interface IState {
   passwordModal: boolean;
 }
 
-const AccountManagementComponentModel = () => {
+const AccountManagementViewModel = () => {
   const [{ passwordModal }, update] = useImmer<IState>({
     passwordModal: false,
   });
@@ -58,4 +58,4 @@ const AccountManagementComponentModel = () => {
   };
 };
 
-export default AccountManagementComponentModel;
+export default AccountManagementViewModel;
