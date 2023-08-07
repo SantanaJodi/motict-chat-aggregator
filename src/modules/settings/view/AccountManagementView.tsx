@@ -86,7 +86,8 @@ const AccountManagementView: React.FC<AccountManagementViewProps> = () => {
               label="Email"
               placeholder="Your email here"
             />
-            <FieldInput
+            {/* Skip for this MVP */}
+            {/* <FieldInput
               name="alternativeEmail1"
               label="Alternative Billing Email 1"
               placeholder="Your billing email 1 here"
@@ -100,7 +101,7 @@ const AccountManagementView: React.FC<AccountManagementViewProps> = () => {
               name="alternativeEmail3"
               label="Alternative Billing Email 3"
               placeholder="Your billing email 3 here"
-            />
+            /> */}
             <div className="flex flex-col gap-2">
               <p className="font-bold text-[#0D0F12]">Password</p>
               <Button
