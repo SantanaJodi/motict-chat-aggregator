@@ -1,4 +1,4 @@
-export interface IAddWhatsAppAccount {
+export interface IWhatsAppAccount {
   badge: string;
   whatsappName: string;
   whatsappNumber: string;

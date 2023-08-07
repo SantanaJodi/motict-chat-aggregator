@@ -3,19 +3,19 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useQuery } from "react-query";
-import { IAddWhatsAppAccount } from "../types/whatsapp-integration-type";
+import { IWhatsAppAccount } from "../types/whatsapp-integration-type";
 
 interface IState {}
 
 const AddWhatsAppAccountViewModel = () => {
   const router = useRouter();
-  const formModule = useForm<IAddWhatsAppAccount>({
+  const formModule = useForm<IWhatsAppAccount>({
     defaultValues: {},
   });
 
   const { isLoading } = useQuery({
     queryFn: () => {
-      const dummy: IAddWhatsAppAccount = {
+      const dummy: IWhatsAppAccount = {
         badge: "",
         token: "",
         whatsappName: "",
@@ -27,7 +27,7 @@ const AddWhatsAppAccountViewModel = () => {
     },
   });
 
-  const onAdd = (val: IAddWhatsAppAccount) => {
+  const onAdd = (val: IWhatsAppAccount) => {
     toast.success("WhatsApp Account Successfully Added");
   };
 
