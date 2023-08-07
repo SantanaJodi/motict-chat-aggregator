@@ -7,7 +7,7 @@ import { IWhatsAppAccount } from "../types/whatsapp-integration-type";
 
 interface IState {}
 
-const AddWhatsAppAccountViewModel = () => {
+const WhatsAppAccountSettingsViewModel = () => {
   const router = useRouter();
   const formModule = useForm<IWhatsAppAccount>({
     defaultValues: {},
@@ -17,25 +17,25 @@ const AddWhatsAppAccountViewModel = () => {
     queryFn: () => {
       const dummy: IWhatsAppAccount = {
         badge: "",
-        token: "",
-        whatsappName: "",
-        whatsappNumber: "",
-        whatsappServerUrl: "",
+        token: "sdjfg8934yt9hgvpiowejrp9230r394r",
+        whatsappName: "Wikitoko",
+        whatsappNumber: "081234567890",
+        whatsappServerUrl: "https://graph.facebook.com",
         isSupportSSL: false,
       };
       formModule.reset(dummy);
     },
   });
 
-  const onAdd = (val: IWhatsAppAccount) => {
-    toast.success("WhatsApp Account Successfully Added");
+  const onSave = (val: IWhatsAppAccount) => {
+    toast.success("Changes Saved");
   };
 
   return {
     isLoading,
     formModule,
-    onAdd,
+    onSave,
   };
 };
 
-export default AddWhatsAppAccountViewModel;
+export default WhatsAppAccountSettingsViewModel;

@@ -14,7 +14,7 @@ import IntegrationViewModel from "../../model/IntegrationViewModel";
 interface IntegrationViewProps {}
 
 const IntegrationView: React.FC<IntegrationViewProps> = () => {
-  const { toggle, isLoading, isError, handleToggle, refetch } =
+  const { data, toggle, isLoading, isError, handleToggle, refetch } =
     IntegrationViewModel();
   return (
     <div className="bg-white overflow-y-auto relative flex flex-col w-full h-full">
@@ -33,7 +33,7 @@ const IntegrationView: React.FC<IntegrationViewProps> = () => {
           <div className="flex flex-row items-center gap-8">
             <IntegrationChannelCard />
             <IntegrationChannelCard
-              account="Wikitoko"
+              account={data}
               toggle={toggle}
               onToggle={() => handleToggle(!toggle)}
             />

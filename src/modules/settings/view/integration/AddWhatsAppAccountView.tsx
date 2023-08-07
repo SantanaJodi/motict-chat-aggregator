@@ -27,6 +27,7 @@ const AddWhatsAppAccountView: React.FC<AddWhatsAppAccountViewProps> = () => {
               onClick={() => router.back()}
             />
             <Button
+              type="submit"
               variant="primary"
               color="#323944"
               label="Add"

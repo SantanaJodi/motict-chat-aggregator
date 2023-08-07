@@ -2,9 +2,13 @@
 import { Avatar, FieldInput, FieldSwitch } from "@/src/components/atoms";
 import React from "react";
 
-interface WhatsAppAccountFormProps {}
+interface WhatsAppAccountFormProps {
+  isSettings?: boolean;
+}
 
-const WhatsAppAccountForm: React.FC<WhatsAppAccountFormProps> = () => {
+const WhatsAppAccountForm: React.FC<WhatsAppAccountFormProps> = ({
+  isSettings,
+}) => {
   return (
     <div className="p-6 pt-0 flex flex-col gap-8">
       {/* Badge */}
@@ -29,16 +33,20 @@ const WhatsAppAccountForm: React.FC<WhatsAppAccountFormProps> = () => {
         name="whatsappNumber"
         label="WhatsApp Number (+62)"
         placeholder="Type WhatsApp Number"
+        disabled={isSettings}
       />
       <FieldInput
+        type="password"
         name="token"
         label="Encoded User Token"
         placeholder="Type WhatsApp Encoded User Token"
+        disabled={isSettings}
       />
       <FieldInput
         name="whatsappServerUrl"
         label="WhatsApp Server Base URL"
         placeholder="Type WhatsApp Server Base URL"
+        disabled={isSettings}
       />
       <div className="w-full flex flex-row items-start justify-between">
         <div className="flex flex-col gap-1">
