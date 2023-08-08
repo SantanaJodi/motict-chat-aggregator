@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { useImmer } from "use-immer";
 import { IAgent } from "../../types/agent-types";
 import dummyAgent from "../agent/dummy-agent.json";
+import { useRouter } from "next/navigation";
 
 interface IState {
   showPassword: boolean;
@@ -36,8 +37,11 @@ const CreateUpdateViewModel = ({
     },
   });
 
+  const router = useRouter();
+
   const onSave = (val: IAgent) => {
     toast.success("Agent Saved");
+    router.push("/settings/agent");
   };
 
   const handlePassword = (val: boolean) => {

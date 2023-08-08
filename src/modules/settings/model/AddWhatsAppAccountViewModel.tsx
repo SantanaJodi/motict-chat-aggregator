@@ -29,12 +29,18 @@ const AddWhatsAppAccountViewModel = () => {
 
   const onAdd = (val: IWhatsAppAccount) => {
     toast.success("WhatsApp Account Successfully Added");
+    router.push("/settings/integration");
+  };
+
+  const handleBadgeIcon = (_images: FileList) => {
+    console.log("🚀 -> handleBadgeIcon -> _images:", _images);
   };
 
   return {
     isLoading,
     formModule,
     onAdd,
+    handleBadgeIcon,
   };
 };
 
