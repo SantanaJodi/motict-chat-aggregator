@@ -1,9 +1,10 @@
+import GeneralChatSettingsView from "@/src/modules/settings/view/chat/GeneralChatSettingsView";
 import React from "react";
 
-interface ChatProps {}
+interface ChatSettingPageProps {}
 
-const Chat: React.FC<ChatProps> = () => {
-  return <h1>CHAT SETTINGS</h1>;
+const ChatSettingPage: React.FC<ChatSettingPageProps> = () => {
+  return <GeneralChatSettingsView />;
 };
 
-export default Chat;
+export default ChatSettingPage;
