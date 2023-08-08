@@ -13,13 +13,13 @@ interface AddWhatsAppAccountViewProps {}
 
 const AddWhatsAppAccountView: React.FC<AddWhatsAppAccountViewProps> = () => {
   const router = useRouter();
-  const { formModule, onAdd } = AddWhatsAppAccountViewModel();
+  const { formModule, onAdd, handleBadgeIcon } = AddWhatsAppAccountViewModel();
   return (
     <div className="w-full bg-white overflow-y-auto">
       <AddWhatsAppAccountHeader />
       <FormProvider {...formModule}>
         <form onSubmit={formModule.handleSubmit(onAdd)}>
-          <WhatsAppAccountForm />
+          <WhatsAppAccountForm onChangeBadge={handleBadgeIcon} />
           <div className="flex flex-row items-center justify-end gap-4 p-6 pt-2">
             <Button
               variant="ghost"

@@ -31,10 +31,15 @@ const WhatsAppAccountSettingsViewModel = () => {
     toast.success("Changes Saved");
   };
 
+  const handleBadgeIcon = (_images: FileList) => {
+    console.log("🚀 -> handleBadgeIcon -> _images:", _images);
+  };
+
   return {
     isLoading,
     formModule,
     onSave,
+    handleBadgeIcon,
   };
 };
 

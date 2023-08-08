@@ -17,7 +17,8 @@ const WhatsAppAccountSettingView: React.FC<
 > = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { formModule, isLoading, onSave } = WhatsAppAccountSettingsViewModel();
+  const { formModule, isLoading, onSave, handleBadgeIcon } =
+    WhatsAppAccountSettingsViewModel();
   return (
     <div className="w-full h-full bg-white overflow-y-auto">
       <div className="p-6">
@@ -36,7 +37,7 @@ const WhatsAppAccountSettingView: React.FC<
       </div>
       <FormProvider {...formModule}>
         <form onSubmit={formModule.handleSubmit(onSave)}>
-          <WhatsAppAccountForm isSettings />
+          <WhatsAppAccountForm isSettings onChangeBadge={handleBadgeIcon} />
           <div className="p-6 pt-2 flex flex-col gap-8">
             <CopyUrl
               label="Webhook URL"

@@ -4,16 +4,18 @@ import React from "react";
 
 interface WhatsAppAccountFormProps {
   isSettings?: boolean;
+  onChangeBadge: (_images: FileList) => void;
 }
 
 const WhatsAppAccountForm: React.FC<WhatsAppAccountFormProps> = ({
   isSettings,
+  onChangeBadge,
 }) => {
   return (
     <div className="p-6 pt-0 flex flex-col gap-8">
       {/* Badge */}
       <div className="flex flex-row items-center gap-4">
-        <Avatar isEditable />
+        <Avatar isEditable onChange={onChangeBadge} />
         <div className="flex flex-col gap-2">
           <p className="font-bold">Channel Badge Icon</p>
           <p className="text-xs text-[#8B9EB7]">
