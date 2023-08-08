@@ -3,7 +3,7 @@ import React from "react";
 
 interface IconButtonProps {
   Icon: React.ElementType;
-  onClick: () => void;
+  onClick?: () => void;
   color?: string;
   className?: string;
   size?: "small" | "medium";
