@@ -6,6 +6,7 @@ import ChatIcon from "./ChatIcon";
 import ChevronDownIcon from "./ChevronDownIcon";
 import ChevronLeftIcon from "./ChevronLeftIcon";
 import ChevronRightIcon from "./ChevronRightIcon";
+import ChevronUpIcon from "./ChevronUpIcon";
 import CircleCheckIcon from "./CircleCheckIcon";
 import DoubleCheckIcon from "./DoubleCheckIcon";
 import DownloadIcon from "./DownloadIcon";
@@ -41,6 +42,7 @@ import WarningIcon from "./WarningIcon";
 import XIcon from "./XIcon";
 
 export {
+  ChevronUpIcon,
   WarningIcon,
   CameraIcon,
   TrashIcon,
