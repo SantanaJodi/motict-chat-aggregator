@@ -215,6 +215,12 @@ input[type="checkbox"] {
     white-space: nowrap;
 }
 
+
+/* INPUT TIME */
+input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
 /* 
 input[type="checkbox"]:disabled {
     border-color: #c0c0c0;
