@@ -8,7 +8,9 @@ import AutoResponderChatModel from "./AutoResponderChatModel";
 interface AutoResponderChatProps {}
 
 const AutoResponderChat: React.FC<AutoResponderChatProps> = () => {
-  const { formModule } = AutoResponderChatModel();
+  const { formModule, onSaveChange } = AutoResponderChatModel();
+
+  const fields = formModule.watch();
 
   return (
     <Dropdown title="Auto-Responder" hideBorder>
@@ -44,7 +46,7 @@ const AutoResponderChat: React.FC<AutoResponderChatProps> = () => {
         />
         <Line />
         <FormProvider {...formModule}>
-          <form>
+          <form onSubmit={formModule.handleSubmit(onSaveChange)}>
             <div className="flex flex-col gap-6">
               <FieldTextArea
                 name="autoWhenOnline"
@@ -55,6 +57,7 @@ const AutoResponderChat: React.FC<AutoResponderChatProps> = () => {
               <ListSetting
                 label="Keep sending every time a customer initiates a chat session even though the room has been resolved"
                 name="isKeepSending"
+                disabled={!fields.autoWhenOnline}
               />
               <Line />
               <FieldTextArea
@@ -66,6 +69,7 @@ const AutoResponderChat: React.FC<AutoResponderChatProps> = () => {
               <ListSetting
                 label="Sent every time a customer sends a message"
                 name="isSendEvery"
+                disabled={!fields.autoWhenOffline}
               />
               <Button
                 label="Save Settings"
