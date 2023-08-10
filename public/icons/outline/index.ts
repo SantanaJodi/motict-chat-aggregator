@@ -8,6 +8,7 @@ import ChevronLeftIcon from "./ChevronLeftIcon";
 import ChevronRightIcon from "./ChevronRightIcon";
 import ChevronUpIcon from "./ChevronUpIcon";
 import CircleCheckIcon from "./CircleCheckIcon";
+import ClockIcon from "./ClockIcon";
 import DoubleCheckIcon from "./DoubleCheckIcon";
 import DownloadIcon from "./DownloadIcon";
 import EmojiIcon from "./EmojiIcon";
@@ -42,6 +43,7 @@ import WarningIcon from "./WarningIcon";
 import XIcon from "./XIcon";
 
 export {
+  ClockIcon,
   ChevronUpIcon,
   WarningIcon,
   CameraIcon,
