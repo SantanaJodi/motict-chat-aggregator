@@ -1,5 +1,6 @@
 import FieldInput from "./FieldInput";
 import FieldSelect from "./FieldSelect";
 import FieldSwitch from "./FieldSwitch";
+import FieldTextArea from "./FieldTextArea";
 
-export { FieldSwitch, FieldSelect, FieldInput };
+export { FieldTextArea, FieldSwitch, FieldSelect, FieldInput };
