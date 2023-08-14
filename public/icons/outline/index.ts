@@ -13,6 +13,8 @@ import DoubleCheckIcon from "./DoubleCheckIcon";
 import DownloadIcon from "./DownloadIcon";
 import EmojiIcon from "./EmojiIcon";
 import ExpanderIcon from "./ExpanderIcon.";
+import EyeClose from "./EyeClose";
+import EyeOpen from "./EyeOpen";
 import FailedIcon from "./FailedIcon";
 import FileIcon from "./FileIcon";
 import FilterIcon from "./FilterIcon";
@@ -20,6 +22,7 @@ import HeadsetIcon from "./HeadsetIcon";
 import HelpIcon from "./HelpIcon";
 import ImageIcon from "./ImageIcon";
 import InfoIcon from "./InfoIcon";
+import LogoutIcon from "./LogoutIcon";
 import MergeIcon from "./MergeIcon";
 import NotificationIcon from "./NotificationIcon";
 import PaperPlaneIcon from "./PaperPlaneIcon";
@@ -41,8 +44,10 @@ import TagIcon from "./TagIcon";
 import TrashIcon from "./TrashIcon";
 import WarningIcon from "./WarningIcon";
 import XIcon from "./XIcon";
-
 export {
+  LogoutIcon,
+  EyeOpen,
+  EyeClose,
   ClockIcon,
   ChevronUpIcon,
   WarningIcon,
