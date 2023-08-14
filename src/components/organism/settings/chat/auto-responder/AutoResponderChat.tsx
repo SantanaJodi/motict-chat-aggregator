@@ -8,8 +8,8 @@ import AutoResponderChatModel from "./AutoResponderChatModel";
 interface AutoResponderChatProps {}
 
 const AutoResponderChat: React.FC<AutoResponderChatProps> = () => {
-  const { formModule, onSaveChange } = AutoResponderChatModel();
-
+  const { formModule, confirmModal, handleConfirmModal, onSaveChange } =
+    AutoResponderChatModel();
   const fields = formModule.watch();
 
   return (
@@ -72,6 +72,7 @@ const AutoResponderChat: React.FC<AutoResponderChatProps> = () => {
                 disabled={!fields.autoWhenOffline}
               />
               <Button
+                type="submit"
                 label="Save Settings"
                 variant="primary"
                 color="#323944"

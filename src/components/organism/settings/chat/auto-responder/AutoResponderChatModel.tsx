@@ -23,9 +23,17 @@ const AutoResponderChatModel = () => {
     toast.success("Changes saved");
   };
 
+  const handleConfirmModal = (val: boolean) => {
+    update((s) => {
+      s.confirmModal = val;
+    });
+  };
+
   return {
     formModule,
+    confirmModal,
     onSaveChange,
+    handleConfirmModal,
   };
 };
 
