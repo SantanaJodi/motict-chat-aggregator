@@ -1,19 +1,43 @@
 "use client";
 
-import { useMutation } from "react-query";
-import { LoginApi } from "../api/login-api";
-import { useForm } from "react-hook-form";
-import { IReqLogin } from "../types/login-type";
 import { useAuthContext } from "@/src/hooks/auth-context";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation } from "react-query";
+import * as z from "zod";
+import { LoginApi } from "../api/login-api";
+import { IReqLogin } from "../types/login-type";
 
 const { loginFn } = LoginApi();
+
+const schema = z.object({
+  email: z.string({
+    invalid_type_error: "Check your email",
+  }),
+  password: z.string({
+    invalid_type_error: "Check your password",
+  }),
+});
 
 export const LoginViewModel = () => {
   const router = useRouter();
   const { handleSetToken } = useAuthContext();
-  const { mutateAsync: loginAsync } = useMutation("loginFn", (req: IReqLogin) =>
-    loginFn(req)
+  const { mutateAsync: loginAsync, isLoading } = useMutation(
+    "loginFn",
+    (req: IReqLogin) =>
+      loginFn(req).then((res) => {
+        handleSetToken(res?.data?.data?.token);
+      }),
+    {
+      onError: (err) => {
+        toast.error("Wrong email / password combination");
+      },
+      onSuccess: () => {
+        router.replace("/");
+      },
+    }
   );
 
   const formModule = useForm<IReqLogin>({
@@ -21,13 +45,12 @@ export const LoginViewModel = () => {
       email: "",
       password: "",
     },
+    resolver: zodResolver(schema),
   });
 
   const handleLogin = async (val: IReqLogin) => {
-    const res = await loginAsync(val);
-    handleSetToken(res?.data?.data?.token);
-    router.replace("/");
+    await loginAsync(val);
   };
 
-  return { formModule, handleLogin };
+  return { formModule, isLoading, handleLogin };
 };

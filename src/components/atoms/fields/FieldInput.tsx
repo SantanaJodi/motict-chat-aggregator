@@ -4,7 +4,8 @@ import React from "react";
 import { useController } from "react-hook-form";
 import { TextInput, TextInputProps } from "../input";
 
-interface FieldInputProps extends Omit<TextInputProps, "value" | "onChange"> {
+export interface FieldInputProps
+  extends Omit<TextInputProps, "value" | "onChange"> {
   name: string;
   label?: string;
   hints?: string;
