@@ -1,16 +1,18 @@
 "use client";
 
 import {
-  BroadcastIcon,
   ChartIcon,
   ChatIcon,
   HelpIcon,
+  LogoutIcon,
   PeoplesIcon,
   SettingsIcon,
 } from "@/public/icons/outline";
 import { clsx } from "clsx";
 import React, { useState } from "react";
 import { ISidebarMenuItem, SidebarHeader, SidebarMenu } from "../../molecules";
+import { LogoutModal } from "../../molecules/modal";
+import { useAuthContext } from "@/src/hooks/auth-context";
 
 interface SidebarProps {
   isExpand?: boolean;
@@ -54,6 +56,11 @@ const Sidebar: React.FC<SidebarProps> = () => {
       label: "Help",
       Icon: HelpIcon,
     },
+    {
+      path: "/logout",
+      label: "Log Out",
+      Icon: LogoutIcon,
+    },
     // EXCLUDED SINCE STILL CONSIDERED BY MAS RENDI
     // {
     //   path: "/notification",
@@ -66,6 +73,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
     //   Icon: ProfileIcon,
     // },
   ];
+  const { handleLogoutModal, logoutModal } = useAuthContext();
 
   return (
     <div
@@ -82,6 +90,10 @@ const Sidebar: React.FC<SidebarProps> = () => {
         <SidebarMenu items={main} collapsed={collapsed} isMain />
         <SidebarMenu items={secondary} collapsed={collapsed} />
       </div>
+      <LogoutModal
+        visible={logoutModal}
+        onClose={() => handleLogoutModal(false)}
+      />
     </div>
   );
 };
