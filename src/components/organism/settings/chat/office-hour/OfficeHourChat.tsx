@@ -7,18 +7,13 @@ import {
 } from "@/src/components/atoms";
 import { ListChatSchedule } from "@/src/components/molecules";
 import { DevTool } from "@hookform/devtools";
-import React, { useState } from "react";
+import React from "react";
 import { FormProvider } from "react-hook-form";
-import { allTimezones } from "react-timezone-select";
 import OfficeHourChatModel from "./OfficeHourChatModel";
-console.log("🚀 -> allTimezones:", allTimezones);
 interface OfficeHourChatProps {}
 
 const OfficeHourChat: React.FC<OfficeHourChatProps> = () => {
   const { formModule, onSaveSetting } = OfficeHourChatModel();
-  const [selectedTimezone, setSelectedTimezone] = useState(
-    Intl.DateTimeFormat().resolvedOptions().timeZone
-  );
 
   return (
     <Dropdown title="Office Hour">

@@ -4,6 +4,11 @@ export interface TableProps<T> {
   table: ReactTable<T>;
   data: T[];
   onRowClick?: (row: Row<T>) => void;
+  // TODO:find best practices later
+  className?: {
+    key: string;
+    classes: string;
+  };
 }
 
 export interface IRowSelectOption {

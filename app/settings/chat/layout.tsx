@@ -1,7 +1,7 @@
 "use client";
 import { Filter } from "@/src/components/atoms/tag";
-import { useRouter } from "next/navigation";
-import React, { PropsWithChildren, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { PropsWithChildren } from "react";
 
 interface ChatSettingsLayoutProps extends PropsWithChildren {}
 
@@ -20,7 +20,7 @@ const ChatSettingsLayout: React.FC<ChatSettingsLayoutProps> = ({
   children,
 }) => {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState(TABS[0]);
+  const pathname = usePathname();
 
   return (
     <div className="w-full h-full bg-white overflow-y-auto">
@@ -31,16 +31,13 @@ const ChatSettingsLayout: React.FC<ChatSettingsLayoutProps> = ({
             <Filter
               key={item.label}
               label={item.label}
-              isActive={item === activeTab}
-              onClick={() => {
-                router.push(item.path);
-                setActiveTab(item);
-              }}
+              isActive={item.path === pathname}
+              onClick={() => router.push(item.path)}
             />
           ))}
         </div>
       </div>
-      <div>{children}</div>
+      <div className="w-full h-full">{children}</div>
     </div>
   );
 };

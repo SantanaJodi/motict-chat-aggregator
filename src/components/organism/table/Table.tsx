@@ -1,6 +1,7 @@
 "use client";
 
 import { flexRender } from "@tanstack/react-table";
+import clsx from "clsx";
 import TablePagination from "./TablePagination";
 import { TableProps } from "./table-type";
 
@@ -8,6 +9,7 @@ const Table = <T extends object>({
   table,
   data,
   onRowClick,
+  className,
 }: TableProps<T>) => {
   return (
     <div className="w-full flex flex-col justify-between h-full overflow-auto">
@@ -15,11 +17,15 @@ const Table = <T extends object>({
         <thead className="bg-[#EEF5FF] sticky top-0">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
+              {headerGroup.headers.map((header: any) => {
+                const key = header.column.columnDef.accessorKey;
                 return (
                   <th
                     key={header.id}
-                    className=" p-6 text-left text-[14px] leading-[18.23px] font-bold text-[#323944]"
+                    className={clsx(
+                      " p-6 text-left text-[14px] leading-[18.23px] font-bold text-[#323944]",
+                      className?.key === key && className?.classes
+                    )}
                   >
                     {header.isPlaceholder
                       ? null
@@ -45,11 +51,15 @@ const Table = <T extends object>({
                   }
                 }}
               >
-                {row.getVisibleCells().map((cell) => {
+                {row.getVisibleCells().map((cell: any) => {
+                  const key = cell.column.columnDef.accessorKey;
                   return (
                     <td
                       key={cell.id}
-                      className="p-6 text-left text-[14px] leading-[18.23px]  text-[#323944]"
+                      className={clsx(
+                        "p-6 text-left text-[14px] leading-[18.23px]  text-[#323944]",
+                        className?.key === key && className?.classes
+                      )}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
