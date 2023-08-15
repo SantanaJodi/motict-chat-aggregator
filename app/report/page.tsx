@@ -1,5 +1,7 @@
+import ReportGeneralView from "@/src/modules/report/view/general/ReportGeneralView";
+
 const ReportPage = () => {
-  return <h1>Report Page</h1>;
+  return <ReportGeneralView />;
 };
 
 export default ReportPage;
