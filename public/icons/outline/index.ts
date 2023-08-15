@@ -10,6 +10,8 @@ import ChevronUpIcon from "./ChevronUpIcon";
 import CircleCheckIcon from "./CircleCheckIcon";
 import ClockIcon from "./ClockIcon";
 import DoubleCheckIcon from "./DoubleCheckIcon";
+import DoubleChevronLeftIcon from "./DoubleChevronLeftIcon";
+import DoubleChevronRightIcon from "./DoubleChevronRightIcon";
 import DownloadIcon from "./DownloadIcon";
 import EmojiIcon from "./EmojiIcon";
 import ExpanderIcon from "./ExpanderIcon.";
@@ -45,6 +47,8 @@ import TrashIcon from "./TrashIcon";
 import WarningIcon from "./WarningIcon";
 import XIcon from "./XIcon";
 export {
+  DoubleChevronRightIcon,
+  DoubleChevronLeftIcon,
   LogoutIcon,
   EyeOpen,
   EyeClose,
