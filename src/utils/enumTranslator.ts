@@ -1,4 +1,5 @@
 import { StatusEnum } from "../components/organism/chatroom/messages/types/MessagesTypes";
+import { UserTypeEnum } from "../modules/report/types/report-general-type";
 
 export const StatusEnumTranslator = (item: StatusEnum) => {
   switch (item) {
@@ -14,5 +15,16 @@ export const StatusEnumTranslator = (item: StatusEnum) => {
       return "Resolved";
     case StatusEnum.WAITING:
       return "Waiting";
+  }
+};
+
+export const UsertTypeEnumTranslator = (item: UserTypeEnum) => {
+  switch (item) {
+    case UserTypeEnum.ADMIN:
+      return "Admin";
+    case UserTypeEnum.AGENT:
+      return "Agent";
+    case UserTypeEnum.CUSTOMER:
+      return "Customer";
   }
 };
