@@ -1,3 +1,4 @@
+"use client";
 import clsx from "clsx";
 import { Categories, EmojiStyle } from "emoji-picker-react";
 import dynamic from "next/dynamic";
