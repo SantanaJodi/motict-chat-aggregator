@@ -23,7 +23,7 @@ const ChatSettingsLayout: React.FC<ChatSettingsLayoutProps> = ({
   const pathname = usePathname();
 
   return (
-    <div className="w-full h-full bg-white overflow-y-auto">
+    <div className="w-full h-full bg-white overflow-y-auto flex flex-col">
       <div className="p-6 border-b border-[#EEF5FF] flex flex-col gap-6">
         <h2 className="font-bold text-xl text-[#0D0F12]">Chat</h2>
         <div className="flex flex-row items-center gap-4">
@@ -37,7 +37,7 @@ const ChatSettingsLayout: React.FC<ChatSettingsLayoutProps> = ({
           ))}
         </div>
       </div>
-      <div className="w-full h-full">{children}</div>
+      <div className="w-full h-full flex flex-col">{children}</div>
     </div>
   );
 };

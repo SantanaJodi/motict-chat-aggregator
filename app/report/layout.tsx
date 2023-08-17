@@ -9,9 +9,9 @@ const ReportViewLayout: React.FC<ReportViewLayoutProps> = ({ children }) => {
   return (
     <Container>
       <ReportContextProvider>
-        <div className="w-full h-full bg-white overflow-y-auto">
+        <div className="w-full h-full flex flex-col bg-white overflow-y-auto">
           <ReportHeader />
-          <div className="w-full h-full">{children}</div>
+          <div className="w-full h-full flex flex-col">{children}</div>
         </div>
       </ReportContextProvider>
     </Container>
