@@ -1,0 +1,102 @@
+{
+    "new_conversation_per_agent": [
+        {
+            "agent": "Kirk Pollich",
+            "total": 67
+        },
+        {
+            "agent": "Elena Schultz",
+            "total": 58
+        },
+        {
+            "agent": "Pauline Strosin",
+            "total": 27
+        },
+        {
+            "agent": "Stephanie Cassin",
+            "total": 15
+        }
+    ],
+    "resolved_conversation_per_agent": [
+        {
+            "agent": "Kirk Pollich",
+            "total": 67
+        },
+        {
+            "agent": "Elena Schultz",
+            "total": 58
+        },
+        {
+            "agent": "Pauline Strosin",
+            "total": 27
+        },
+        {
+            "agent": "Stephanie Cassin",
+            "total": 15
+        }
+    ],
+    "agent_division": [
+        {
+            "division": "Operation",
+            "total": 67
+        },
+        {
+            "division": "Campaign",
+            "total": 67
+        }
+    ],
+    "average_resolve_time_per_agent": [
+        {
+            "agent": "Kirk Pollich",
+            "duration": 5
+        },
+        {
+            "agent": "Elena Schultz",
+            "duration": 68
+        },
+        {
+            "agent": "Pauline Strosin",
+            "duration": 402
+        },
+        {
+            "agent": "Stephanie Cassin",
+            "duration": 542
+        }
+    ],
+    "average_resolve_time_per_agent_week": [
+        {
+            "agent": "Kirk Pollich",
+            "duration": 5
+        },
+        {
+            "agent": "Elena Schultz",
+            "duration": 68
+        },
+        {
+            "agent": "Pauline Strosin",
+            "duration": 402
+        },
+        {
+            "agent": "Stephanie Cassin",
+            "duration": 542
+        }
+    ],
+    "average_first_response_time_per_agent": [
+        {
+            "agent": "Kirk Pollich",
+            "duration": 5
+        },
+        {
+            "agent": "Elena Schultz",
+            "duration": 68
+        },
+        {
+            "agent": "Pauline Strosin",
+            "duration": 402
+        },
+        {
+            "agent": "Stephanie Cassin",
+            "duration": 542
+        }
+    ]
+}
