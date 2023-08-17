@@ -40,6 +40,7 @@ const flexRow = "flex flex-row items-center flex-shrink-0";
 const TablePagination = <T extends object>({
   table,
   data,
+  hideRowsSelection,
 }: TablePaginationProps<T>) => {
   const [{ rows, toPage }, update] = useImmer<ITableState>({
     rows: rowSelectOption[0],
@@ -74,18 +75,20 @@ const TablePagination = <T extends object>({
   }, [pageIndex]);
 
   return (
-    <div className=" bg-white w-full p-6 flex flex-row items-center justify-between sticky bottom-0">
+    <div className=" bg-white w-full p-6 flex flex-row items-center justify-between absolute bottom-0">
       <p className={textClasses}>{paginationLabel}</p>
       <div className={clsx(flexRow, "gap-4")}>
-        <div className={clsx(flexRow, "gap-2")}>
-          <p className={textClasses}>Show</p>
-          <DropdownInput
-            options={rowSelectOption}
-            value={rows}
-            menuPlacement="top"
-            onChange={handleChangeShowRow}
-          />
-        </div>
+        {!hideRowsSelection && (
+          <div className={clsx(flexRow, "gap-2")}>
+            <p className={textClasses}>Show</p>
+            <DropdownInput
+              options={rowSelectOption}
+              value={rows}
+              menuPlacement="top"
+              onChange={handleChangeShowRow}
+            />
+          </div>
+        )}
         <Line isVertical />
         <div className={clsx(flexRow, "gap-4")}>
           <Button

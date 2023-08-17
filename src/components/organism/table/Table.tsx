@@ -10,10 +10,11 @@ const Table = <T extends object>({
   data,
   onRowClick,
   className,
+  hideRowsSelection,
 }: TableProps<T>) => {
   return (
-    <div className="w-full flex flex-col justify-between h-full overflow-auto">
-      <table className="w-full">
+    <div className="w-full flex flex-col justify-between h-full overflow-auto gap-20">
+      <table className="w-full mb-20">
         <thead className="bg-[#EEF5FF] sticky top-0">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -73,7 +74,11 @@ const Table = <T extends object>({
           })}
         </tbody>
       </table>
-      <TablePagination data={data} table={table} />
+      <TablePagination
+        data={data}
+        table={table}
+        hideRowsSelection={hideRowsSelection}
+      />
     </div>
   );
 };
