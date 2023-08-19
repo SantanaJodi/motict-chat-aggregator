@@ -41,7 +41,7 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
     enabled: !!selectedChat?.conversation_id,
   });
 
-  const { mutateAsync: setNotes } = useMutation(
+  const { mutateAsync: setNotes, isLoading: isLoadingNotes } = useMutation(
     ["setNotesFn", selectedChat?.conversation_id],
 
     {
@@ -159,6 +159,7 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
         setAgentModal,
         setAgent,
         setTags,
+        isLoadingNotes,
       }}
     >
       {children}
@@ -173,6 +174,7 @@ export interface ChatroomContextProps {
   setSelectedChat: (_v?: IChatroomDetail) => void;
   isExpanded?: boolean;
   agentModal?: boolean;
+  isLoadingNotes: boolean;
   setIsExpanded: (v: boolean) => void;
   setAgentModal: (v: boolean) => void;
   conversationDetail?: IConversationDetail;

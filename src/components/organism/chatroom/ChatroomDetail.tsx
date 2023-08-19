@@ -18,7 +18,7 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
   isExpanded,
   chatroomDetail,
 }) => {
-  const { setNotes } = useChatroomContext();
+  const { setNotes, isLoadingNotes } = useChatroomContext();
   const [tags, setTags] = useState<ISelectOpt[]>([]);
   return (
     <div
@@ -37,8 +37,9 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
           <ChatroomInfo conversationDetail={chatroomDetail} />
           <Line />
           <Note
+            isLoading={isLoadingNotes}
             notes={chatroomDetail?.notes}
-            onSave={async (value) => await setNotes(value)}
+            onSave={(value) => setNotes(value)}
           />
           <Line />
           <Tags

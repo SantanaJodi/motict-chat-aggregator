@@ -2,14 +2,16 @@
 
 import { PenIcon, SaveIcon } from "@/public/icons/outline";
 import { Button, IconButton, TextInput } from "@/src/components/atoms";
+import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
 import React, { useEffect, useState } from "react";
 
 interface NoteProps {
   notes?: string;
-  onSave: (value: string) => void;
+  onSave: (value: string) => Promise<IConversationDetail>;
+  isLoading: boolean;
 }
 
-const Note: React.FC<NoteProps> = ({ notes, onSave }) => {
+const Note: React.FC<NoteProps> = ({ notes, onSave, isLoading }) => {
   const [value, setValue] = useState(notes || "");
   const [isEdit, setIsEdit] = useState(false);
 
@@ -52,17 +54,17 @@ const Note: React.FC<NoteProps> = ({ notes, onSave }) => {
             className="flex-1"
           />
           <Button
+            disabled={isLoading}
             variant="primary"
             label="Save"
             Icon={SaveIcon}
             size="small"
             color="#323944"
-            onClick={() => {
-              onSave(value);
+            onClick={async () => {
+              await onSave(value);
               setIsEdit(false);
             }}
             className="flex-1"
-            disabled={!value}
           />
         </div>
       </div>
