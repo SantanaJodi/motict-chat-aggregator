@@ -1,4 +1,5 @@
 "use client";
+
 import type { ChartData } from "chart.js";
 import React from "react";
 import { Line } from "react-chartjs-2";
