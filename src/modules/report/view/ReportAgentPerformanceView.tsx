@@ -3,6 +3,7 @@
 import {
   ChatTime,
   FailedToLoad,
+  LineChartDailyConversation,
   Loading,
   TableAverageFirstResponseTimePerAgent,
   TableAverageResolveTimePerAgent,
@@ -38,6 +39,10 @@ const ReportAgentPerformanceView: React.FC<
           data={data?.resolved_conversation_per_agent}
         />
       </div>
+      <ChatTime time="Daily Conversation per Agent" />
+      <div>
+        <LineChartDailyConversation />
+      </div>
       <ChatTime time="Miscellaneous" />
       <div className="grid grid-cols-2 gap-4">
         <TableAverageResolveTimePerAgent
@@ -47,9 +52,11 @@ const ReportAgentPerformanceView: React.FC<
           data={data?.average_resolve_time_per_agent_week}
         />
       </div>
-      <TableAverageFirstResponseTimePerAgent
-        data={data?.average_first_response_time_per_agent}
-      />
+      <div className="w-full pb-6">
+        <TableAverageFirstResponseTimePerAgent
+          data={data?.average_first_response_time_per_agent}
+        />
+      </div>
     </div>
   );
 };
