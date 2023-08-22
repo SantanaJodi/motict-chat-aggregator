@@ -1,5 +1,7 @@
 import AttachFile from "./AttachFile";
+import Bubble from "./Bubble";
 import EmojiPicker from "./EmojiPicker";
 import SessionBubble from "./SessionBubble";
 
-export { AttachFile, EmojiPicker, SessionBubble };
+export * from "./Bubble";
+export { AttachFile, EmojiPicker, SessionBubble, Bubble };

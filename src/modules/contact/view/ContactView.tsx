@@ -41,7 +41,7 @@ const ContactView: React.FC<ContactViewProps> = ({ contact }) => {
           onSelectChannel={handleChangeChannel}
           onDeleteContact={() => handleDeleteModal(true)}
         />
-        <div className="w-full h-[calc(100%_-_150px)] relative">
+        <div className="w-full flex flex-grow relative">
           <div className="absolute w-full h-full">
             <Table table={table} data={data} />
           </div>

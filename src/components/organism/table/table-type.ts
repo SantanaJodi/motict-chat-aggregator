@@ -9,6 +9,7 @@ export interface TableProps<T> {
     key: string;
     classes: string;
   };
+  hideRowsSelection?: boolean;
 }
 
 export interface IRowSelectOption {

@@ -1,7 +1,11 @@
 "use client";
 
 import { ChevronDownIcon, XIcon } from "@/public/icons/outline";
-import Select, { MultiValueRemoveProps, components } from "react-select";
+import Select, {
+  GetOptionLabel,
+  MultiValueRemoveProps,
+  components,
+} from "react-select";
 
 export interface DropdownInputProps<T> {
   placeholder?: string;
@@ -10,6 +14,7 @@ export interface DropdownInputProps<T> {
   value: any;
   isMulti?: boolean;
   menuPlacement?: "auto" | "bottom" | "top";
+  customLabel?: GetOptionLabel<any>;
 }
 
 const DropdownIndicator = () => <ChevronDownIcon className="cursor-pointer" />;
@@ -27,6 +32,7 @@ const DropdownInput = <T extends any>({
   onChange,
   value,
   menuPlacement,
+  customLabel,
 }: DropdownInputProps<T>) => {
   return (
     <Select
@@ -41,6 +47,7 @@ const DropdownInput = <T extends any>({
         DropdownIndicator,
         MultiValueRemove,
       }}
+      getOptionLabel={customLabel}
       menuPlacement={menuPlacement}
       styles={{
         control: (base) => ({

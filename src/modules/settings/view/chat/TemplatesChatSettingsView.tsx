@@ -35,8 +35,8 @@ const TemplatesChatSettingsView: React.FC<
   } = TemplateChatSettingsViewModel();
 
   return (
-    <div className="flex flex-col  w-full h-full">
-      <div className="flex flex-row item gap-4 p-6">
+    <div className="flex flex-col w-full h-full gap-0">
+      <div className="flex flex-row item gap-4 p-6 flex-shrink-0">
         <TextInput
           value={search}
           onChange={handleSearch}
@@ -51,7 +51,7 @@ const TemplatesChatSettingsView: React.FC<
           onClick={handleAddNewTemplate}
         />
       </div>
-      <div className="relative flex flex-col w-full flex-1">
+      <div className="relative flex flex-col w-full flex-grow">
         <Table
           table={table}
           data={data}
