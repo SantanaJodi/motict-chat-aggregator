@@ -1,0 +1,69 @@
+{
+    "total_conversation": 19021,
+    "total_unserved_conversation": 2341,
+    "total_served_conversation": 1452,
+    "total_resolved_conversataion": 10231,
+    "list_of_agents": [
+        {
+            "id": 1,
+            "name": "Marchel SIahaan",
+            "status": 2,
+            "lastLogin": "8/16/2023, 2:13:21 PM",
+            "conversation": 3
+        },
+        {
+            "id": 2,
+            "name": "Santoso Nursiwan Mahadetya",
+            "status": 2,
+            "lastLogin": "8/16/2023, 2:13:21 PM",
+            "conversation": 1
+        },
+        {
+            "id": 3,
+            "name": "Karin Mahalena",
+            "status": 1,
+            "lastLogin": "8/16/2023, 2:13:21 PM",
+            "conversation": 0
+        },
+        {
+            "id": 4,
+            "name": "Goyang Simalakama",
+            "status": 1,
+            "lastLogin": "8/16/2023, 2:13:21 PM",
+            "conversation": 0
+        },
+        {
+            "id": 5,
+            "name": "Mantap Jaya",
+            "status": 1,
+            "lastLogin": "8/16/2023, 2:13:21 PM",
+            "conversation": 0
+        }
+    ],
+    "agent_first_response_time": 145,
+    "agent_and_supervisor": 5,
+    "monthly_active_user": 70,
+    "list_mau": [
+        {
+            "id": 1,
+            "last_active": "07 December 2022",
+            "user_id": "Shanelle_Corkery@@wikitoko.com",
+            "username": "Kathryn Luettgen",
+            "type": 2
+        },
+        {
+            "id": 2,
+            "last_active": "05 December 2022",
+            "user_id": "Davion.Wolff@@wikitoko.com",
+            "username": "Wilbur Considine",
+            "type": 3
+        },
+        {
+            "id": 3,
+            "last_active": "07 December 2022",
+            "user_id": "01 December 2022",
+            "username": "Alfredo.Upton@@wikitoko.com",
+            "type": 1
+        }
+    ]
+}

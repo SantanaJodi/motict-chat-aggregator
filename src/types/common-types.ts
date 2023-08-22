@@ -16,3 +16,8 @@ export interface PaginateResponseDTO<T> {
   next: string;
   prev: string;
 }
+
+export interface IDateRange {
+  start?: Date | null;
+  end?: Date | null;
+}
