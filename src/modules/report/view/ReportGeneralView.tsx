@@ -7,8 +7,9 @@ import {
   TableListMAU,
   TableListOfAgent,
 } from "@/src/components";
+import { getMinuteSecond } from "@/src/utils";
 import React from "react";
-import ReportGeneralViewModel from "../../model/ReportGeneralViewModel";
+import ReportGeneralViewModel from "../model/ReportGeneralViewModel";
 
 interface ReportGeneralViewProps {}
 
@@ -55,9 +56,7 @@ const ReportGeneralView: React.FC<ReportGeneralViewProps> = () => {
         <div className="grid grid-cols-2 grid-rows-2 gap-4">
           <NumberReportCard
             title="Agent First Response Time"
-            value={`${Math.floor(
-              (data?.agent_first_response_time || 0) / 60
-            )} mins ${(data?.agent_first_response_time || 0) % 60} secs`}
+            value={getMinuteSecond(data?.agent_first_response_time)}
             anchor="response_time"
             text="Showing the average agent’s response timeto a newly assigned conversation (in the past 30 days)."
           />

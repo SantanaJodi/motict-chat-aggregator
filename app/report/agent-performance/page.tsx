@@ -1,4 +1,4 @@
-import ReportAgentPerformanceView from "@/src/modules/report/view/agent-performance/ReportAgentPerformanceView";
+import ReportAgentPerformanceView from "@/src/modules/report/view/ReportAgentPerformanceView";
 
 const ReportPage = () => {
   return <ReportAgentPerformanceView />;

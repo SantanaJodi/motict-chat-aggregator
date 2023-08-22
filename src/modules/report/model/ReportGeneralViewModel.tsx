@@ -1,3 +1,4 @@
+"use client";
 import { useQuery } from "react-query";
 import { IReportGeneral } from "../types/report-general-type";
 import dummyReport from "./dummy-report-general.json";
