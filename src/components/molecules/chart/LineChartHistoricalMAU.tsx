@@ -60,6 +60,7 @@ const LineChartHistoricalMAU: React.FC<LineChartHistoricalMAUProps> = () => {
           labels={labels}
           datasets={[{ data }]}
           tooltip={historicalMAUTooltip}
+          showLegend={false}
         />
       </div>
       <Bubble
