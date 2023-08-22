@@ -3,11 +3,18 @@
 import type { ChartData } from "chart.js";
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { externalTooltipHandler } from "./tooltipExternal";
 
-interface LineChartProps extends ChartData<"line"> {}
+interface LineChartProps extends ChartData<"line"> {
+  tooltip: (context: any) => void;
+  showLegend?: boolean;
+}
 
-const LineChart: React.FC<LineChartProps> = ({ datasets, labels }) => {
+const LineChart: React.FC<LineChartProps> = ({
+  datasets,
+  labels,
+  tooltip,
+  showLegend,
+}) => {
   return (
     <Line
       options={{
@@ -18,7 +25,7 @@ const LineChart: React.FC<LineChartProps> = ({ datasets, labels }) => {
         },
         datasets: {
           line: {
-            borderWidth: 1,
+            borderWidth: 2,
             borderColor: "#0D0F12",
             pointBackgroundColor: "#0D0F12",
             pointBorderWidth: 0,
@@ -44,39 +51,34 @@ const LineChart: React.FC<LineChartProps> = ({ datasets, labels }) => {
           },
         },
         plugins: {
+          legend: {
+            display: showLegend,
+            position: "top",
+            align: "start",
+            textDirection: "center",
+            labels: {
+              boxWidth: 8,
+              boxHeight: 8,
+              pointStyle: "circle",
+              usePointStyle: true,
+              textAlign: "center",
+              padding: 10,
+              font: {
+                family: "DM Sans, sans-serif",
+                size: 14,
+                lineHeight: 18,
+              },
+            },
+            onHover: (item, e, legend) => {
+              // console.log("🚀 -> legend:", legend.chart.updateHoverStyle);
+              // console.log("🚀 -> e:", e);
+              // console.log("🚀 -> item:", item);
+            },
+          },
           tooltip: {
             enabled: false,
             position: "nearest",
-            backgroundColor: "#323944",
-            external: (props) => {
-              externalTooltipHandler(props);
-            },
-            // external: (chart) => {
-            //   const tooltipEl =
-            //     chart?.chart?.canvas?.parentNode?.querySelector("div");
-
-            //   if (tooltipEl) {
-            //     tooltipEl.style.background = "rgba(0, 0, 0, 0.7)";
-            //     tooltipEl.style.borderRadius = "3px";
-            //     tooltipEl.style.color = "white";
-            //     tooltipEl.style.opacity = "1";
-            //     tooltipEl.style.pointerEvents = "none";
-            //     tooltipEl.style.position = "absolute";
-            //     tooltipEl.style.transform = "translate(-50%, 0)";
-            //     tooltipEl.style.transition = "all .1s ease";
-            //   }
-
-            //   const start = parse(
-            //     chart.tooltip.dataPoints[0].label,
-            //     "MMM yyyy",
-            //     new Date()
-            //   );
-
-            //   const p = document.createElement("p");
-            //   p.innerHTML = format(start, "dd MM yyyy");
-
-            //   tooltipEl?.appendChild(p);
-            // },
+            external: tooltip,
           },
         },
       }}
