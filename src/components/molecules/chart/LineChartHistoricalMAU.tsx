@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 import { eachMonthOfInterval, format, subYears } from "date-fns";
 import React, { useMemo } from "react";
-import { IconButton, LineChart } from "../../atoms";
+import { IconButton, LineChart, historicalMAUTooltip } from "../../atoms";
 import { Bubble } from "../popup";
 
 interface LineChartHistoricalMAUProps {}
@@ -55,7 +55,13 @@ const LineChartHistoricalMAU: React.FC<LineChartHistoricalMAUProps> = () => {
         color="#67768B"
         size="small"
       />
-      <LineChart labels={labels} datasets={[{ data }]} />
+      <div>
+        <LineChart
+          labels={labels}
+          datasets={[{ data }]}
+          tooltip={historicalMAUTooltip}
+        />
+      </div>
       <Bubble
         anchor="last_year_MAU"
         text="Showing the historical number of active users on each period, starting from First Time App Active or last 1 year."
