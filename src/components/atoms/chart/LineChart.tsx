@@ -15,8 +15,20 @@ const LineChart: React.FC<LineChartProps> = ({
   tooltip,
   showLegend,
 }) => {
+  const legendMargin = {
+    id: "legendMargin",
+    beforeInit: function (chart: any) {
+      const originalFit = chart.legend.fit;
+      chart.legend.fit = function fit() {
+        originalFit.bind(chart.legend)();
+        this.height += 20;
+      };
+    },
+  };
+
   return (
     <Line
+      plugins={[legendMargin]}
       options={{
         responsive: true,
         borderColor: "#fff",
@@ -62,17 +74,33 @@ const LineChart: React.FC<LineChartProps> = ({
               pointStyle: "circle",
               usePointStyle: true,
               textAlign: "center",
-              padding: 10,
+              padding: 15,
               font: {
                 family: "DM Sans, sans-serif",
                 size: 14,
                 lineHeight: 18,
               },
             },
-            onHover: (item, e, legend) => {
-              // console.log("🚀 -> legend:", legend.chart.updateHoverStyle);
-              // console.log("🚀 -> e:", e);
-              // console.log("🚀 -> item:", item);
+            onHover: function (evt, item, legend) {
+              const index = item?.datasetIndex as number;
+              legend.chart.data.datasets.forEach((d, id) => {
+                if (id === index) return item;
+                d.borderColor += "2b";
+                d.pointBackgroundColor += "2b";
+              });
+              legend.chart.update();
+            },
+            onLeave: function (evt, item, legend) {
+              const index = item?.datasetIndex as number;
+              legend.chart.data.datasets.forEach((d, id) => {
+                if (id !== index) {
+                  d.borderColor = d.borderColor?.toString().slice(0, -2);
+                  d.pointBackgroundColor = d.pointBackgroundColor
+                    ?.toString()
+                    .slice(0, -2);
+                }
+              });
+              legend.chart.update();
             },
           },
           tooltip: {
