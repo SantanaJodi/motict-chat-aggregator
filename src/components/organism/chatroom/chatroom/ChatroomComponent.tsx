@@ -10,7 +10,7 @@ import React, { useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StatesContainer from "../../StatesContainer";
 import { IChatroomDetail } from "../messages/types/MessagesTypes";
-import { ChatroomViewModel } from "./viewModel/ChatRoomViewModel";
+import { flatten } from "lodash";
 
 interface ChatroomComponentProps {
   chatroomDetail?: IConversationDetail;
@@ -26,38 +26,38 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
   selectedChat,
 }) => {
   const {
+    conversationDetail,
     chatroomDetails,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
+    fetchNextPageMessages,
+    isLoadingMessages,
+    hasNextPageMessages,
     messageHeader,
-  } = ChatroomViewModel({ selectedChat: selectedChat });
-
-  const { conversationDetail } = useChatroomContext();
+  } = useChatroomContext();
 
   const messageChats = useMemo(() => {
     const component = [] as any;
     Object.keys(chatroomDetails).forEach((t, y) => {
       component.push(
         <>
-          <ChatTime time={t} />
           <div className="flex flex-col gap-2">
             {chatroomDetails[t].map((c) => (
               <ChatCard
                 key={c.id}
                 // TODO: fix this a
                 status={c.status as any}
-                isSelf={c.is_agent}
+                isSelf={c.status == "sent" || c.status == "sending"}
                 chat={{
                   // TODO: fix this
                   timestamp: c.send_time as any,
                   username: c.from_user_name,
                   message: c.text,
+                  images: c.media_url,
                 }}
                 hideUsername={c.is_agent}
               />
             ))}
           </div>
+          <ChatTime time={t} />
         </>
       );
     });
@@ -77,27 +77,36 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
       )}
 
       <div className="h-full w-full flex flex-col justify-between relative">
-        <div className="p-6 pr-14 flex flex-col gap-6 w-full overflow-y-auto  mb-40">
-          {/*TODO APIN: Groups chat by time and divide using ChatTime component */}
+        <div
+          id="chats"
+          className="p-6 pr-14 flex flex-col-reverse  w-full overflow-y-auto mb-40"
+        >
+          {/* <div className="flex flex-col-reverse  w-full overflow-y-auto"> */}
           <InfiniteScroll
-            dataLength={Object.keys(chatroomDetails).length}
-            next={fetchNextPage}
+            dataLength={flatten(Object.values(chatroomDetails)).length}
+            next={fetchNextPageMessages}
+            style={{
+              display: "flex",
+              flexDirection: "column-reverse",
+              overflowY: "hidden",
+            }}
             loader={<Loading />}
-            hasMore={hasNextPage || false}
+            hasMore={hasNextPageMessages || false}
+            scrollableTarget="chats"
             inverse={true}
           >
             {messageChats}
           </InfiniteScroll>
+          {/* </div> */}
         </div>
 
         <ChatProperties
-          onSend={() => alert("send...")}
           isExpired={chatroomDetail?.session.text === "Expired"}
         />
 
         {/* STATES */}
         <StatesContainer
-          isLoading={isFetching}
+          isLoading={isLoadingMessages}
           isEmpty={!chatroomDetail?.conversation_id}
           // isError={error}
           emptyMsg="Choose chatroom from the left sidebar"

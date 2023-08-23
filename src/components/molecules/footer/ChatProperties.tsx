@@ -9,16 +9,27 @@ import {
 import React, { useState } from "react";
 import { IconButton } from "../../atoms";
 import { AttachFile, EmojiPicker } from "../popup";
+import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
 
 interface ChatPropertiesProps {
-  onSend: (value: string) => void;
   isExpired: boolean;
 }
 
 const ChatProperties: React.FC<ChatPropertiesProps> = ({ isExpired }) => {
+  const { sendMessage } = useChatroomContext();
   const [value, setValue] = useState("");
   const [emoji, setEmoji] = useState(false);
   const [attachFile, setAttachFile] = useState(false);
+
+  const handleSend = async () => {
+    await sendMessage({
+      type: "text",
+      text: value,
+      file: null,
+    }).then((_) => {
+      setValue("");
+    });
+  };
 
   if (isExpired) {
     return (
@@ -56,7 +67,7 @@ const ChatProperties: React.FC<ChatPropertiesProps> = ({ isExpired }) => {
         className="bg-[#EEF5FF] px-4 py-2 h-[37px] rounded-lg w-full text-[#0D0F12] hover:bg-[#D7E4F5] placeholder:text-[#AABDD7] focus:outline-none"
       />
       <button className="bg-[#AABDD7] rounded-lg p-2 border-none">
-        <PaperPlaneIcon fill="#fff" />
+        <PaperPlaneIcon fill="#fff" onClick={handleSend} />
       </button>
 
       <EmojiPicker visible={emoji} onClose={() => setEmoji(false)} />
