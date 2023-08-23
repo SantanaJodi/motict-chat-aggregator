@@ -14,11 +14,6 @@ export const historicalMAUTooltip = (context: any) => {
 
   // Set Text
   if (tooltip.body) {
-    const tableRoot = tooltipEl.querySelector("table");
-    if (tableRoot) {
-      tableRoot.remove();
-    }
-
     const start = parse(
       chart.tooltip.dataPoints[0].label,
       "MMM yyyy",

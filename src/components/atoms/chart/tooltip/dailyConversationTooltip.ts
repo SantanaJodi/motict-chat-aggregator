@@ -14,18 +14,13 @@ export const dailyConversationTooltip = (context: any) => {
 
   // Set Text
   if (tooltip.body) {
-    console.log("is herere");
-
-    const tableRoot = tooltipEl.querySelector("table");
-    if (tableRoot) {
-      tableRoot.remove();
-    }
-
-    const start = parse(
+    const dates = parse(
       chart.tooltip.dataPoints[0].label,
-      "MMM yyyy",
+      "dd/MM/yyyy",
       new Date()
     );
+
+    const agentName = chart.tooltip.dataPoints[0].dataset.label;
 
     const agent = document.createElement("p");
     const date = document.createElement("p");
@@ -39,8 +34,8 @@ export const dailyConversationTooltip = (context: any) => {
     date.innerHTML = "Date: ";
     total.innerHTML = "Total Conversation: ";
 
-    agentBold.innerHTML = format(start, "dd MMM yyyy");
-    dateBold.innerHTML = format(addMonths(start, 1), "dd MMM yyyy");
+    agentBold.innerHTML = agentName;
+    dateBold.innerHTML = format(addMonths(dates, 1), "dd MMM yyyy");
     totalBold.innerHTML = tooltip.dataPoints?.[0]?.raw;
 
     agent.appendChild(agentBold);
