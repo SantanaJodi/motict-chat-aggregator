@@ -41,7 +41,18 @@ const ReportAgentPerformanceView: React.FC<
       </div>
       <ChatTime time="Daily Conversation per Agent" />
       <div>
-        <LineChartDailyConversation />
+        <LineChartDailyConversation
+          title="Daily New Conversations per Agent"
+          anchor="new_daily"
+          text="Showing the number of new conversation on each agent daily."
+        />
+      </div>
+      <div>
+        <LineChartDailyConversation
+          title="Daily Resolved Conversations per Agent"
+          anchor="resolved_daily"
+          text="Showing the number of resolved conversation on each agent daily."
+        />
       </div>
       <ChatTime time="Miscellaneous" />
       <div className="grid grid-cols-2 gap-4">
