@@ -30,3 +30,9 @@ export interface IConversationDetailSession {
   text: string;
   countdown_second: null;
 }
+
+export interface ISendMessageRequest {
+  file?: File | undefined | null;
+  type: "image" | "text";
+  text?: string;
+}

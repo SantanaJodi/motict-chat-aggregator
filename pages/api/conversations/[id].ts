@@ -23,7 +23,7 @@ export default async function handler(
       })
       .catch((err) => {
         const { status, data } = err.response;
-        console.log(status);
+
         return res.status(status).json(data);
       });
   } else {

@@ -33,4 +33,5 @@ export interface IMessagesData {
   text: string;
   send_time: Date;
   status: string;
+  media_url?: string;
 }
