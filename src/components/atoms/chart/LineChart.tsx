@@ -81,6 +81,7 @@ const LineChart: React.FC<LineChartProps> = ({
                 lineHeight: 18,
               },
             },
+            onClick: () => {},
             onHover: function (evt, item, legend) {
               const index = item?.datasetIndex as number;
               legend.chart.data.datasets.forEach((d, id) => {
