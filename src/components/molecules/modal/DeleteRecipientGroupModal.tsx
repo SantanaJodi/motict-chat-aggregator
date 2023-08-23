@@ -24,7 +24,7 @@ const DeleteRecipientGroupModal: React.FC<DeleteRecipientGroupModalProps> = ({
         onClick={onClose}
       />
       <Button
-        label="Go"
+        label="Delete"
         variant="primary"
         size="small"
         color="#C02716"
@@ -42,7 +42,7 @@ const DeleteRecipientGroupModal: React.FC<DeleteRecipientGroupModalProps> = ({
       visible={visible}
       footer={footerContent}
       width={480}
-      height={22657}
+      height={210}
     >
       <div className="pb-6">
         <p>{content}</p>

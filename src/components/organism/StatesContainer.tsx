@@ -1,3 +1,5 @@
+"use client";
+
 import { SearchIcon } from "@/public/icons/outline";
 import clsx from "clsx";
 import React, { useEffect } from "react";
@@ -13,8 +15,9 @@ interface StatesContainerProps {
   emptyMsg?: string;
   onReload: () => void;
   noResultMsg?: string;
-  EmptyIcon: any;
+  EmptyIcon?: any;
   disableErrorToast?: boolean;
+  className?: string;
 }
 
 const StatesContainer: React.FC<StatesContainerProps> = ({
@@ -27,6 +30,7 @@ const StatesContainer: React.FC<StatesContainerProps> = ({
   onReload,
   EmptyIcon,
   disableErrorToast,
+  className,
 }) => {
   useEffect(() => {
     if (disableErrorToast) return;
@@ -41,7 +45,7 @@ const StatesContainer: React.FC<StatesContainerProps> = ({
         !isEmpty && !isError && !isLoading && "hidden"
       )}
     >
-      <div className="mb-20 w-full">
+      <div className={clsx("mb-20 w-full", className)}>
         {isLoading ? (
           <Loading />
         ) : isError ? (

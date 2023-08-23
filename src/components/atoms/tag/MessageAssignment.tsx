@@ -11,7 +11,7 @@ export enum MessageAssignmentEnum {
 }
 
 interface MessageAssignmentProps {
-  type: MessageAssignmentEnum;
+  type: MessageAssignmentEnum | null;
 }
 
 const MessageAssignment: React.FC<MessageAssignmentProps> = ({ type }) => {
@@ -27,6 +27,9 @@ const MessageAssignment: React.FC<MessageAssignmentProps> = ({ type }) => {
         return ["#4ABF71", "Resolved"];
       case MessageAssignmentEnum.campaign:
         return ["#F0A22E", "Campaign"];
+
+      default:
+        return ["#8B9EB7", "Waiting"];
     }
   }, [type]);
 

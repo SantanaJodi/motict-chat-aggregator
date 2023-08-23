@@ -1,3 +1,4 @@
+"use client";
 import { DownloadIcon, SearchIcon, TrashIcon } from "@/public/icons/outline";
 import { IContact } from "@/src/modules/contact/types/contact-type";
 import { ISelectOpt } from "@/src/types";

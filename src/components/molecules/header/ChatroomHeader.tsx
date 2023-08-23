@@ -5,11 +5,14 @@ import clsx from "clsx";
 import React from "react";
 import { Button } from "../../atoms";
 import CustomerData from "../data/CustomerData";
+import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
+import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
 
 interface ChatroomHeaderProps {
   isResolved?: boolean;
   isChatExpanded?: boolean;
   onChatExpanded: () => void;
+  header?: IConversationDetail;
 }
 
 const flex = "flex flex-row items-center gap-6";
@@ -18,7 +21,9 @@ const ChatroomHeader: React.FC<ChatroomHeaderProps> = ({
   isResolved,
   isChatExpanded,
   onChatExpanded,
+  header,
 }) => {
+  const { setResolve } = useChatroomContext();
   return (
     <div
       className={clsx(
@@ -26,14 +31,14 @@ const ChatroomHeader: React.FC<ChatroomHeaderProps> = ({
         "bg-white pl-6 justify-between border-b border-[#EEF5FF]"
       )}
     >
-      <CustomerData agent={null} />
+      <CustomerData header={header} />
 
       <div className={flex}>
         <Button
           variant={isResolved ? "primary" : "ghost"}
           label={isResolved ? "Resolved" : "Resolve"}
           color={isResolved ? "#4ABF71" : "#0D0F12"}
-          onClick={() => alert("resolved")}
+          onClick={async () => await setResolve()}
         />
         <div
           onClick={onChatExpanded}

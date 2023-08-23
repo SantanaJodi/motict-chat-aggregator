@@ -1,15 +1,22 @@
 import AttachmentIcon from "./AttachmentIcon";
 import BroadcastIcon from "./BroadcastIcon";
+import CameraIcon from "./CameraIcon";
 import ChartIcon from "./ChartIcon";
 import ChatIcon from "./ChatIcon";
 import ChevronDownIcon from "./ChevronDownIcon";
 import ChevronLeftIcon from "./ChevronLeftIcon";
 import ChevronRightIcon from "./ChevronRightIcon";
+import ChevronUpIcon from "./ChevronUpIcon";
 import CircleCheckIcon from "./CircleCheckIcon";
+import ClockIcon from "./ClockIcon";
 import DoubleCheckIcon from "./DoubleCheckIcon";
+import DoubleChevronLeftIcon from "./DoubleChevronLeftIcon";
+import DoubleChevronRightIcon from "./DoubleChevronRightIcon";
 import DownloadIcon from "./DownloadIcon";
 import EmojiIcon from "./EmojiIcon";
 import ExpanderIcon from "./ExpanderIcon.";
+import EyeClose from "./EyeClose";
+import EyeOpen from "./EyeOpen";
 import FailedIcon from "./FailedIcon";
 import FileIcon from "./FileIcon";
 import FilterIcon from "./FilterIcon";
@@ -17,6 +24,7 @@ import HeadsetIcon from "./HeadsetIcon";
 import HelpIcon from "./HelpIcon";
 import ImageIcon from "./ImageIcon";
 import InfoIcon from "./InfoIcon";
+import LogoutIcon from "./LogoutIcon";
 import MergeIcon from "./MergeIcon";
 import NotificationIcon from "./NotificationIcon";
 import PaperPlaneIcon from "./PaperPlaneIcon";
@@ -36,9 +44,18 @@ import SnackbarSuccessIcon from "./SnackbarSuccessIcon";
 import SnackbarWarningIcon from "./SnackbarWarningIcon";
 import TagIcon from "./TagIcon";
 import TrashIcon from "./TrashIcon";
+import WarningIcon from "./WarningIcon";
 import XIcon from "./XIcon";
-
 export {
+  DoubleChevronRightIcon,
+  DoubleChevronLeftIcon,
+  LogoutIcon,
+  EyeOpen,
+  EyeClose,
+  ClockIcon,
+  ChevronUpIcon,
+  WarningIcon,
+  CameraIcon,
   TrashIcon,
   ChevronDownIcon,
   SaveIcon,

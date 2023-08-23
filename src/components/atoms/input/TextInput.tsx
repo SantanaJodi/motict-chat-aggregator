@@ -27,7 +27,8 @@ const TextInput: React.FC<TextInputProps> = ({
     <div
       className={clsx(
         "bg-[#EEF5FF] hover:bg-[#D7E4F5] rounded-lg flex flex-row items-center gap-2 p-2 w-full focus:border focus:border-[#AABDD7]",
-        className
+        className,
+        props.disabled && "!bg-[#D7E4F5]"
       )}
     >
       {Icon && <Icon />}
@@ -37,13 +38,15 @@ const TextInput: React.FC<TextInputProps> = ({
         placeholder={placeholder}
         {...props}
         className={clsx(
-          "w-full bg-transparent border-none focus:outline-none text-base placeholder:text-[#AABDD7]"
+          "w-full bg-transparent border-none focus:outline-none text-base placeholder:text-[#AABDD7]",
+          props.disabled && "!text-[#AABDD7]"
         )}
       />
       {rightElement
         ? rightElement
         : value &&
-          !disableClear && (
+          !disableClear &&
+          !props.disabled && (
             <XIcon fill="#AABDD7" onClick={() => onChange("")} />
           )}
     </div>

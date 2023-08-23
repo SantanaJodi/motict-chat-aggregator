@@ -2,7 +2,7 @@ import { Checked, Stripe } from "@/public/icons/checkbox";
 import clsx from "clsx";
 import React, { HTMLProps } from "react";
 
-interface CheckboxProps extends HTMLProps<HTMLInputElement> {
+export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   indeterminate?: boolean;
 }
 

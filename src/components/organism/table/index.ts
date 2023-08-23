@@ -1,3 +1,5 @@
 import Table from "./Table";
+import { TableAgentList } from "./agent-list";
 
-export { Table };
+export * from "./report";
+export { Table, TableAgentList };

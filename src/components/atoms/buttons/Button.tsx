@@ -3,7 +3,8 @@
 import clsx from "clsx";
 import React from "react";
 
-interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, "size"> {
+interface ButtonProps
+  extends Omit<React.HTMLProps<HTMLButtonElement>, "size" | "type"> {
   variant: "primary" | "subtle" | "ghost" | "link";
   Icon?: React.ElementType;
   label?: string;
@@ -13,6 +14,7 @@ interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, "size"> {
   color?: string;
   size?: "medium" | "small";
   className?: string;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -25,12 +27,14 @@ const Button: React.FC<ButtonProps> = ({
   color,
   size = "medium",
   className,
+  type = "button",
 }) => {
   const iconSize = size === "medium" && variant !== "link" ? 24 : 16;
   return (
     <button
       onClick={onClick}
       disabled={isLoading || disabled}
+      type={type}
       className={clsx(
         "rounded-lg gap-1 w-max flex flex-row items-center justify-center",
         variant === "subtle" && "border border-[#D7E4F5] hover:bg-[#EEF5FF]",
@@ -45,7 +49,8 @@ const Button: React.FC<ButtonProps> = ({
         className
       )}
       style={{
-        background: !disabled && variant === "primary" ? color : "",
+        background:
+          !disabled && variant === "primary" ? (color ? color : "#323944") : "",
       }}
     >
       {Icon && (

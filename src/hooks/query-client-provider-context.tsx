@@ -1,9 +1,12 @@
 import { AxiosError } from "axios";
 import { PropsWithChildren } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { useAuthContext } from "./auth-context";
+import { toast } from "react-hot-toast";
 export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
   children,
 }) => {
+  const { handleRevokeToken } = useAuthContext();
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -11,8 +14,26 @@ export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
         // @ts-ignore
         onError: (err: AxiosError<IResponDataFetch>) => {
           if (err.response?.data) {
-            console.log(err, "<< error");
+            const res = err.response.status === 403;
+
+            if (res) {
+              handleRevokeToken();
+
+              toast.error("Unauthorized, please login again.");
+
+              return;
+            }
+
+            if (err.response.status >= 500) {
+              toast.error("Please contact your administrator.");
+
+              return;
+            }
+
+            toast.error(err.response.data?.message as string);
+            return;
           }
+          toast.error("Please contact your administrator.");
           return;
         },
       },
@@ -20,8 +41,29 @@ export const QueryClientProviderContext: React.FC<PropsWithChildren> = ({
         // @ts-ignore
         onError(err: AxiosError<IResponDataFetch>) {
           if (err.response?.data) {
-            console.log("iki error bruh");
+            const res = err.response.status === 403;
+
+            if (res) {
+              handleRevokeToken();
+
+              toast.error("Unauthorized, please login again.");
+
+              return;
+            }
+
+            if (err.response.status >= 500) {
+              toast.error(
+                err.response.data?.message ||
+                  "Please contact your administrator."
+              );
+
+              return;
+            }
+
+            toast.error(err.response.data?.message as string);
+            return;
           }
+          toast.error("Please contact your administrator.");
           return;
         },
       },

@@ -1,33 +1,55 @@
 "use client";
 
+import { ChatroomDetail, Container, Messages } from "@/src/components";
+import { AssignAgentModal } from "@/src/components/molecules/modal";
+import ChatroomComponent from "@/src/components/organism/chatroom/chatroom/ChatroomComponent";
+import React from "react";
 import {
-  Chatroom,
-  ChatroomDetail,
-  Container,
-  Messages,
-} from "@/src/components";
-import React, { useState } from "react";
+  ChatroomContextProvider,
+  useChatroomContext,
+} from "../context/ChatroomContext";
 
 interface ChatroomViewProps {}
 
-const ChatroomView: React.FC<ChatroomViewProps> = () => {
-  const [selectedChat, setSelectedChat] = useState<number>();
-  const [isExpanded, setIsExpanded] = useState(false);
+const ChatroomView: React.FC<ChatroomViewProps> = (props) => {
+  return (
+    <ChatroomContextProvider>
+      <Children {...props} />
+    </ChatroomContextProvider>
+  );
+};
+
+const Children: React.FC<ChatroomViewProps> = () => {
+  const {
+    isExpanded,
+    selectedChat,
+    setIsExpanded,
+    conversationDetail,
+    agentModal,
+    setAgentModal,
+  } = useChatroomContext();
 
   return (
     <Container>
       <div className="w-full h-full flex flex-row gap-[1px]">
-        <Messages
-          selectedChatId={selectedChat}
-          onSelectChat={(id) => setSelectedChat(id)}
-        />
-        <Chatroom
-          chatId={selectedChat}
+        <Messages />
+        <ChatroomComponent
+          chatroomDetail={conversationDetail}
           isChatExpanded={isExpanded}
-          onChatExpanded={() => setIsExpanded((prev) => !prev)}
+          selectedChat={selectedChat}
+          onChatExpanded={() => setIsExpanded(!isExpanded)}
         />
-        <ChatroomDetail isExpanded={isExpanded} />
+        <ChatroomDetail
+          isExpanded={isExpanded}
+          chatroomDetail={conversationDetail}
+        />
       </div>
+      <AssignAgentModal
+        // TODO change this based on assigned agent, if any
+        defaultValue={{ agent_id: 1, name: "anggih", user_id: 1 }}
+        visible={agentModal}
+        onClose={() => setAgentModal(false)}
+      />
     </Container>
   );
 };

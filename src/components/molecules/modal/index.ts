@@ -1,4 +1,13 @@
-import AssignAgentModal from "./AssignAgentModal";
+import ChatTemplatesModal from "./ChatTemplatesModal";
 import DeleteRecipientGroupModal from "./DeleteRecipientGroupModal";
+import LogoutModal from "./LogoutModal";
+import UnsavedConfirmationModal from "./UnsavedConfirmationModal";
 
-export { DeleteRecipientGroupModal, AssignAgentModal };
+export * from "./agent";
+export * from "./change-password";
+export {
+  ChatTemplatesModal,
+  UnsavedConfirmationModal,
+  DeleteRecipientGroupModal,
+  LogoutModal,
+};

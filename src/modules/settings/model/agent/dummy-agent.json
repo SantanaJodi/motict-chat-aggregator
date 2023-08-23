@@ -1,0 +1,56 @@
+{
+    "data": [
+        {
+            "id": "0",
+            "name": "Anggih Nur Hidayat",
+            "email": "works.anggihnur@gmail.com",
+            "password": "123456",
+            "division": {
+                "label": "No Division",
+                "value": "no_division"
+            },
+            "channel": [
+                {
+                    "label": "WhatsApp - Wikitoko",
+                    "value": "WhatsApp - Wikitoko"
+                },
+                {
+                    "label": "WhatsApp - Tokowiki",
+                    "value": "WhatsApp - Tokowiki"
+                }
+            ]
+        },
+        {
+            "id": "1",
+            "name": "Shanelle Corkey",
+            "email": "Shanelle_Corkery@@wikitoko.com",
+            "password": "123456",
+            "division": {
+                "label": "Operation",
+                "value": "Operation"
+            },
+            "channel": [
+                {
+                    "label": "WhatsApp - Wikitoko",
+                    "value": "WhatsApp - Wikitoko"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "Shavanna Johns",
+            "email": "Savanna_Johns29@@wikitoko.com",
+            "password": "123456",
+            "division": {
+                "label": "Operation",
+                "value": "Operation"
+            },
+            "channel": [
+                {
+                    "label": "WhatsApp - Wikitoko",
+                    "value": "WhatsApp - Wikitoko"
+                }
+            ]
+        }
+    ]
+}
