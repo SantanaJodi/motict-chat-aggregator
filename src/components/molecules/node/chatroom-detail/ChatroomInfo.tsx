@@ -21,10 +21,12 @@ const ChatroomInfo: React.FC<ChatroomInfoProps> = ({ conversationDetail }) => {
       <ListData
         label="Created"
         data={
-          format(
-            new Date(conversationDetail?.created_at as any),
-            "dd MMMM yyyy • HH:mm"
-          ) || ""
+          (conversationDetail?.created_at &&
+            format(
+              new Date(conversationDetail?.created_at as any),
+              "dd MMMM yyyy • HH:mm"
+            )) ||
+          ""
         }
         size="small"
       />
