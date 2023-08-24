@@ -35,7 +35,6 @@ const ImagesAttachment: React.FC<ImagesAttachmentProps> = ({
   isLoading,
 }) => {
   const [size, setSize] = useState<ImageProps>();
-
   const isString = typeof urls === "string";
 
   useEffect(() => {
@@ -55,6 +54,8 @@ const ImagesAttachment: React.FC<ImagesAttachmentProps> = ({
     return (
       <div className="relative">
         <NextImage
+          // TODO: Image not shown because the url don't have preview
+          // try to access in browser and directly download the image
           src={urls}
           alt="images"
           width={size?.width}
