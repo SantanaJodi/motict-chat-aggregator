@@ -2,6 +2,7 @@
 "use client";
 
 import {
+  AddWhatsappAccountCard,
   FailedToLoad,
   IntegrationChannelCard,
   IntegrationHeader,
@@ -10,12 +11,16 @@ import {
 import clsx from "clsx";
 import React from "react";
 import IntegrationViewModel from "../../model/IntegrationViewModel";
+import { IWhatsAppAccount } from "../../types";
 
-interface IntegrationViewProps {}
+interface IntegrationViewProps {
+  accounts: IWhatsAppAccount[];
+}
 
-const IntegrationView: React.FC<IntegrationViewProps> = () => {
-  const { data, toggle, isLoading, isError, handleToggle, refetch } =
-    IntegrationViewModel();
+const IntegrationView: React.FC<IntegrationViewProps> = ({ accounts }) => {
+  const { data, isLoading, isError, handleToggle, refetch } =
+    IntegrationViewModel({ accounts });
+
   return (
     <div className="bg-white overflow-y-auto relative flex flex-col w-full h-full">
       <IntegrationHeader />
@@ -30,13 +35,15 @@ const IntegrationView: React.FC<IntegrationViewProps> = () => {
         ) : isError ? (
           <FailedToLoad onReload={refetch} />
         ) : (
-          <div className="flex flex-row items-center gap-8">
-            <IntegrationChannelCard />
-            <IntegrationChannelCard
-              account={data}
-              toggle={toggle}
-              onToggle={() => handleToggle(!toggle)}
-            />
+          <div className="flex flex-row items-center gap-8 flex-wrap">
+            <AddWhatsappAccountCard />
+            {data?.map((account) => (
+              <IntegrationChannelCard
+                key={account.token}
+                account={account}
+                onToggle={handleToggle}
+              />
+            ))}
           </div>
         )}
       </div>
