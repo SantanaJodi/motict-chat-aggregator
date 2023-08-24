@@ -22,7 +22,7 @@ export const MessagesViewModel = () => {
 
   const debouncedSearch = useDebounce(search || "", 500);
 
-  const { data, fetchNextPage, hasNextPage, error, isLoading } =
+  const { data, fetchNextPage, hasNextPage, error, isLoading, refetch } =
     useInfiniteQuery({
       queryKey: [debouncedSearch, assignee, status],
       queryFn: ({ pageParam = 1, queryKey }) => {
@@ -82,5 +82,6 @@ export const MessagesViewModel = () => {
     setSearch,
     setMsgStatus,
     fetchNextPage,
+    refetch,
   };
 };
