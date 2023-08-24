@@ -25,9 +25,8 @@ const ChatProperties: React.FC<ChatPropertiesProps> = ({ isExpired }) => {
   const [attachFile, setAttachFile] = useState(false);
 
   const [imageFile, setImageFile] = useState<Blob | MediaSource>();
-  const [srcImg, setSrcImg] = useState("");
 
-  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
 
     if (files?.length) {
@@ -36,9 +35,15 @@ const ChatProperties: React.FC<ChatPropertiesProps> = ({ isExpired }) => {
 
       if (allowedType.includes(fileType)) {
         setImageFile(files[0]);
-        const blob = new Blob([files[0]], { type: fileType });
-        setSrcImg(URL.createObjectURL(blob));
         setAttachFile(false);
+        await sendMessage({
+          file: files[0],
+          type: "image",
+          text: "",
+        }).then(() => {
+          setValue("");
+          setImageFile(undefined);
+        });
       } else {
         toast.error("Only accept .jpg, .jpeg, or .png format");
       }
@@ -54,7 +59,6 @@ const ChatProperties: React.FC<ChatPropertiesProps> = ({ isExpired }) => {
     await sendMessage(val).then((_) => {
       setValue("");
       setImageFile(undefined);
-      setSrcImg("");
     });
   };
 
@@ -87,16 +91,13 @@ const ChatProperties: React.FC<ChatPropertiesProps> = ({ isExpired }) => {
         onClick={() => setEmoji((value) => !value)}
         color={emoji ? "#C02716" : "#0D0F12"}
       />
-      {srcImg ? (
-        <Image src={srcImg} alt="images" height={30} width={30} />
-      ) : (
-        <input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder="Type something here. Press “shift + enter” to make a new line."
-          className="bg-[#EEF5FF] px-4 py-2 h-[37px] rounded-lg w-full text-[#0D0F12] hover:bg-[#D7E4F5] placeholder:text-[#AABDD7] focus:outline-none"
-        />
-      )}
+
+      <input
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Type something here. Press “shift + enter” to make a new line."
+        className="bg-[#EEF5FF] px-4 py-2 h-[37px] rounded-lg w-full text-[#0D0F12] hover:bg-[#D7E4F5] placeholder:text-[#AABDD7] focus:outline-none"
+      />
 
       <button className="bg-[#AABDD7] rounded-lg p-2 border-none">
         <PaperPlaneIcon fill="#fff" onClick={handleSend} />
