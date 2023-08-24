@@ -4,28 +4,26 @@ import { useQuery } from "react-query";
 import { IAccountManagementType } from "../types/account-management-type";
 import { IWhatsAppAccount } from "../types/whatsapp-integration-type";
 
-interface IState {}
+interface IntegrationViewModelProps {
+  accounts: IWhatsAppAccount[];
+}
 
-const IntegrationViewModel = () => {
+const IntegrationViewModel = ({ accounts }: IntegrationViewModelProps) => {
   const [toggle, setToggle] = useState(true);
+
   const { data, isLoading, isError, refetch } = useQuery({
-    queryFn: () => {
-      return {
-        badge: "",
-        token: "isdfj894509hfsfsad928fndasi898978bdlkw4md89",
-        whatsappName: "Wikitoko",
-        whatsappNumber: "081234567890",
-        whatsappServerUrl: "https://graph.facebook.com",
-        isSupportSSL: false,
-      } as IWhatsAppAccount;
-    },
+    queryKey: ["whatsappAccount", accounts],
+    queryFn: ({ queryKey }) => queryKey[1] as IWhatsAppAccount[],
   });
 
   const onSave = (val: IAccountManagementType) => {
     toast.success("");
   };
 
-  const handleToggle = (val: boolean) => setToggle(val);
+  const handleToggle = (val: boolean, token: string) => {
+    // API : set active or not for every Whatsapp Account
+    // change params based on BE req
+  };
 
   return {
     data,
