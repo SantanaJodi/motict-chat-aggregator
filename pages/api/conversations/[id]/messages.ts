@@ -23,7 +23,7 @@ export default async function handler(
       })
       .catch((err) => {
         const { status, data } = err.response;
-        console.log(status);
+
         return res.status(status).json(data);
       });
   }
@@ -31,19 +31,14 @@ export default async function handler(
   if (req.method === "POST") {
     const conversation_id = req.query["id"];
     const token = req.cookies["token"];
-    const form = new FormData();
-
-    form.append("text", req.body.text);
-    form.append("type", req.body.type);
-    form.append("file", req.body.file);
 
     return await axios({
       url: `${BASEURL}/conversations/${conversation_id}/messages`,
       method: "post",
-      data: form,
+      data: req.body,
       headers: {
         Authorization: "Bearer " + token,
-        "Content-Type": `multipart/form-data;`,
+        "Content-Type": req.headers["content-type"],
       },
     })
       .then((r) => {
