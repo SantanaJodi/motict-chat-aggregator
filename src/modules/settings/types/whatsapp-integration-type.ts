@@ -5,4 +5,5 @@ export interface IWhatsAppAccount {
   token: string;
   whatsappServerUrl: string;
   isSupportSSL: boolean;
+  isActive: boolean;
 }
