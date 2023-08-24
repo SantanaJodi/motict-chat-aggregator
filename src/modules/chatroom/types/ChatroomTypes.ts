@@ -32,7 +32,7 @@ export interface IConversationDetailSession {
 }
 
 export interface ISendMessageRequest {
-  file?: File | undefined | null;
+  file: File | undefined;
   type: "image" | "text";
-  text?: string;
+  text: string;
 }

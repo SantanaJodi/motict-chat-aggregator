@@ -10,6 +10,9 @@ import React, { useState } from "react";
 import { IconButton } from "../../atoms";
 import { AttachFile, EmojiPicker } from "../popup";
 import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
+import toast from "react-hot-toast";
+import Image from "next/image";
+import { ISendMessageRequest } from "@/src/modules/chatroom/types/ChatroomTypes";
 
 interface ChatPropertiesProps {
   isExpired: boolean;
@@ -21,13 +24,37 @@ const ChatProperties: React.FC<ChatPropertiesProps> = ({ isExpired }) => {
   const [emoji, setEmoji] = useState(false);
   const [attachFile, setAttachFile] = useState(false);
 
+  const [imageFile, setImageFile] = useState<Blob | MediaSource>();
+  const [srcImg, setSrcImg] = useState("");
+
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+
+    if (files?.length) {
+      const fileType = files[0].type;
+      const allowedType = ["image/png", "image/gif", "image/jpeg"];
+
+      if (allowedType.includes(fileType)) {
+        setImageFile(files[0]);
+        const blob = new Blob([files[0]], { type: fileType });
+        setSrcImg(URL.createObjectURL(blob));
+        setAttachFile(false);
+      } else {
+        toast.error("Only accept .jpg, .jpeg, or .png format");
+      }
+    }
+  };
+
   const handleSend = async () => {
-    await sendMessage({
-      type: "text",
-      text: value,
-      file: null,
-    }).then((_) => {
+    const val = {
+      type: imageFile ? "image" : "text",
+      text: imageFile ? "" : value,
+      file: imageFile ? imageFile : null,
+    } as ISendMessageRequest;
+    await sendMessage(val).then((_) => {
       setValue("");
+      setImageFile(undefined);
+      setSrcImg("");
     });
   };
 
@@ -60,18 +87,27 @@ const ChatProperties: React.FC<ChatPropertiesProps> = ({ isExpired }) => {
         onClick={() => setEmoji((value) => !value)}
         color={emoji ? "#C02716" : "#0D0F12"}
       />
-      <input
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        placeholder="Type something here. Press “shift + enter” to make a new line."
-        className="bg-[#EEF5FF] px-4 py-2 h-[37px] rounded-lg w-full text-[#0D0F12] hover:bg-[#D7E4F5] placeholder:text-[#AABDD7] focus:outline-none"
-      />
+      {srcImg ? (
+        <Image src={srcImg} alt="images" height={30} width={30} />
+      ) : (
+        <input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Type something here. Press “shift + enter” to make a new line."
+          className="bg-[#EEF5FF] px-4 py-2 h-[37px] rounded-lg w-full text-[#0D0F12] hover:bg-[#D7E4F5] placeholder:text-[#AABDD7] focus:outline-none"
+        />
+      )}
+
       <button className="bg-[#AABDD7] rounded-lg p-2 border-none">
         <PaperPlaneIcon fill="#fff" onClick={handleSend} />
       </button>
 
       <EmojiPicker visible={emoji} onClose={() => setEmoji(false)} />
-      <AttachFile visible={attachFile} onClose={() => setAttachFile(false)} />
+      <AttachFile
+        visible={attachFile}
+        onClose={() => setAttachFile(false)}
+        onClickImage={handleImageSelect}
+      />
     </div>
   );
 };

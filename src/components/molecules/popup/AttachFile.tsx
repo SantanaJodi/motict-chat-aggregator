@@ -1,14 +1,19 @@
 import { FileIcon, ImageIcon } from "@/public/icons/outline";
 import clsx from "clsx";
-import React from "react";
+import React, { ChangeEventHandler } from "react";
 import { FloatingIconButton } from "../../atoms";
 
 interface AttachFileProps {
   visible?: boolean;
   onClose: () => void;
+  onClickImage: (_t: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const AttachFile: React.FC<AttachFileProps> = ({ onClose, visible }) => {
+const AttachFile: React.FC<AttachFileProps> = ({
+  onClose,
+  visible,
+  onClickImage,
+}) => {
   return (
     <div
       className={clsx(
@@ -16,8 +21,11 @@ const AttachFile: React.FC<AttachFileProps> = ({ onClose, visible }) => {
         visible ? "block" : "hidden"
       )}
     >
-      <FloatingIconButton Icon={ImageIcon} />
-      <FloatingIconButton Icon={FileIcon} />
+      <FloatingIconButton Icon={ImageIcon} onClick={onClickImage} />
+      <FloatingIconButton
+        Icon={FileIcon}
+        onClick={(f) => console.log(f, "<<< file icon")}
+      />
     </div>
   );
 };
