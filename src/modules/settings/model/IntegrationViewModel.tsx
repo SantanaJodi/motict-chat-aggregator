@@ -12,7 +12,7 @@ const IntegrationViewModel = ({ accounts }: IntegrationViewModelProps) => {
   const [toggle, setToggle] = useState(true);
 
   const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ["whatsappAccount", accounts],
+    queryKey: ["whatsappAccountList", accounts],
     queryFn: ({ queryKey }) => queryKey[1] as IWhatsAppAccount[],
   });
 
