@@ -1,5 +1,4 @@
 import { ModalType } from "@/src/types";
-import clsx from "clsx";
 import React, { PropsWithChildren } from "react";
 import { ModalHeader } from "../molecules";
 
@@ -23,11 +22,7 @@ const Modal: React.FC<ModalProps> = ({
   }
 
   return (
-    <div
-      className={clsx(
-        "fixed top-0 left-0 w-full min-h-screen bg-[#0D0F12A1] flex items-center justify-center z-50"
-      )}
-    >
+    <div className="fixed top-0 left-0 w-full min-h-screen bg-[#0D0F12A1] flex flex-col items-center justify-center z-50">
       <div
         className="bg-white rounded-2xl relative overflow-hidden flex flex-col"
         style={{ width, height }}
