@@ -11,21 +11,21 @@ export enum MessageAssignmentEnum {
 }
 
 interface MessageAssignmentProps {
-  type: MessageAssignmentEnum | null;
+  type: string;
 }
 
 const MessageAssignment: React.FC<MessageAssignmentProps> = ({ type }) => {
   const content = useMemo(() => {
     switch (type) {
-      case MessageAssignmentEnum.waiting:
+      case "waiting":
         return ["#8B9EB7", "Waiting"];
-      case MessageAssignmentEnum.assigned:
+      case "assigned":
         return ["#0D0F12", "Assigned"];
-      case MessageAssignmentEnum.assigned_to_me:
+      case "assigned_to_me":
         return ["#4ABF71", "Assigned to Me"];
-      case MessageAssignmentEnum.resolved:
+      case "resolved":
         return ["#4ABF71", "Resolved"];
-      case MessageAssignmentEnum.campaign:
+      case "campaign":
         return ["#F0A22E", "Campaign"];
 
       default:
@@ -33,7 +33,7 @@ const MessageAssignment: React.FC<MessageAssignmentProps> = ({ type }) => {
     }
   }, [type]);
 
-  const isResolved = type === MessageAssignmentEnum.resolved;
+  const isResolved = type === "resolved";
 
   return (
     <div
