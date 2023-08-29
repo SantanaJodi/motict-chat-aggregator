@@ -1,22 +1,20 @@
 "use client";
 
 import { ChatIcon } from "@/public/icons/outline";
-import React from "react";
-import { ChatHeader, MessageCard } from "../../../molecules";
-import StatesContainer from "../../StatesContainer";
-
 import { Loading } from "@/src/components/atoms";
-import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
+import { useChatroomContext } from "@/src/modules/chatroom";
 import { AxiosError } from "axios";
+import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { ChatHeader, MessageCard, MessageStatusTab } from "../../../molecules";
+import StatesContainer from "../../StatesContainer";
+import { MessagesViewModel } from "./model/MessagesViewModel";
 import { IChatroomDetail, StatusEnum } from "./types/MessagesTypes";
-import { MessagesViewModel } from "./viewModel/MessagesViewModel";
 
 interface MessagesProps {}
 
 const Messages: React.FC<MessagesProps> = ({}) => {
-  const { selectedChat, setSelectedChat, conversationDetail } =
-    useChatroomContext();
+  const { selectedChat, setSelectedChat } = useChatroomContext();
   const {
     error,
     search,
@@ -27,39 +25,43 @@ const Messages: React.FC<MessagesProps> = ({}) => {
     setSearch,
     setMsgStatus,
     fetchNextPage,
+    refetch,
   } = MessagesViewModel();
 
   return (
-    <div className="w-[375px] h-screen bg-white py-6  border-r border-[#EEF5FF]  overflow-hidden flex-shrink-0">
+    <div className="w-[375px] h-screen flex flex-col bg-white border-r border-[#EEF5FF] overflow-hidden flex-shrink-0">
       <ChatHeader
         search={search}
         onSearch={(val) => setSearch(val)}
         error={error as AxiosError}
+      />
+      <MessageStatusTab
         status={msgStatus}
         onChangeStatus={setMsgStatus}
         messages={messages}
       />
-      <div className=" h-full w-full flex flex-col items-start justify-start mt-4 relative">
-        <div id="messages" className="h-full w-full overflow-auto pb-[145px]">
-          <InfiniteScroll
-            dataLength={messages.length}
-            next={fetchNextPage}
-            loader={<Loading />}
-            hasMore={hasNextPage || false}
-            scrollableTarget="messages"
-          >
-            {messages.map((c: IChatroomDetail) => (
-              <MessageCard
-                key={c.conversation_id}
-                data={c}
-                onSelectChat={setSelectedChat}
-                isSelectedChat={
-                  c.conversation_id === selectedChat?.conversation_id
-                }
-              />
-            ))}
-          </InfiniteScroll>
-        </div>
+      <div
+        id="messages"
+        className=" h-full w-full flex flex-col relative overflow-y-auto"
+      >
+        <InfiniteScroll
+          dataLength={messages.length}
+          next={fetchNextPage}
+          loader={<Loading hideText />}
+          hasMore={hasNextPage || false}
+          scrollableTarget="messages"
+        >
+          {messages.map((c: IChatroomDetail) => (
+            <MessageCard
+              key={c.conversation_id}
+              data={c}
+              onSelectChat={setSelectedChat}
+              isSelectedChat={
+                c.conversation_id === selectedChat?.conversation_id
+              }
+            />
+          ))}
+        </InfiniteScroll>
         <StatesContainer
           isLoading={isLoading}
           isEmpty={messages.length === 0}
@@ -68,7 +70,7 @@ const Messages: React.FC<MessagesProps> = ({}) => {
             (!!search || msgStatus !== StatusEnum.ALL) && !messages.length
           }
           emptyMsg="You have no chatroom"
-          onReload={() => alert("reload")}
+          onReload={refetch}
           EmptyIcon={ChatIcon}
         />
       </div>

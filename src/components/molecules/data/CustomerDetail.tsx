@@ -1,8 +1,9 @@
 "use client";
-import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
+
+import { IConversationDetail } from "@/src/modules/chatroom";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { Avatar, Button, LogoChannel } from "../../atoms";
-import { useRouter } from "next/navigation";
 
 interface CustomerDetailProps {
   chatroomDetail?: IConversationDetail;
@@ -26,10 +27,8 @@ const CustomerDetail: React.FC<CustomerDetailProps> = ({ chatroomDetail }) => {
             />
             <div className="flex flex-row items-center gap-1 w-full">
               <p className="text-[#0D0F12] text-[14px] leading-[18.23px] mr-1">
-                {/* TODO: DATA MOBILE PHONE BELUM ADAm  */}
                 {chatroomDetail?.sender?.whatsapp?.whatsapp_id}
               </p>
-              {/* TODO: DATA DARI BACKEDN BELUM ADA */}
               <Button
                 variant="link"
                 label="• Contact Detail"

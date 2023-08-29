@@ -93,7 +93,8 @@ const MessageCard: React.FC<MessageCardProps> = ({
           )}
         >
           <ChatStatus expireAt={data.expire_at} />
-          <MessageAssignment type={data.assigned_agent_id} />
+          {/* TODO: BE response not clear what data to use for this status */}
+          <MessageAssignment type={data.status} />
         </div>
       </div>
 

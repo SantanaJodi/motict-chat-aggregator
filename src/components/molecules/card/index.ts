@@ -1,3 +1,4 @@
+import AddWhatsappAccountCard from "./AddWhatsappAccountCard";
 import ContactHistoryCard from "./ContactHistoryCard";
 import IntegrationChannelCard from "./IntegrationChannelCard";
 import MessageCard from "./MessageCard";
@@ -13,4 +14,5 @@ export {
   MessageCard,
   IntegrationChannelCard,
   NumberReportCard,
+  AddWhatsappAccountCard,
 };

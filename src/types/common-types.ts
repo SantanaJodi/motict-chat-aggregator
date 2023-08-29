@@ -21,3 +21,8 @@ export interface IDateRange {
   start?: Date | null;
   end?: Date | null;
 }
+
+export interface IPageServerProps {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}

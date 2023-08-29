@@ -10,10 +10,10 @@ const ReactEmojiPicker = dynamic(() => import("emoji-picker-react"), {
 
 interface EmojiPickerProps {
   visible?: boolean;
-  onClose: () => void;
+  onSelect: (emoji: string) => void;
 }
 
-const EmojiPicker: React.FC<EmojiPickerProps> = ({ onClose, visible }) => {
+const EmojiPicker: React.FC<EmojiPickerProps> = ({ visible, onSelect }) => {
   if (!visible) return null;
 
   return (
@@ -26,6 +26,7 @@ const EmojiPicker: React.FC<EmojiPickerProps> = ({ onClose, visible }) => {
         emojiStyle={EmojiStyle.GOOGLE}
         searchPlaceHolder="Cari emoji"
         previewConfig={{ showPreview: false }}
+        onEmojiClick={(val) => onSelect(val.emoji)}
         height={300}
         categories={[
           { category: Categories.SUGGESTED, name: "Terakhir Digunakan" },

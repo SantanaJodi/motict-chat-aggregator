@@ -9,16 +9,20 @@ import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { FormProvider } from "react-hook-form";
 import WhatsAppAccountSettingsViewModel from "../../model/WhatsAppAccountSettingsViewModel";
+import { IWhatsAppAccount } from "../../types";
 
-interface WhatsAppAccountSettingViewProps {}
+interface WhatsAppAccountSettingViewProps {
+  account: IWhatsAppAccount;
+}
 
-const WhatsAppAccountSettingView: React.FC<
-  WhatsAppAccountSettingViewProps
-> = () => {
+const WhatsAppAccountSettingView: React.FC<WhatsAppAccountSettingViewProps> = ({
+  account,
+}) => {
   const pathname = usePathname();
   const router = useRouter();
-  const { formModule, isLoading, onSave, handleBadgeIcon } =
-    WhatsAppAccountSettingsViewModel();
+  const { formModule, onSave, handleBadgeIcon } =
+    WhatsAppAccountSettingsViewModel({ account });
+
   return (
     <div className="w-full h-full bg-white overflow-y-auto">
       <div className="p-6">

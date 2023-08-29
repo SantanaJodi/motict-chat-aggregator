@@ -1,7 +1,9 @@
 "use client";
 
-import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
-import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
+import {
+  IConversationDetail,
+  useChatroomContext,
+} from "@/src/modules/chatroom";
 import { ISelectOpt } from "@/src/types";
 import clsx from "clsx";
 import React, { useState } from "react";
@@ -20,6 +22,7 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
 }) => {
   const { setNotes, isLoadingNotes } = useChatroomContext();
   const [tags, setTags] = useState<ISelectOpt[]>([]);
+
   return (
     <div
       className={clsx(
@@ -30,27 +33,25 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
       <div className="px-4 py-6 font-bold border-b border-[#EEF5FF] text-[#0D0F12] fixed w-full bg-white z-[1]">
         Customer Detail
       </div>
-      <div className="">
-        <div className="p-6 flex flex-col gap-6 h-full mt-[73px]">
-          <CustomerDetail chatroomDetail={chatroomDetail} />
-          <Line />
-          <ChatroomInfo conversationDetail={chatroomDetail} />
-          <Line />
-          <Note
-            isLoading={isLoadingNotes}
-            notes={chatroomDetail?.notes}
-            onSave={(value) => setNotes(value)}
-          />
-          <Line />
-          <Tags
-            tags={
-              chatroomDetail?.tags?.map((t) => ({ label: t, value: t })) as any
-            }
-            onSave={setTags}
-          />
-          <Line />
-          <Agent />
-        </div>
+      <div className="p-6 flex flex-col gap-6 h-full mt-[73px]">
+        <CustomerDetail chatroomDetail={chatroomDetail} />
+        <Line />
+        <ChatroomInfo conversationDetail={chatroomDetail} />
+        <Line />
+        <Note
+          isLoading={isLoadingNotes}
+          notes={chatroomDetail?.notes}
+          onSave={(value) => setNotes(value)}
+        />
+        <Line />
+        <Tags
+          tags={
+            chatroomDetail?.tags?.map((t) => ({ label: t, value: t })) as any
+          }
+          onSave={setTags}
+        />
+        <Line />
+        <Agent />
       </div>
     </div>
   );

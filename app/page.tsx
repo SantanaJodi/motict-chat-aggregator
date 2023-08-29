@@ -1,4 +1,4 @@
-import ChatroomView from "@/src/modules/chatroom/view/ChatroomView";
+import { ChatroomView } from "@/src/modules/chatroom";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

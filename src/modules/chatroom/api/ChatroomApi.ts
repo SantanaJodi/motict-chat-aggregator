@@ -77,9 +77,20 @@ export const ChatroomApi = () => {
   };
 
   const SendMessage = async (id: number, body: ISendMessageRequest) => {
+    const form = new FormData();
+
+    form.append("text", body.text);
+    form.append("type", body.type);
+    form.append("file", body.file as any);
+
     const res = await api.post<any, AxiosResponse<GlobalResData<any>>>(
       `api/conversations/${id}/messages`,
-      body
+      body,
+      {
+        headers: {
+          "Content-Type": `multipart/form-data;`,
+        },
+      }
     );
 
     return res?.data?.data;

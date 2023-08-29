@@ -2,20 +2,24 @@
 
 import { ChatIcon } from "@/public/icons/outline";
 import { ChatTime, Loading } from "@/src/components/atoms";
-import { ChatCard, ChatroomHeader } from "@/src/components/molecules";
-import { ChatProperties } from "@/src/components/molecules/footer";
-import { useChatroomContext } from "@/src/modules/chatroom/context/ChatroomContext";
-import { IConversationDetail } from "@/src/modules/chatroom/types/ChatroomTypes";
+import {
+  ChatCard,
+  ChatInput,
+  ChatroomHeader,
+} from "@/src/components/molecules";
+import {
+  IConversationDetail,
+  useChatroomContext,
+} from "@/src/modules/chatroom";
+import clsx from "clsx";
+import { flatten } from "lodash";
 import React, { useMemo } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import StatesContainer from "../../StatesContainer";
-import { IChatroomDetail } from "../messages/types/MessagesTypes";
-import { flatten } from "lodash";
 
 interface ChatroomComponentProps {
   chatroomDetail?: IConversationDetail;
   isChatExpanded?: boolean;
-  selectedChat?: IChatroomDetail;
   onChatExpanded: () => void;
 }
 
@@ -23,7 +27,6 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
   chatroomDetail,
   onChatExpanded,
   isChatExpanded,
-  selectedChat,
 }) => {
   const {
     conversationDetail,
@@ -43,17 +46,15 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
             {chatroomDetails[t].map((c) => (
               <ChatCard
                 key={c.id}
-                // TODO: fix this a
                 status={c.status as any}
                 isSelf={c.status == "sent" || c.status == "sending"}
+                hideUsername={c.is_agent}
                 chat={{
-                  // TODO: fix this
                   timestamp: c.send_time as any,
                   username: c.from_user_name,
                   message: c.text,
                   images: c.media_url,
                 }}
-                hideUsername={c.is_agent}
               />
             ))}
           </div>
@@ -66,7 +67,7 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
   }, [chatroomDetails]);
 
   return (
-    <div className="w-full h-full overflow-hidden relative">
+    <div className="w-full h-screen flex flex-col overflow-hidden">
       {conversationDetail && (
         <ChatroomHeader
           isResolved={messageHeader?.conversation_status === "resolved"}
@@ -79,36 +80,33 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
       <div className="h-full w-full flex flex-col justify-between relative">
         <div
           id="chats"
-          className="p-6 pr-14 flex flex-col-reverse  w-full overflow-y-auto mb-40"
+          className={clsx("p-6 pr-14 overflow-y-auto pb-[100px]")}
         >
-          {/* <div className="flex flex-col-reverse  w-full overflow-y-auto"> */}
           <InfiniteScroll
             dataLength={flatten(Object.values(chatroomDetails)).length}
             next={fetchNextPageMessages}
-            style={{
-              display: "flex",
-              flexDirection: "column-reverse",
-              overflowY: "hidden",
-            }}
             loader={<Loading />}
             hasMore={hasNextPageMessages || false}
             scrollableTarget="chats"
             inverse={true}
+            style={{
+              display: "flex",
+              flexDirection: "column-reverse",
+              overflowY: "hidden",
+              height: "100%",
+            }}
           >
             {messageChats}
           </InfiniteScroll>
-          {/* </div> */}
         </div>
 
-        <ChatProperties
-          isExpired={chatroomDetail?.session.text === "Expired"}
-        />
+        <div className="sticky bottom-0 w-full">
+          <ChatInput isExpired={chatroomDetail?.session.text === "Expired"} />
+        </div>
 
-        {/* STATES */}
         <StatesContainer
           isLoading={isLoadingMessages}
           isEmpty={!chatroomDetail?.conversation_id}
-          // isError={error}
           emptyMsg="Choose chatroom from the left sidebar"
           onReload={() => alert("reload")}
           EmptyIcon={ChatIcon}
