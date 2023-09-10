@@ -1,3 +1,5 @@
+import { ITagDetail } from "@/src/components/molecules/node/chatroom-detail/tag/types/TagTypes";
+
 export interface IConversationDetail {
   conversation_id: number;
   sender: IConversationDetailSender;
@@ -6,7 +8,7 @@ export interface IConversationDetail {
   session: IConversationDetailSession;
   notes: string;
   agents: IConversationDetailAgent[];
-  tags: any[];
+  tags: ITagDetail[];
 }
 
 export interface IConversationDetailAgent {

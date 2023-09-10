@@ -69,8 +69,16 @@ export const ChatroomApi = () => {
 
   const SetTags = async (id: number, body: { tag_ids: number[] }) => {
     const res = await api.post<any, AxiosResponse<GlobalResData<any>>>(
-      `api/conversations/${id}/assign`,
+      `api/conversations/${id}/tags`,
       body
+    );
+
+    return res?.data?.data;
+  };
+
+  const GetTags = async () => {
+    const res = await api.get<any, AxiosResponse<GlobalResData<any>>>(
+      `api/tags`
     );
 
     return res?.data?.data;
@@ -88,7 +96,7 @@ export const ChatroomApi = () => {
       body,
       {
         headers: {
-          "Content-Type": `multipart/form-data;`,
+          "Content-Type": `multipart/form-data`,
         },
       }
     );
@@ -105,5 +113,6 @@ export const ChatroomApi = () => {
     SetAgent,
     SetTags,
     SendMessage,
+    GetTags,
   };
 };

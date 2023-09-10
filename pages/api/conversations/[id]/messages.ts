@@ -2,6 +2,12 @@ import { BASEURL } from "@/src/constant/config-api";
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -13,7 +19,7 @@ export default async function handler(
       .get(`${BASEURL}/conversations/${conversation_id}/messages`, {
         params: req.query,
         headers: {
-          Authorization: "Bearer " + token,
+          Authorization: token,
         },
       })
       .then((r) => {
@@ -32,15 +38,13 @@ export default async function handler(
     const conversation_id = req.query["id"];
     const token = req.cookies["token"];
 
-    return await axios({
-      url: `${BASEURL}/conversations/${conversation_id}/messages`,
-      method: "post",
-      data: req.body,
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": req.headers["content-type"],
-      },
-    })
+    return await axios
+      .post(`${BASEURL}/conversations/${conversation_id}/messages`, req, {
+        headers: {
+          "Content-Type": req.headers["content-type"],
+          Authorization: token,
+        },
+      })
       .then((r) => {
         const { status, data } = r;
 

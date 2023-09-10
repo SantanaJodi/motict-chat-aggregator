@@ -25,6 +25,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
 }) => {
   const diffHours = differenceInHours(new Date(data.expire_at), new Date());
   const unreadCount = data.unread_counter <= 99 ? data.unread_counter : "+99";
+
   return (
     <div
       className={
@@ -80,7 +81,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
             <p
               className={clsx(textColor, "text-[12px] truncate max-w-[268px]")}
             >
-              {data.tags.join(", ")}
+              {data.tags.map((t) => t.name).join(",")}
             </p>
           </div>
         )}

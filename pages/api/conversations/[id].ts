@@ -13,7 +13,7 @@ export default async function handler(
       .get(`${BASEURL}/conversations/${conversation_id}`, {
         params: req.query,
         headers: {
-          Authorization: "Bearer " + token,
+          Authorization: token,
         },
       })
       .then((r) => {
