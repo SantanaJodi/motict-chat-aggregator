@@ -45,7 +45,7 @@ const StatesContainer: React.FC<StatesContainerProps> = ({
         !isEmpty && !isError && !isLoading && "hidden"
       )}
     >
-      <div className={clsx("mb-20 w-full", className)}>
+      <div className={clsx(" w-full", className)}>
         {isLoading ? (
           <Loading />
         ) : isError ? (

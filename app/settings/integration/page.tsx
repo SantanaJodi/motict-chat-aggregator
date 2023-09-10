@@ -1,10 +1,14 @@
-import IntegrationView from "@/src/modules/settings/view/integration/IntegrationView";
-import React from "react";
+import { dummySettingIntegration } from "@/src/dummy";
+import { IntegrationView } from "@/src/modules/settings";
 
-interface WhatsAppIntegrationProps {}
+const getWhatsAppAccountList = async () => {
+  // API: list for Whatsapp Account that already integrated
+  return dummySettingIntegration;
+};
 
-const WhatsAppIntegration: React.FC<WhatsAppIntegrationProps> = () => {
-  return <IntegrationView />;
+const WhatsAppIntegration = async () => {
+  const accounts = await getWhatsAppAccountList();
+  return <IntegrationView accounts={accounts} />;
 };
 
 export default WhatsAppIntegration;

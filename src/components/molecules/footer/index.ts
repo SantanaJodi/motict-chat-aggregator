@@ -1,3 +1,3 @@
-import ChatProperties from "./ChatProperties";
+import ChatInput from "./ChatInput";
 
-export { ChatProperties };
+export { ChatInput };

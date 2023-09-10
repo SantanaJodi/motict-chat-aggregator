@@ -1,30 +1,17 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { useQuery } from "react-query";
 import { IWhatsAppAccount } from "../types/whatsapp-integration-type";
 
-interface IState {}
+interface WhatsAppAccountSettingsViewModelProps {
+  account: IWhatsAppAccount;
+}
 
-const WhatsAppAccountSettingsViewModel = () => {
-  const router = useRouter();
+const WhatsAppAccountSettingsViewModel = ({
+  account,
+}: WhatsAppAccountSettingsViewModelProps) => {
   const formModule = useForm<IWhatsAppAccount>({
-    defaultValues: {},
-  });
-
-  const { isLoading } = useQuery({
-    queryFn: () => {
-      const dummy: IWhatsAppAccount = {
-        badge: "",
-        token: "sdjfg8934yt9hgvpiowejrp9230r394r",
-        whatsappName: "Wikitoko",
-        whatsappNumber: "081234567890",
-        whatsappServerUrl: "https://graph.facebook.com",
-        isSupportSSL: false,
-      };
-      formModule.reset(dummy);
-    },
+    defaultValues: account,
   });
 
   const onSave = (val: IWhatsAppAccount) => {
@@ -32,11 +19,10 @@ const WhatsAppAccountSettingsViewModel = () => {
   };
 
   const handleBadgeIcon = (_images: FileList) => {
-    console.log("🚀 -> handleBadgeIcon -> _images:", _images);
+    console.log("🚀 -> handleBadgeIcon :", _images);
   };
 
   return {
-    isLoading,
     formModule,
     onSave,
     handleBadgeIcon,

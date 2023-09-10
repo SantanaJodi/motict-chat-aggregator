@@ -1,9 +1,12 @@
 "use client";
 
-import { ChatroomDetail, Container, Messages } from "@/src/components";
+import {
+  ChatroomComponent,
+  ChatroomDetail,
+  Container,
+  Messages,
+} from "@/src/components";
 import { AssignAgentModal } from "@/src/components/molecules/modal";
-import ChatroomComponent from "@/src/components/organism/chatroom/chatroom/ChatroomComponent";
-import React from "react";
 import {
   ChatroomContextProvider,
   useChatroomContext,
@@ -22,7 +25,6 @@ const ChatroomView: React.FC<ChatroomViewProps> = (props) => {
 const Children: React.FC<ChatroomViewProps> = () => {
   const {
     isExpanded,
-    selectedChat,
     setIsExpanded,
     conversationDetail,
     agentModal,
@@ -36,7 +38,6 @@ const Children: React.FC<ChatroomViewProps> = () => {
         <ChatroomComponent
           chatroomDetail={conversationDetail}
           isChatExpanded={isExpanded}
-          selectedChat={selectedChat}
           onChatExpanded={() => setIsExpanded(!isExpanded)}
         />
         <ChatroomDetail
