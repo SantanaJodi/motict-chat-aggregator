@@ -14,7 +14,7 @@ export default async function handler(
       .post(`${BASEURL}/conversations/${conversation_id}/tags`, req.body, {
         params: req.query,
         headers: {
-          Authorization: "Bearer " + token,
+          Authorization: token,
         },
       })
       .then((r) => {

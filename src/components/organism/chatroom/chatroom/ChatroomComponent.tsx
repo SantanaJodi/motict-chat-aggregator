@@ -41,7 +41,8 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
     const component = [] as any;
     Object.keys(chatroomDetails).forEach((t, y) => {
       component.push(
-        <>
+        <div>
+          <ChatTime time={t} />
           <div className="flex flex-col gap-2">
             {chatroomDetails[t].map((c) => (
               <ChatCard
@@ -58,8 +59,7 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
               />
             ))}
           </div>
-          <ChatTime time={t} />
-        </>
+        </div>
       );
     });
 
@@ -91,7 +91,7 @@ const ChatroomComponent: React.FC<ChatroomComponentProps> = ({
             inverse={true}
             style={{
               display: "flex",
-              flexDirection: "column-reverse",
+              flexDirection: "column",
               overflowY: "hidden",
               height: "100%",
             }}

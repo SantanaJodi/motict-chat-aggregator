@@ -117,7 +117,7 @@ export const ChatroomContextProvider: React.FC<PropsWithChildren> = ({
   }, [messages]);
 
   const messageHeader = useMemo(() => {
-    return messages?.pages.map((t) => t.header)[0];
+    return messages?.pages?.map((t) => t.header)[0];
   }, [messages]);
 
   const { mutateAsync: setNotes, isLoading: isLoadingNotes } = useMutation(

@@ -13,7 +13,7 @@ export default async function handler(
       .get(`${BASEURL}/tags`, {
         params: req.query,
         headers: {
-          Authorization: "Bearer " + token,
+          Authorization: token,
         },
       })
       .then((r) => {

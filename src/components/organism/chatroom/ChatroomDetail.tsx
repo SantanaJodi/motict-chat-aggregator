@@ -21,7 +21,6 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
   chatroomDetail,
 }) => {
   const { setNotes, isLoadingNotes } = useChatroomContext();
-  const [tags, setTags] = useState<ISelectOpt[]>([]);
 
   return (
     <div
@@ -44,12 +43,7 @@ const ChatroomDetail: React.FC<ChatroomDetailProps> = ({
           onSave={(value) => setNotes(value)}
         />
         <Line />
-        <Tags
-          tags={
-            chatroomDetail?.tags?.map((t) => ({ label: t, value: t })) as any
-          }
-          onSave={setTags}
-        />
+        <Tags tags={chatroomDetail?.tags || []} />
         <Line />
         <Agent />
       </div>

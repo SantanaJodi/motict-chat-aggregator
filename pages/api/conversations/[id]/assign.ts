@@ -13,7 +13,7 @@ export default async function handler(
     return await axios
       .post(`${BASEURL}/conversations/${conversation_id}/assign`, req.body, {
         headers: {
-          Authorization: "Bearer " + token,
+          Authorization: token,
         },
       })
       .then((r) => {

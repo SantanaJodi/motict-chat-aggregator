@@ -1,3 +1,7 @@
+import {
+  ITag,
+  ITagDetail,
+} from "@/src/components/molecules/node/chatroom-detail/tag/types/TagTypes";
 import { PaginateRequestDTO } from "@/src/types/common-types";
 
 export interface IChatroomDetail {
@@ -8,7 +12,7 @@ export interface IChatroomDetail {
   last_message: LastMessageDTO;
   platform: string;
   status: string;
-  tags: any[];
+  tags: ITag[];
   unread_counter: number;
   is_expired: boolean;
   expire_at: Date;

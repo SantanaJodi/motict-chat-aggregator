@@ -28,7 +28,7 @@ export const LoginViewModel = () => {
     "loginFn",
     (req: IReqLogin) =>
       loginFn(req).then((res) => {
-        handleSetToken(res?.data?.data?.token);
+        handleSetToken("Bearer " + res?.data?.data?.token);
       }),
     {
       onError: (err) => {
