@@ -102,7 +102,7 @@ const ChatProperties: React.FC<ChatPropertiesProps> = ({ isExpired }) => {
       <button className="bg-[#AABDD7] rounded-lg p-2 border-none">
         <PaperPlaneIcon fill="#fff" onClick={handleSend} />
       </button>
-
+      {/* @ts-ignore */}
       <EmojiPicker visible={emoji} onClose={() => setEmoji(false)} />
       <AttachFile
         visible={attachFile}
